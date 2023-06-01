@@ -10,7 +10,7 @@ const colors = {
 
 const DATABASE = process.env.MYSQL_DATABASE;
 
-async function dbSeedAndReset() {
+async function dbCreateDatabase() {
 	const query = `
   DROP DATABASE IF EXISTS ${DATABASE};
   CREATE SCHEMA IF NOT EXISTS ${DATABASE} DEFAULT CHARACTER SET utf8;
@@ -90,47 +90,6 @@ async function dbSeedAndReset() {
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
   );
-  
-  INSERT INTO materials (name, color, metriage, cost_price, receipt_date, amount) VALUES
-  ('Algodão', 'Branco', 50.00, 10.00, '2023-05-01 09:00:00', 100),
-  ('Botão de Plástico', 'Preto', NULL, 0.50, '2023-05-02 10:00:00', 500),
-  ('Linha de Costura', NULL, NULL, 1.00, '2023-05-03 11:00:00', 200)
-  ;
-  
-  INSERT INTO products (name, sales_price) VALUES
-  ('Camisa', 20.00),
-  ('Calça', 30.00),
-  ('Vestido', 40.00)
-  ;
-  
-  INSERT INTO clients (name, address, email, phone) VALUES
-  ('João Silva', 'Rua A, 123', 'joao.silva@example.com', '31912345678'),
-  ('Maria Souza', 'Avenida B, 456', 'maria.souza@example.com', '31912345679'),
-  ('Pedro Santos', 'Rua C, 789', 'pedro.santos@example.com', '31912345677')
-  ;
-  
-  INSERT INTO orders (date, amount, status, id_client) VALUES
-  ('2023-06-01 14:00:00', 2, 'Em andamento', 1),
-  ('2023-06-02 15:00:00', 1, 'Concluído', 2),
-  ('2023-06-03 16:00:00', 3, 'Em andamento', 3)
-      ;
-  
-  INSERT INTO ordered_products (id_product, id_order) VALUES
-  (1, 1),
-  (2, 1),
-  (2, 2),
-  (3, 2),
-  (1, 3),
-  (3, 3)
-  ;
-  
-  INSERT INTO materials_products (id_materials, id_products) VALUES
-  (1, 1),
-  (2, 1),
-  (1, 2),
-  (3, 2),
-  (3, 3)
-  ;
   `;
 
 	await dbConnection.query(query);
@@ -139,8 +98,8 @@ async function dbSeedAndReset() {
 }
 
 try {
-	dbSeedAndReset()
-		.then(() => console.info(`➜  MySQL: ${colors.green}seeds successfully created!${colors.reset}\n`));
+	dbCreateDatabase()
+		.then(() => console.info(`➜  MySQL: ${colors.green}database and tables successfully created!${colors.reset}\n`));
 } catch(error) {
-	console.info(`➜  MySQL: ${colors.red}Error while trying to seed.${colors.reset}\n`);
+	console.info(`➜  MySQL: ${colors.red}Error while trying to create database.${colors.reset}\n`);
 }

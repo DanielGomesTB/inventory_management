@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
-    "db:seed": "node src/database/seeds.js"
+    "db:seed": "node src/database/seeds.js",
+    "db:create": "node src/database/createDatabase.js"
   },
   "keywords": [],
   "author": "",
