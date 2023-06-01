@@ -25,9 +25,9 @@ async function dbSeedAndReset() {
         quantity decimal(5,2) NOT NULL
     );
 
-    INSERT INTO products VALUES (1,'AZEITE  PORTUGUÊS  EXTRA VIRGEM GALLO 500ML',18.44);
-    INSERT INTO products VALUES (2,'BEBIDA ENERGÉTICA VIBE 2L',8.09);
-    INSERT INTO products VALUES (3,'ENERGÉTICO  RED BULL ENERGY DRINK 250ML',6.56);
+    INSERT INTO products VALUES (1,'tricoline estampado 100% algodão',30);
+    INSERT INTO products VALUES (2,'cetim sintético pink',8.50);
+    INSERT INTO products VALUES (3,'oxford branco premium 100% poliéster',27.30);
   `;
 
 	await dbConnection.query(query);

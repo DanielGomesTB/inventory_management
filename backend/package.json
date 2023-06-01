@@ -20,13 +20,7 @@
     "mysql2": "^3.3.3"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.41.0",
     "nodemon": "^2.0.22"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
