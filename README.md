@@ -19,8 +19,7 @@ Este repositório contém uma solução para ajudar as lojas a controlar seu est
 <br />
 
 ## Diagrama Relacional do Banco de Dados:
-
-![Diagrama Relacional](https://github.com/DanielGomesTB/inventory_management/assets/102492818/2f35c6b0-3128-4e37-9ccd-11e8d8126eaf)
+![image](https://github.com/DanielGomesTB/inventory_management/assets/102492818/f26dc90a-0e3d-4230-8134-dbd2d942eed3)
 
 <br />
 
