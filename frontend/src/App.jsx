@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { getAllProducts } from './service/api'
 
+// iniciando nova branch
+
 function App() {
   const [count, setCount] = useState(0)
   const [products, setProducts] = useState([])
