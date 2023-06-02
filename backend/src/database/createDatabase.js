@@ -23,18 +23,20 @@ async function dbCreateDatabase() {
       color VARCHAR(45) NULL,
       cost_price DECIMAL(10,2) NOT NULL,
       stock DECIMAL(10,2) NOT NULL,
+      is_active BOOLEAN NOT NULL DEFAULT true,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
-    
+
     CREATE TABLE IF NOT EXISTS products (
       product_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       product_name VARCHAR(100) NOT NULL,
       selling_price DECIMAL(10,2) NOT NULL,
+      is_active BOOLEAN NOT NULL DEFAULT true,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
-    
+
     CREATE TABLE IF NOT EXISTS customers (
       customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       customer_name VARCHAR(45) NOT NULL,
@@ -42,13 +44,15 @@ async function dbCreateDatabase() {
       address VARCHAR(45) NOT NULL,
       email VARCHAR(45) NOT NULL,
       phone VARCHAR(20) NOT NULL,
+      is_active BOOLEAN NOT NULL DEFAULT true,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     );
-    
+
     CREATE TABLE IF NOT EXISTS orders (
       order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      status VARCHAR(45) NOT NULL,
+      order_status ENUM('pendente', 'iniciado', 'concluído', 'cancelado'),
+      order_type ENUM('atacado', 'varejo'),
       customer_id INT NOT NULL,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -56,13 +60,11 @@ async function dbCreateDatabase() {
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
     );
-    
+
     CREATE TABLE IF NOT EXISTS order_items (
       product_id INT NOT NULL,
       order_id INT NOT NULL,
       quantity INT NOT NULL,
-      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       PRIMARY KEY (product_id, order_id),
       FOREIGN KEY (product_id) REFERENCES inventory.products (product_id)
         ON DELETE NO ACTION
@@ -71,13 +73,11 @@ async function dbCreateDatabase() {
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
     );
-    
+
     CREATE TABLE IF NOT EXISTS products_materials (
       material_id INT NOT NULL,
       product_id INT NOT NULL,
       quantity DECIMAL(10,2) NOT NULL,
-      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       PRIMARY KEY (material_id, product_id),
       FOREIGN KEY (material_id) REFERENCES inventory.materials (material_id)
         ON DELETE NO ACTION
