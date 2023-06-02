@@ -1,5 +1,4 @@
 # Inventory Management
-main release
 
 ## Descrição:
 Este repositório contém uma solução para ajudar as lojas a controlar seu estoque e gerenciar seus produtos.
