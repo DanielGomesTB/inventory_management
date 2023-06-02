@@ -12,125 +12,122 @@ const DATABASE = process.env.MYSQL_DATABASE;
 
 async function dbSeedAndReset() {
 	const query = `
-  DROP DATABASE IF EXISTS ${DATABASE};
-  CREATE SCHEMA IF NOT EXISTS ${DATABASE} DEFAULT CHARACTER SET utf8;
-  USE ${DATABASE};
-  
-  CREATE TABLE IF NOT EXISTS materials (
-    id_material INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(45) NOT NULL,
-    color VARCHAR(45) NULL,
-    metriage DECIMAL(5,2) NULL,
-    cost_price DECIMAL(5,2) NOT NULL,
-    receipt_date DATETIME NOT NULL,
-    amount INT NULL
-  );
-  
-  CREATE TABLE IF NOT EXISTS products (
-    id_product INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(45) NOT NULL,
-    sales_price DECIMAL(5,2) NOT NULL
-  );
-  
-  CREATE TABLE IF NOT EXISTS clients (
-    id_client INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(45) NOT NULL,
-    address VARCHAR(45) NOT NULL,
-    email VARCHAR(45) NOT NULL,
-    phone VARCHAR(45) NOT NULL
-  );
-  
-  CREATE TABLE IF NOT EXISTS orders (
-    id_order INT NOT NULL AUTO_INCREMENT,
-    date DATETIME NOT NULL,
-    amount INT NOT NULL,
-    status VARCHAR(45) NOT NULL,
-    id_client INT NOT NULL,
-    PRIMARY KEY (id_order),
-    INDEX fk_orders_clients_idx (id_client ASC) VISIBLE,
-    CONSTRAINT fk_orders_clients
-      FOREIGN KEY (id_client)
-      REFERENCES inventory.clients (id_client)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-  );
-  
-  CREATE TABLE IF NOT EXISTS ordered_products (
-    id_product INT NOT NULL,
-    id_order INT NOT NULL,
-    PRIMARY KEY (id_product, id_order),
-    INDEX fk_produtos_has_pedidos_pedidos1_idx (id_order ASC) VISIBLE,
-    INDEX fk_produtos_has_pedidos_produtos1_idx (id_product ASC) VISIBLE,
-    CONSTRAINT fk_produtos_has_pedidos_produtos1
-      FOREIGN KEY (id_product)
-      REFERENCES inventory.products (id_product)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-    CONSTRAINT fk_produtos_has_pedidos_pedidos1
-      FOREIGN KEY (id_order)
-      REFERENCES inventory.orders (id_order)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-  );
-  
-  CREATE TABLE IF NOT EXISTS materials_products (
-    id_materials INT NOT NULL,
-    id_products INT NOT NULL,
-    PRIMARY KEY (id_materials, id_products),
-    INDEX fk_mercadorias_has_produtos_produtos1_idx (id_products ASC) VISIBLE,
-    INDEX fk_mercadorias_has_produtos_mercadorias1_idx (id_materials ASC) VISIBLE,
-    CONSTRAINT fk_mercadorias_has_produtos_mercadorias1
-      FOREIGN KEY (id_materials)
-      REFERENCES inventory.materials (id_material)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-    CONSTRAINT fk_mercadorias_has_produtos_produtos1
-      FOREIGN KEY (id_products)
-      REFERENCES inventory.products (id_product)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
-  );
-  
-  INSERT INTO materials (name, color, metriage, cost_price, receipt_date, amount) VALUES
-  ('Algodão', 'Branco', 50.00, 10.00, '2023-05-01 09:00:00', 100),
-  ('Botão de Plástico', 'Preto', NULL, 0.50, '2023-05-02 10:00:00', 500),
-  ('Linha de Costura', NULL, NULL, 1.00, '2023-05-03 11:00:00', 200)
-  ;
-  
-  INSERT INTO products (name, sales_price) VALUES
-  ('Camisa', 20.00),
-  ('Calça', 30.00),
-  ('Vestido', 40.00)
-  ;
-  
-  INSERT INTO clients (name, address, email, phone) VALUES
-  ('João Silva', 'Rua A, 123', 'joao.silva@example.com', '31912345678'),
-  ('Maria Souza', 'Avenida B, 456', 'maria.souza@example.com', '31912345679'),
-  ('Pedro Santos', 'Rua C, 789', 'pedro.santos@example.com', '31912345677')
-  ;
-  
-  INSERT INTO orders (date, amount, status, id_client) VALUES
-  ('2023-06-01 14:00:00', 2, 'Em andamento', 1),
-  ('2023-06-02 15:00:00', 1, 'Concluído', 2),
-  ('2023-06-03 16:00:00', 3, 'Em andamento', 3)
-      ;
-  
-  INSERT INTO ordered_products (id_product, id_order) VALUES
-  (1, 1),
-  (2, 1),
-  (2, 2),
-  (3, 2),
-  (1, 3),
-  (3, 3)
-  ;
-  
-  INSERT INTO materials_products (id_materials, id_products) VALUES
-  (1, 1),
-  (2, 1),
-  (1, 2),
-  (3, 2),
-  (3, 3)
-  ;
+    SET time_zone = 'America/Sao_Paulo';
+    DROP DATABASE IF EXISTS ${DATABASE};
+    CREATE SCHEMA IF NOT EXISTS ${DATABASE} DEFAULT CHARACTER SET utf8;
+    USE ${DATABASE};
+    
+    CREATE TABLE IF NOT EXISTS materials (
+      material_id INT AUTO_INCREMENT PRIMARY KEY,
+      material_name VARCHAR(100) NOT NULL,
+      color VARCHAR(45) NULL,
+      cost_price DECIMAL(10,2) NOT NULL,
+      stock DECIMAL(10,2) NOT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    
+    CREATE TABLE IF NOT EXISTS products (
+      product_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      product_name VARCHAR(100) NOT NULL,
+      selling_price DECIMAL(10,2) NOT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    
+    CREATE TABLE IF NOT EXISTS customers (
+      customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      customer_name VARCHAR(45) NOT NULL,
+      cpf VARCHAR(20) NOT NULL,
+      address VARCHAR(45) NOT NULL,
+      email VARCHAR(45) NOT NULL,
+      phone VARCHAR(20) NOT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    
+    CREATE TABLE IF NOT EXISTS orders (
+      order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      status VARCHAR(45) NOT NULL,
+      customer_id INT NOT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      FOREIGN KEY (customer_id) REFERENCES inventory.customers (customer_id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+    );
+    
+    CREATE TABLE IF NOT EXISTS order_items (
+      product_id INT NOT NULL,
+      order_id INT NOT NULL,
+      quantity INT NOT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (product_id, order_id),
+      FOREIGN KEY (product_id) REFERENCES inventory.products (product_id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+      FOREIGN KEY (order_id) REFERENCES inventory.orders (order_id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+    );
+    
+    CREATE TABLE IF NOT EXISTS products_materials (
+      material_id INT NOT NULL,
+      product_id INT NOT NULL,
+      quantity DECIMAL(10,2) NOT NULL,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (material_id, product_id),
+      FOREIGN KEY (material_id) REFERENCES inventory.materials (material_id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+      FOREIGN KEY (product_id) REFERENCES inventory.products (product_id)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+    );
+    
+    INSERT INTO materials (material_name, color, cost_price, stock) VALUES
+      ('Tecido de Seda Branco', 'Branco', 10.50, 30),
+      ('Botão Vermelho', 'Vermelho', 0.50, 57),
+      ('Elástico', NULL, 1.00, 3),
+      ('Velcro Dupla Face', NULL, 2.50, 1);
+    
+    INSERT INTO products (product_name, selling_price) VALUES
+      ('Camisa', 25.99),
+      ('Calça', 39.99),
+      ('Vestido', 49.99),
+      ('Saia', 24.99);
+    
+    INSERT INTO customers (customer_name, cpf, address, email, phone) VALUES
+      ('João Silva', '123456789', 'Rua Principal 123', 'joao@example.com', '123-456-7890'),
+      ('Ana Oliveira', '987654321', 'Rua das Flores 123', 'ana@example.com', '987-654-3210'),
+      ('Pedro Santos', '123456789', 'Avenida Principal 456', 'pedro@example.com', '123-456-7890'),
+      ('Maria Santos', '987654321', 'Rua Secundária 456', 'maria@example.com', '987-654-3210');
+    
+    INSERT INTO orders (status, customer_id) VALUES
+      ('Pendente', 1),
+      ('Concluído', 2),
+      ('Pendente', 3),
+      ('Concluído', 4),
+      ('Pendente', 2);
+    
+    INSERT INTO order_items (product_id, order_id, quantity) VALUES
+      (1, 1, 2),
+      (2, 1, 1),
+      (3, 2, 1),
+      (1, 3, 1),
+      (3, 3, 2),
+      (2, 5, 3),
+      (4, 4, 2);
+    
+    INSERT INTO products_materials (material_id, product_id, quantity) VALUES
+      (1, 1, 2.50),
+      (2, 1, 4.00),
+      (3, 2, 1.75),
+      (4, 3, 0.50),
+      (1, 4, 3.75),
+      (3, 4, 2.00);
   `;
 
 	await dbConnection.query(query);
