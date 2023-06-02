@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { getAllProducts } from './service/api'
 
 
-function App() {
+export default function App() {
   const [products, setProducts] = useState([])
   const getApi = async () => {
     const result = await getAllProducts();
@@ -19,5 +19,3 @@ function App() {
     </>
   )
 }
-
-export default App
