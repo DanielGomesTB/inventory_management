@@ -2,7 +2,7 @@ const express = require('express');
 const router = require('./routes/router');
 const cors = require('cors');
 
-// iniciando nova branch
+// renomeando branch
 
 
 const app = express();
