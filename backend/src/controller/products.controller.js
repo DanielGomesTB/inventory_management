@@ -7,7 +7,6 @@ async function getAll(req, res) {
     return res.status(200).json(result);
 }
 
-
 async function insert(req, res) {
     const result = await productsService.insert(req.body);
 
