@@ -24,8 +24,19 @@ async function insert(payload) {
 	return result;
 }
 
+async function insertOrderItem(payload) {
+    const values = Object.values(payload);
+    const columns = Object.keys(payload).join(', ');
+    const placeholders = values.map((_value) => '?').join(', ');
+    const query = `INSERT INTO order_items (${columns}) VALUES(${placeholders})`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
+    insertOrderItem,
 }
