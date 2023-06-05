@@ -10,14 +10,6 @@ async function insert(body) {
 
 	return insertedOrder;
 }
-// {
-// order_type: 'atacado',
-// customer_id: 1,
-// products: [
-//     {product_id: 1, quantity: 1},
-//     {product_id: 2, quantity: 2},
-//   ]
-// } 
 
 module.exports = {
     insert,
