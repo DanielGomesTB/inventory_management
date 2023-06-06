@@ -34,9 +34,19 @@ async function insertProductMaterial(payload) {
 	return result;
 }
 
+async function update(payload, id) {
+    const values = Object.values(payload);
+    const columns = Object.keys(payload).map((column) => `${column} = ?`).join(', ');
+    const query = `UPDATE products SET ${columns} WHERE product_id = ${id}`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
     insertProductMaterial,
+    update,
 }
