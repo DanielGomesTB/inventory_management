@@ -43,10 +43,19 @@ async function update(payload, id) {
 	return result;
 }
 
+async function deleteProduct(payload, id) {
+    const values = Object.values(payload);
+    const query = `UPDATE products SET is_active = 0 WHERE product_id = ${id}`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
     insertProductMaterial,
     update,
+    deleteProduct,
 }
