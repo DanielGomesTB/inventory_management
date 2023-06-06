@@ -34,9 +34,19 @@ async function insertOrderItem(payload) {
 	return result;
 }
 
+async function update(payload, id) {
+    const values = Object.values(payload);
+    const columns = Object.keys(payload).map((column) => `${column} = ?`).join(', ');
+    const query = `UPDATE orders SET ${columns} WHERE order_id = ${id}`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
     insertOrderItem,
+    update,
 }
