@@ -24,8 +24,18 @@ async function insert(payload) {
 	return result;
 }
 
+async function update(payload, id) {
+    const values = Object.values(payload);
+    const columns = Object.keys(payload).map((column) => `${column} = ?`).join(', ');
+    const query = `UPDATE materials SET ${columns} WHERE material_id = ${id}`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
+    update,
 }
