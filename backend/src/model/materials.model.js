@@ -33,9 +33,18 @@ async function update(payload, id) {
 	return result;
 }
 
+async function deleteMaterial(payload, id) {
+    const values = Object.values(payload);
+    const query = `UPDATE materials SET is_active = 0 WHERE material_id = ${id}`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
     update,
+    deleteMaterial,
 }

@@ -20,8 +20,16 @@ async function update(req, res) {
     return res.status(200).json(result);
 }
 
+async function deleteMaterial(req, res) {
+    const { id } = req.params;
+    const result = await materialsModel.deleteMaterial(req.body, id);
+
+    return res.status(200).json(result);
+}
+
 module.exports = {
     getAll,
     insert,
     update,
+    deleteMaterial,
 }
