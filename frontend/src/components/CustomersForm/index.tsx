@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 export default function CustomersForm() {
-  const [customerName, setCustomerName] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [customerName, setCustomerName] = useState<string>('');
+  const [cpf, setCpf] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
 
   const handleClick = () => {
     console.log({
@@ -19,7 +19,7 @@ export default function CustomersForm() {
 
   return (
     <>
-      <h1>Clientes</h1>
+      <h2>Clientes</h2>
 
       <form>
         <label htmlFor="customerName">

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 export default function ProductsForm() {
-  const [productName, setProductName] = useState('');
-  const [sellingPrice, setSellingPrice] = useState('');
-  const [materialName, setMaterialName] = useState('Cetim');
-  const [quantity, setQuantity] = useState('');
-  const [materials, setMaterials] = useState([]);
+  const [productName, setProductName] = useState<string>('');
+  const [sellingPrice, setSellingPrice] = useState<number>(0);
+  const [materialName, setMaterialName] = useState<string>('Cetim');
+  const [quantity, setQuantity] = useState<number>(0);
+  const [materials, setMaterials] = useState<IMaterials[]>([]);
 
   const handleClick = () => {
     console.log({
@@ -15,6 +15,11 @@ export default function ProductsForm() {
     })
   };
 
+  interface IMaterials {
+    materialName: string;
+    quantity: number;
+  }
+
   const handleAddMaterial = () => {
     const updatedMaterials = [...materials, { materialName, quantity }];
     setMaterials(updatedMaterials);
@@ -22,7 +27,7 @@ export default function ProductsForm() {
 
   return (
     <>
-      <h1>Produtos</h1>
+      <h2>Produtos</h2>
 
       <form>
         <label htmlFor="productName">
@@ -41,7 +46,7 @@ export default function ProductsForm() {
             type="number"
             id="sellingPrice"
             value={sellingPrice}
-            onChange={(e) => setSellingPrice(e.target.value)}
+            onChange={(e) => setSellingPrice(Number(e.target.value))}
           />
         </label>
 
@@ -75,7 +80,7 @@ export default function ProductsForm() {
               type="number"
               id="quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(Number(e.target.value))}
             />
           </label>
 

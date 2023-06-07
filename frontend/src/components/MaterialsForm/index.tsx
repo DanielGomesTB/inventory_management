@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 export default function MaterialsForm() {
-  const [materialName, setMaterialName] = useState('');
-  const [color, setColor] = useState('');
-  const [costPrice, setCostPrice] = useState('');
-  const [stock, setStock] = useState('');
+  const [materialName, setMaterialName] = useState<string>('');
+  const [color, setColor] = useState<string>('');
+  const [costPrice, setCostPrice] = useState<number>(0);
+  const [stock, setStock] = useState<number>(0);
 
   const handleClick = () => {
     console.log({
@@ -17,7 +17,7 @@ export default function MaterialsForm() {
 
   return (
     <>
-      <h1>Materiais</h1>
+      <h2>Materiais</h2>
 
       <form>
         <label htmlFor="materialName">
@@ -46,7 +46,7 @@ export default function MaterialsForm() {
             type="number"
             id="costPrice"
             value={costPrice}
-            onChange={(e) => setCostPrice(e.target.value)}
+            onChange={(e) => setCostPrice(Number(e.target.value))}
           />
         </label>
 
@@ -56,7 +56,7 @@ export default function MaterialsForm() {
             type="number"
             id="stock"
             value={stock}
-            onChange={(e) => setStock(e.target.value)}
+            onChange={(e) => setStock(Number(e.target.value))}
           />
         </label>
 

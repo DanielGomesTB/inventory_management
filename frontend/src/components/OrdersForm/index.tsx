@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 export default function OrdersForm() {
-  const [orderStatus, setOrderStatus] = useState('pending');
-  const [orderType, setOrderType] = useState('Varejo');
-  const [customerId, setCustomerId] = useState('Maria');
-  const [productName, setProductName] = useState('Boné');
-  const [quantity, setQuantity] = useState('');
-  const [products, setProducts] = useState([]);
+  const [orderStatus, setOrderStatus] = useState<string>('pending');
+  const [orderType, setOrderType] = useState<string>('Varejo');
+  const [customerId, setCustomerId] = useState<string>('Maria');
+  const [productName, setProductName] = useState<string>('Boné');
+  const [quantity, setQuantity] = useState<number>(0);
+  const [products, setProducts] = useState<IProducts[]>([]);
 
   const handleClick = () => {
     console.log({
@@ -17,6 +17,11 @@ export default function OrdersForm() {
     })
   };
 
+  interface IProducts {
+    productName: string;
+    quantity: number;
+  }
+
   const handleAddProduct = () => {
     const updatedProducts = [...products, { productName, quantity }];
     setProducts(updatedProducts);
@@ -24,7 +29,7 @@ export default function OrdersForm() {
 
   return (
     <>
-      <h1>Pedidos</h1>
+      <h2>Pedidos</h2>
 
       <form>
 
@@ -96,7 +101,7 @@ export default function OrdersForm() {
               type="number"
               id="quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(Number(e.target.value))}
             />
           </label>
 
