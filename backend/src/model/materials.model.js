@@ -35,7 +35,7 @@ async function update(payload, id) {
 
 async function deleteMaterial(payload, id) {
     const values = Object.values(payload);
-    const query = `UPDATE materials SET is_active = 0 WHERE material_id = ${id}`;
+    const query = `UPDATE materials SET is_active = ? WHERE material_id = ${id}`;
     const [result] = await dbConnection.execute(query, values);
 
 	return result;

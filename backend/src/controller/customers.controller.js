@@ -20,8 +20,16 @@ async function update(req, res) {
     return res.status(200).json(result);
 }
 
+async function deleteCustomers(req, res) {
+    const { id } = req.params;
+    const result = await customersModel.deleteCustomers(req.body, id);
+
+    return res.status(200).json(result);
+}
+
 module.exports = {
     getAll,
     insert,
     update,
+    deleteCustomers,
 }

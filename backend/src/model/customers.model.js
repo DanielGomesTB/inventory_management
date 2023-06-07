@@ -33,9 +33,18 @@ async function update(payload, id) {
 	return result;
 }
 
+async function deleteCustomers(payload, id) {
+    const values = Object.values(payload);
+    const query = `UPDATE customers SET is_active = ? WHERE customer_id = ${id}`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
     update,
+    deleteCustomers,
 }
