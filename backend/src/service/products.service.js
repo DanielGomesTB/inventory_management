@@ -12,6 +12,18 @@ async function insert(body) {
 	return insertedProduct;
 }
 
+// async function update(body, id) {
+//     const {materials, ...product} = body;
+//     await productsModel.update(product, id);
+//     materials.forEach(async (material) => {
+//         await productsModel.updateProductMaterial(material, id)
+//     })
+//     const updatedProduct = await productsModel.getById(id);
+
+// 	return updatedProduct;
+// }
+
 module.exports = {
     insert,
+    update,
 }
