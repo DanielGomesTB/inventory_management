@@ -40,7 +40,7 @@ async function dbSeedAndReset() {
     CREATE TABLE IF NOT EXISTS customers (
       customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       customer_name VARCHAR(45) NOT NULL,
-      cpf VARCHAR(20) NOT NULL,
+      cpf VARCHAR(11) NOT NULL,
       address VARCHAR(45) NOT NULL,
       email VARCHAR(45) NOT NULL,
       phone VARCHAR(20) NOT NULL,
@@ -51,7 +51,7 @@ async function dbSeedAndReset() {
 
     CREATE TABLE IF NOT EXISTS orders (
       order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      order_status ENUM('pendente', 'iniciado', 'concluído', 'cancelado'),
+      order_status ENUM('pendente', 'iniciado', 'concluído', 'cancelado') DEFAULT 'pendente',
       order_type ENUM('atacado', 'varejo'),
       customer_id INT NOT NULL,
       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
