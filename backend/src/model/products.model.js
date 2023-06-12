@@ -76,5 +76,5 @@ module.exports = {
     insertProductMaterial,
     update,
     deleteProduct,
-    updateProductMaterial,
+    // updateProductMaterial,
 }

@@ -9,10 +9,18 @@ interface ProviderProps {
 
 export default function Provider({ children }: ProviderProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [customersData, setCustomersData] = useState<[]>([]);
+  const [ordersData, setOrdersData] = useState<[]>([]);
+  const [productsData, setProductsData] = useState<[]>([]);
+  const [materialsData, setMaterialsData] = useState<[]>([]);
 
   const context = useMemo(() => ({
     isLoading, setIsLoading,
-  }), [isLoading]);
+    customersData, setCustomersData,
+    ordersData, setOrdersData,
+    productsData, setProductsData,
+    materialsData, setMaterialsData,
+  }), [isLoading, customersData, ordersData, productsData, materialsData]);
 
   return (
     <Context.Provider value={context}>

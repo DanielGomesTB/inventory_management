@@ -29,10 +29,7 @@ export default function OrdersForm() {
 
   return (
     <>
-      <h2>Pedidos</h2>
-
       <form>
-
         <label htmlFor="customerId">
           Cliente
           <select
@@ -117,7 +114,6 @@ export default function OrdersForm() {
           {`${product.productName} - ${product.quantity}`}
         </div>
       ))}
-
     </>
   );
 }

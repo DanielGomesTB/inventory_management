@@ -27,8 +27,6 @@ export default function ProductsForm() {
 
   return (
     <>
-      <h2>Produtos</h2>
-
       <form>
         <label htmlFor="productName">
           Descrição do Produto
@@ -96,7 +94,6 @@ export default function ProductsForm() {
           {`${material.materialName} - ${material.quantity}`}
         </div>
       ))}
-
     </>
   );
 }
