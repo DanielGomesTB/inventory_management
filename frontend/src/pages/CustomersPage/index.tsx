@@ -9,7 +9,7 @@ export default function CustomersPage() {
   const {
     customersData,
     setCustomersData,
-  } = useContext(Context)
+  } = useContext(Context) || {}
 
   const getAllCustomers = async () => {
     const response = await getAll('customers')
@@ -25,7 +25,17 @@ export default function CustomersPage() {
     <>
       <h2>Clientes</h2>
       <CustomersForm />
-      <Table data={customersData} />
+      <Table
+        data={customersData}
+        columns={{
+          customer_name: 'Nome',
+          cpf: 'CPF',
+          address: 'Endereço',
+          email: 'e-mail',
+          phone: 'Telefone',
+          created_at: 'Cadastrado em:'
+        }}
+      />
     </>
   );
 }

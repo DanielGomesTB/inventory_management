@@ -9,7 +9,7 @@ export default function OrdersPage() {
   const {
     ordersData,
     setOrdersData,
-  } = useContext(Context)
+  } = useContext(Context) || {}
 
   const getAllCustomers = async () => {
     const response = await getAll('orders')
@@ -25,7 +25,16 @@ export default function OrdersPage() {
     <>
       <h2>Pedidos</h2>
       <OrdersForm />
-      <Table data={ordersData} />
+      <Table
+        data={ordersData}
+        columns={{
+          order_id: 'Pedido',
+          customer_id: 'Cliente',
+          order_type: 'Tipo',
+          order_status: 'Status',
+          created_at: 'Pedido realizado em:'
+        }}
+      />
     </>
   );
 }

@@ -9,7 +9,7 @@ export default function MaterialsPage() {
   const {
     materialsData,
     setMaterialsData,
-  } = useContext(Context)
+  } = useContext(Context) || {}
 
   const getAllCustomers = async () => {
     const response = await getAll('materials')
@@ -25,7 +25,18 @@ export default function MaterialsPage() {
     <>
       <h2>Estoque</h2>
       <MaterialsForm />
-      <Table data={materialsData} />
+      <Table
+        data={materialsData}
+        columns={{
+          material_id: 'Material',
+          material_name: 'Descrição',
+          color: 'Cor',
+          cost_price: 'Preço de custo',
+          stock: 'Quantidade em estoque',
+          created_at: 'Cadastrado em:',
+          updated_at: 'Atualizado em:',
+        }}
+      />
     </>
   );
 }

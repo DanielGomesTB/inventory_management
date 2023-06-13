@@ -9,7 +9,7 @@ export default function ProductsPage() {
   const {
     productsData,
     setProductsData,
-  } = useContext(Context)
+  } = useContext(Context) || {}
 
   const getAllCustomers = async () => {
     const response = await getAll('products')
@@ -25,7 +25,15 @@ export default function ProductsPage() {
     <>
       <h2>Produtos</h2>
       <ProductsForm />
-      <Table data={productsData} />
+      <Table
+        data={productsData}
+        columns={{
+          product_id: 'Produto',
+          product_name: 'Descrição',
+          selling_price: 'Preço',
+          created_at: 'Cadastrado em:'
+        }}
+      />
     </>
   );
 }

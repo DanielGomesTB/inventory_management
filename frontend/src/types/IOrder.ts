@@ -9,12 +9,3 @@ export interface IOrder {
   order_type?: string;
   products: IOrderItems[];
 }
-
-// {
-//   "order_id": 1,
-//   "order_status": "pendente",
-//   "order_type": "varejo",
-//   "customer_id": 1,
-//   "created_at": "2023-06-02T19:06:31.000Z",
-//   "updated_at": "2023-06-02T19:06:31.000Z"
-// }
