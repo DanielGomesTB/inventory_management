@@ -4,6 +4,8 @@ import ProductsForm from "../../components/ProductsForm";
 import Table from "../../components/Table";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
+import formatDate from '../../utils/formatDate';
+import formatCurrency from '../../utils/formatCurrency';
 
 export default function ProductsPage() {
   const {
@@ -27,12 +29,12 @@ export default function ProductsPage() {
       <ProductsForm />
       <Table
         data={productsData}
-        columns={{
-          product_id: 'Produto',
-          product_name: 'Descrição',
-          selling_price: 'Preço',
-          created_at: 'Cadastrado em:'
-        }}
+        columns={[
+          {column: 'product_id', header: 'Produto'},
+          {column: 'product_name', header: 'Descrição'},
+          {column: 'selling_price', header: 'Preço', formatter: formatCurrency},
+          {column: 'created_at', header: 'Cadastrado em:', formatter: formatDate},
+        ]}
       />
     </>
   );

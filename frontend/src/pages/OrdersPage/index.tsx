@@ -4,6 +4,7 @@ import OrdersForm from "../../components/OrdersForm";
 import Table from "../../components/Table";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
+import formatDate from '../../utils/formatDate';
 
 export default function OrdersPage() {
   const {
@@ -27,13 +28,13 @@ export default function OrdersPage() {
       <OrdersForm />
       <Table
         data={ordersData}
-        columns={{
-          order_id: 'Pedido',
-          customer_id: 'Cliente',
-          order_type: 'Tipo',
-          order_status: 'Status',
-          created_at: 'Pedido realizado em:'
-        }}
+        columns={[
+          {column: 'order_id', header: 'Pedido'},
+          {column: 'customer_id', header: 'Cliente'},
+          {column: 'order_type', header: 'Tipo'},
+          {column: 'order_status', header: 'Status'},
+          {column: 'created_at', header: 'Pedido realizado em:', formatter: formatDate},
+        ]}
       />
     </>
   );

@@ -100,10 +100,10 @@ async function dbSeedAndReset() {
       ('Saia', 24.99);
 
     INSERT INTO customers (customer_name, cpf, address, email, phone) VALUES
-      ('João Silva', '123456789', 'Rua Principal 123', 'joao@example.com', '123-456-7890'),
-      ('Ana Oliveira', '987654321', 'Rua das Flores 123', 'ana@example.com', '987-654-3210'),
-      ('Pedro Santos', '123456789', 'Avenida Principal 456', 'pedro@example.com', '123-456-7890'),
-      ('Maria Santos', '987654321', 'Rua Secundária 456', 'maria@example.com', '987-654-3210');
+      ('João Silva', '11122233344', 'Rua Principal 123', 'joao@example.com', '31945678931'),
+      ('Ana Oliveira', '44455566677', 'Rua das Flores 123', 'ana@example.com', '41976543211'),
+      ('Pedro Santos', '77788899900', 'Avenida Principal 456', 'pedro@example.com', '55923456789'),
+      ('Maria Santos', '00011122233', 'Rua Secundária 456', 'maria@example.com', '11987654321');
 
     INSERT INTO orders (order_status, order_type, customer_id) VALUES
       ('pendente', 'varejo', 1),

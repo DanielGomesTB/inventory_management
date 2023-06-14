@@ -1,33 +1,33 @@
+import { ICustomerApi, IOrderApi, IProductApi, IMaterialApi } from '../../types';
+
+type dataType = ICustomerApi | IOrderApi | IProductApi | IMaterialApi;
+
 interface ITableProps<T> {
-  data: T[];
-  columns: T
+  data: dataType[] | undefined;
+  columns: T[]
 }
 
-type ObjectType = {
-  [key: string]: string | number | boolean;
-};
-
-export default function Table<T extends ObjectType>({ data, columns }: ITableProps<T>) {
-  if (data.length === 0) {
+export default function Table<T>({ data, columns }: ITableProps<T>) {
+  if (data?.length === 0) {
     return <p>Nenhum dado disponível.</p>;
   }
-
-  const tableColumns = Object.entries(columns)
 
   return (
     <table>
       <thead>
         <tr>
-          {tableColumns.map((header, index) => (
-            <th key={index}>{header[1]}</th>
+          {columns.map((column, index) => (
+            <th key={index}>{column.header}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {data.map((item, rowIndex) => (
+        {data?.map((item, rowIndex) => (
           <tr key={rowIndex}>
-            {tableColumns.map((header, columnIndex) => (
-              <td key={columnIndex}>{item[header[0]]}</td>
+            {columns.map((column, columnIndex) => (
+              <td key={columnIndex}>
+                {column.formatter ? column.formatter(item[column.column]) : item[column.column]}
+              </td>
             ))}
             <td>
               <button type="button" onClick={() => alert('Editar!')}>
