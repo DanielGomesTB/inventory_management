@@ -5,6 +5,7 @@ import Table from "../../components/Table";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
 import formatDate from '../../utils/formatDate';
+import OrdersView from "../../components/OrdersView";
 
 export default function OrdersPage() {
   const {
@@ -24,18 +25,9 @@ export default function OrdersPage() {
 
   return (
     <>
-      <h2>Pedidos</h2>
+      <h1>Adicionar pedido</h1>
       <OrdersForm />
-      <Table
-        data={ordersData}
-        columns={[
-          {column: 'order_id', header: 'Pedido'},
-          {column: 'customer_id', header: 'Cliente'},
-          {column: 'order_type', header: 'Tipo'},
-          {column: 'order_status', header: 'Status'},
-          {column: 'created_at', header: 'Pedido realizado em:', formatter: formatDate},
-        ]}
-      />
+      <OrdersView />
     </>
   );
 }
