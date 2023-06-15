@@ -1,12 +1,11 @@
 import { useContext, useEffect } from "react";
 
 import CustomersForm from "../../components/CustomersForm";
-import Table from "../../components/Table";
+import CostumersTable from "../../components/CustomersTable";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
-import formatPhoneNumber from '../../utils/formatPhoneNumber';
-import formatCPF from '../../utils/formatCPF';
-import formatDate from '../../utils/formatDate';
+
+import {customersDataMock} from '../../mocks'
 
 
 export default function CustomersPage() {
@@ -29,17 +28,7 @@ export default function CustomersPage() {
     <>
       <h2>Clientes</h2>
       <CustomersForm />
-      <Table
-        data={customersData}
-        columns={[
-          {column: 'customer_name', header: 'Nome'},
-          {column: 'cpf', header: 'CPF', formatter: formatCPF},
-          {column: 'address', header: 'Endereço'},
-          {column: 'email', header: 'e-mail'},
-          {column: 'phone', header: 'Telefone', formatter: formatPhoneNumber},
-          {column: 'created_at', header: 'Cadastrado em:', formatter: formatDate},
-      ]}
-      />
+      <CostumersTable data={customersDataMock}/>
     </>
   );
 }
