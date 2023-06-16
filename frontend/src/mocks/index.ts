@@ -112,8 +112,48 @@ export const ordersDataMock = [
     updated_at: "2023-06-02T19:06:31.000Z"
   },
   {
-    order_id: 20,
+    order_id: 3,
     order_status: "concluído",
+    order_type: "varejo",
+    customer_id: 10,
+    created_at: "2023-06-02T19:06:31.000Z",
+    updated_at: "2023-06-02T19:06:31.000Z"
+  },
+  {
+    order_id: 4,
+    order_status: "pendente",
+    order_type: "varejo",
+    customer_id: 1,
+    created_at: "2023-06-02T19:06:31.000Z",
+    updated_at: "2023-06-02T19:06:31.000Z"
+  },
+  {
+    order_id: 5,
+    order_status: "concluído",
+    order_type: "atacado",
+    customer_id: 2,
+    created_at: "2023-06-02T19:06:31.000Z",
+    updated_at: "2023-06-02T19:06:31.000Z"
+  },
+  {
+    order_id: 6,
+    order_status: "cancelado",
+    order_type: "varejo",
+    customer_id: 10,
+    created_at: "2023-06-02T19:06:31.000Z",
+    updated_at: "2023-06-02T19:06:31.000Z"
+  },
+  {
+    order_id: 7,
+    order_status: "iniciado",
+    order_type: "atacado",
+    customer_id: 2,
+    created_at: "2023-06-02T19:06:31.000Z",
+    updated_at: "2023-06-02T19:06:31.000Z"
+  },
+  {
+    order_id: 8,
+    order_status: "pendente",
     order_type: "varejo",
     customer_id: 10,
     created_at: "2023-06-02T19:06:31.000Z",

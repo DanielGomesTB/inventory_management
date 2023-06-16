@@ -5,15 +5,13 @@ import ProductsTable from "../../components/ProductsTable";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
 
+import { productsDataMock } from '../../mocks' // Remove this line
+
 export default function ProductsPage() {
-  const {
-    productsData,
-    setProductsData,
-  } = useContext(Context) || {}
+  const { productsData, setProductsData } = useContext(Context)
 
   const getAllCustomers = async () => {
     const response = await getAll('products')
-    console.log(response)
     setProductsData(response.data)
   }
 
@@ -25,7 +23,7 @@ export default function ProductsPage() {
     <>
       <h2>Produtos</h2>
       <ProductsForm />
-      <ProductsTable data={productsData}/>
+      <ProductsTable data={productsDataMock}/>
     </>
   );
 }

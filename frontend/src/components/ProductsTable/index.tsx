@@ -2,12 +2,14 @@ import { IProductApi } from '../../types';
 import formatDate from '../../utils/formatDate';
 import formatCurrency from '../../utils/formatCurrency';
 
-interface ITableProps {
+interface IProps {
   data: IProductApi[];
 }
 
-export default function ProductsTable({ data }: ITableProps) {
-  if (data?.length === 0) {
+export default function ProductsTable(props : IProps) {
+  const {data} = props;
+
+  if (!data || data.length === 0) {
     return <p>Nenhum dado disponível.</p>;
   }
 

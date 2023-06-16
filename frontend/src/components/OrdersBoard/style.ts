@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Board = styled.div`
   padding: 16px;
-  border: 1px solid rgba(204, 204, 204, 0.4);
+  border: 1px solid var(--main-white);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -25,10 +25,11 @@ export const OrdersContainer = styled.div`
   margin-top: 24px;
 
   button {
-    background: #fff;
+    padding: 16px;
+    background: var(--main-white);
     border-radius: 8px;
     height: 128px;
-    border: 1px solid rgba(204, 204, 204, 0.4);
+    border: 1px solid var(--sec-dark);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -42,11 +43,14 @@ export const OrdersContainer = styled.div`
 
     span {
       font-size: 14px;
-      color: #666;
     }
 
     & + button {
       margin-top: 24px;
     }
   }
+`;
+
+export const ColoredText = styled.strong`
+  color: ${({color}) => `var(--main-${color})`};
 `;

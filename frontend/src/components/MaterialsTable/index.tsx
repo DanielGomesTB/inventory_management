@@ -2,12 +2,14 @@ import { IMaterialApi } from '../../types';
 import formatCurrency from '../../utils/formatCurrency';
 import formatDate from '../../utils/formatDate';
 
-interface ITableProps {
+interface IProps {
   data: IMaterialApi[];
 }
 
-export default function MaterialsTable({ data }: ITableProps) {
-  if (data?.length === 0) {
+export default function MaterialsTable(props : IProps) {
+  const {data} = props;
+
+  if (!data || data.length === 0) {
     return <p>Nenhum dado disponível.</p>;
   }
 

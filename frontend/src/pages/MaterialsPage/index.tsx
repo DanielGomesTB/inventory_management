@@ -5,15 +5,13 @@ import MaterialsTable from "../../components/MaterialsTable";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
 
+import { materialsDataMock } from '../../mocks' // Remove this line
+
 export default function MaterialsPage() {
-  const {
-    materialsData,
-    setMaterialsData,
-  } = useContext(Context) || {}
+  const { materialsData, setMaterialsData } = useContext(Context)
 
   const getAllCustomers = async () => {
     const response = await getAll('materials')
-    console.log(response)
     setMaterialsData(response.data)
   }
 
@@ -25,7 +23,7 @@ export default function MaterialsPage() {
     <>
       <h2>Estoque</h2>
       <MaterialsForm />
-      <MaterialsTable data={materialsData}/>
+      <MaterialsTable data={materialsDataMock}/>
     </>
   );
 }

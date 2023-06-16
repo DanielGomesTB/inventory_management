@@ -3,12 +3,14 @@ import formatPhoneNumber from '../../utils/formatPhoneNumber';
 import formatCPF from '../../utils/formatCPF';
 import formatDate from '../../utils/formatDate';
 
-interface ITableProps {
+interface IProps {
   data: ICustomerApi[];
 }
 
-export default function CostumersTable({ data }: ITableProps) {
-  if (data?.length === 0) {
+export default function CostumersTable(props : IProps) {
+  const {data} = props;
+
+  if (!data || data.length === 0) {
     return <p>Nenhum dado disponível.</p>;
   }
 

@@ -4,11 +4,12 @@ import { ICustomerApi, IOrderApi, IProductApi, IMaterialApi } from '../types';
 
 import Context from './Context';
 
-interface IProviderProps {
+interface IProps {
   children: React.ReactNode
 }
 
-export default function Provider({ children }: IProviderProps) {
+export default function Provider({ children }: IProps) {
+  
   const [customersData, setCustomersData] = useState<ICustomerApi[]>([]);
   const [ordersData, setOrdersData] = useState<IOrderApi[]>([]);
   const [productsData, setProductsData] = useState<IProductApi[]>([]);

@@ -1,16 +1,15 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
-import NotFoundPage from '../pages/NotFoundPage/index'
+import NavBar from '../components/NavBar';
 import HomePage from '../pages/HomePage';
+import NotFoundPage from '../pages/NotFoundPage/index'
 import CustomersPage from '../pages/CustomersPage';
 import OrdersPage from '../pages/OrdersPage';
 import ProductsPage from '../pages/ProductsPage';
 import MaterialsPage from '../pages/MaterialsPage';
-import NavBar from '../components/NavBar';
 
 export default function Router() {
   return (
-    <>
       <BrowserRouter>
         <div style={{ display: 'flex' }}>
           <NavBar />
@@ -26,6 +25,5 @@ export default function Router() {
           </div>
         </div>
       </BrowserRouter>
-    </>
   )
 }

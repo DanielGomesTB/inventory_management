@@ -12,6 +12,6 @@ interface IContextValue {
   setMaterialsData: React.Dispatch<React.SetStateAction<IMaterialApi[]>>;
 }
 
-const Context = createContext<IContextValue | undefined>(undefined);
+const Context = createContext({} as IContextValue);
 
 export default Context;

@@ -1,36 +1,25 @@
 import OrdersBoard from "../OrdersBoard"
-import { useContext, useEffect } from "react";
-import Context from "../../context/Context";
-import { getAll } from "../../services/api/api"
+import { IOrderApi } from '../../types';
 import { Container } from './style';
 
-export default function OrdersView() {
-  const {
-    ordersData,
-    setOrdersData,
-  } = useContext(Context) || {}
+interface IProps {
+  data: IOrderApi[];
+}
 
-  const getAllOrders = async () => {
-    const response = await getAll('orders')
-    console.log(response)
-    setOrdersData(response.data)
-  }
+export default function OrdersView(props : IProps) {
+  const {data} = props;
 
-  useEffect(() => {
-    getAllOrders()
-  }, [])
-
-  const pendente = ordersData.filter((item) => item.oder_status === 'pendente');
-  const producao = ordersData.filter((item) => item.order_status === 'iniciado');
-  const finalizado = ordersData.filter((item) => item.order_status === 'concluído' || item.status ==='cancelado');
+  const pending = data.filter((item) => item.order_status === 'pendente');
+  const initialized = data.filter((item) => item.order_status === 'iniciado');
+  const completedAndCanceled = data.filter((item) => item.order_status === 'concluído' || item.order_status ==='cancelado');
 
   return (
     <>
       <h1>Pedidos</h1>
       <Container>
-        <OrdersBoard status='pendente' data={pendente}/>
-        <OrdersBoard status='em produção' data={producao}/>
-        <OrdersBoard status='finalizado' data={finalizado}/>
+        <OrdersBoard icon='🕒' status='Pendentes' data={pending} />
+        <OrdersBoard icon='🪡' status='Em Produção' data={initialized} />
+        <OrdersBoard icon='✅' status='Finalizados' data={completedAndCanceled} />
       </Container>
     </>
   )

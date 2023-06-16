@@ -5,7 +5,7 @@ type PayloadType = ICustomer | IOrder | IProduct | IMaterial;
 
 export async function getAll(route: string) {
     try {
-        const response = API.get(route);
+        const response = await API.get(route);
         return response;
     } catch (error) {
         console.error(error);
@@ -15,7 +15,7 @@ export async function getAll(route: string) {
 
 export async function insert(route: string, payload: PayloadType) {
     try {
-        const response = API.post(route, payload);
+        const response = await API.post(route, payload);
         return response;
     } catch (error) {
         console.error(error);
@@ -24,7 +24,7 @@ export async function insert(route: string, payload: PayloadType) {
 
 export async function update(route: string, id: number, payload: PayloadType) {
     try {
-        const response = API.put(`${route}/:${id}`, payload);
+        const response = await API.put(`${route}/:${id}`, payload);
         return response;
     } catch (error) {
         console.error(error);
@@ -33,7 +33,7 @@ export async function update(route: string, id: number, payload: PayloadType) {
 
 export async function remove(route: string, id: number) {
     try {
-        const response = API.patch(`${route}/:${id}`);
+        const response = await API.patch(`${route}/:${id}`);
         return response;
     } catch (error) {
         console.error(error);

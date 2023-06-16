@@ -1,33 +1,29 @@
 import { useContext, useEffect } from "react";
 
-import OrdersForm from "../../components/OrdersForm";
-import Table from "../../components/Table";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
-import formatDate from '../../utils/formatDate';
+import OrdersForm from "../../components/OrdersForm";
 import OrdersView from "../../components/OrdersView";
 
-export default function OrdersPage() {
-  const {
-    ordersData,
-    setOrdersData,
-  } = useContext(Context) || {}
+import { ordersDataMock } from '../../mocks' // Remove this line
 
-  const getAllCustomers = async () => {
+export default function OrdersPage() {
+  const { ordersData, setOrdersData } = useContext(Context)
+
+  const getAllOrders = async () => {
     const response = await getAll('orders')
-    console.log(response)
     setOrdersData(response.data)
   }
 
   useEffect(() => {
-    getAllCustomers()
+    getAllOrders()
   }, [])
 
   return (
     <>
       <h1>Adicionar pedido</h1>
       <OrdersForm />
-      <OrdersView />
+      <OrdersView data={ordersDataMock} />
     </>
   );
 }

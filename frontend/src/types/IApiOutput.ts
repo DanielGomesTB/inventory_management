@@ -1,4 +1,5 @@
 interface BaseColumns {
+  is_active?: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -10,7 +11,6 @@ export interface ICustomerApi extends BaseColumns {
   address: string;
   email: string;
   phone: string;
-  is_active: number;
 }
 
 export interface IOrderApi extends BaseColumns {
@@ -24,7 +24,6 @@ export interface IProductApi extends BaseColumns {
   product_id: number;
   product_name: string;
   selling_price: string;
-  is_active: number;
 }
 
 export interface IMaterialApi extends BaseColumns {
@@ -33,5 +32,4 @@ export interface IMaterialApi extends BaseColumns {
   color: string;
   cost_price: string;
   stock: string;
-  is_active: number;
 }
