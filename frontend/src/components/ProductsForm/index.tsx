@@ -1,11 +1,25 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import Context from '../../context/Context';
+import { getAll } from '../../services/api/api';
+
+interface IMaterials {
+  material: string;
+  quantity: number;
+}
 
 export default function ProductsForm() {
   const [productName, setProductName] = useState<string>('');
   const [sellingPrice, setSellingPrice] = useState<number>(0);
-  const [materialName, setMaterialName] = useState<string>('Cetim');
+  const [material, setMaterial] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(0);
   const [materials, setMaterials] = useState<IMaterials[]>([]);
+
+  const { materialsData, setMaterialsData } = useContext(Context)
+
+  const getAllMaterials = async () => {
+    const response = await getAll('materials')
+    setMaterialsData(response.data)
+  }
 
   const handleClick = () => {
     console.log({
@@ -15,15 +29,14 @@ export default function ProductsForm() {
     })
   };
 
-  interface IMaterials {
-    materialName: string;
-    quantity: number;
-  }
-
   const handleAddMaterial = () => {
-    const updatedMaterials = [...materials, { materialName, quantity }];
+    const updatedMaterials = [...materials, { material, quantity }];
     setMaterials(updatedMaterials);
   };
+
+  useEffect(() => {
+    getAllMaterials()
+  }, [])
 
   return (
     <>
@@ -62,13 +75,12 @@ export default function ProductsForm() {
             Material
             <select
               id="materialName"
-              value={materialName}
-              onChange={(e) => setMaterialName(e.target.value)}
+              value={material}
+              onChange={(e) => setMaterial(e.target.value)}
             >
-              <option value="Cetim">Cetim</option>
-              <option value="Velcro">Velcro</option>
-              <option value="Botão">Botão</option>
-              <option value="Seda">Seda</option>
+              {materialsData.map(({material_id, material_name}) => (
+                <option key={material_id} value={material_id}>{material_name}</option>
+              ))}
             </select>
           </label>
 
@@ -91,7 +103,7 @@ export default function ProductsForm() {
 
       {materials.map((material, index) => (
         <div key={index}>
-          {`${material.materialName} - ${material.quantity}`}
+          {`${material.material} - ${material.quantity}`}
         </div>
       ))}
     </>

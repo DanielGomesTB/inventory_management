@@ -1,12 +1,31 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { getAll } from '../../services/api/api';
+import Context from '../../context/Context';
+
+interface IProducts {
+  productName: string;
+  quantity: number;
+}
 
 export default function OrdersForm() {
   const [orderStatus, setOrderStatus] = useState<string>('pending');
   const [orderType, setOrderType] = useState<string>('Varejo');
-  const [customerId, setCustomerId] = useState<string>('Maria');
-  const [productName, setProductName] = useState<string>('Boné');
+  const [customerId, setCustomerId] = useState<string>('');
+  const [productName, setProductName] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(0);
   const [products, setProducts] = useState<IProducts[]>([]);
+
+  const {
+    customersData, setCustomersData,
+    productsData, setProductsData,
+  } = useContext(Context)
+
+  const getAllItems = async () => {
+    const customersResponse = await getAll('customers')
+    const productsResponse = await getAll('products')
+    setCustomersData(customersResponse.data)
+    setProductsData(productsResponse.data)
+  }
 
   const handleClick = () => {
     console.log({
@@ -17,15 +36,14 @@ export default function OrdersForm() {
     })
   };
 
-  interface IProducts {
-    productName: string;
-    quantity: number;
-  }
-
   const handleAddProduct = () => {
     const updatedProducts = [...products, { productName, quantity }];
     setProducts(updatedProducts);
   };
+
+  useEffect(() => {
+    getAllItems()
+  }, [])
 
   return (
     <>
@@ -37,10 +55,9 @@ export default function OrdersForm() {
             value={customerId}
             onChange={(e) => setCustomerId(e.target.value)}
           >
-            <option value="Maria">Maria</option>
-            <option value="João">João</option>
-            <option value="Joaquim">Joaquim</option>
-            <option value="Fernanda">Fernanda</option>
+            {customersData.map(({customer_id, customer_name}) => (
+              <option key={customer_id} value={customer_id}>{customer_name}</option>
+            ))}
           </select>
         </label>
 
@@ -85,10 +102,9 @@ export default function OrdersForm() {
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
             >
-              <option value="Boné">Boné</option>
-              <option value="Calcinha">Calcinha</option>
-              <option value="Pijama">Pijama</option>
-              <option value="Vestido">Vestido</option>
+            {productsData.map(({product_id, product_name}) => (
+              <option key={product_id} value={product_id}>{product_name}</option>
+            ))}
             </select>
           </label>
 

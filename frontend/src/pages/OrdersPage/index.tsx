@@ -5,7 +5,7 @@ import { getAll } from "../../services/api/api"
 import OrdersForm from "../../components/OrdersForm";
 import OrdersView from "../../components/OrdersView";
 
-import { ordersDataMock } from '../../mocks' // Remove this line
+// import { ordersDataMock } from '../../mocks' // Remove this line
 
 export default function OrdersPage() {
   const { ordersData, setOrdersData } = useContext(Context)
@@ -23,7 +23,7 @@ export default function OrdersPage() {
     <>
       <h1>Adicionar pedido</h1>
       <OrdersForm />
-      <OrdersView data={ordersDataMock} />
+      <OrdersView data={ordersData} />
     </>
   );
 }

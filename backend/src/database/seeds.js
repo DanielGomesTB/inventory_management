@@ -112,7 +112,8 @@ async function dbSeedAndReset() {
       ('concluído', 'varejo', 2),
       ('iniciado', 'atacado', 3),
       ('iniciado', 'varejo', 4),
-      ('pendente', 'varejo', 2);
+      ('pendente', 'varejo', 2),
+      ('cancelado', 'varejo', 3);
 
     INSERT INTO order_items (product_id, order_id, quantity) VALUES
       (1, 1, 2),
@@ -120,8 +121,9 @@ async function dbSeedAndReset() {
       (3, 2, 1),
       (1, 3, 2),
       (3, 3, 2),
-      (2, 5, 3),
-      (4, 4, 2);
+      (2, 4, 3),
+      (4, 5, 2),
+      (4, 6, 5);
 
     INSERT INTO products_materials (material_id, product_id, quantity) VALUES
       (1, 1, 1.15),
