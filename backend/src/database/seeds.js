@@ -88,16 +88,18 @@ async function dbSeedAndReset() {
     );
 
     INSERT INTO materials (material_name, color, cost_price, stock) VALUES
-      ('Tecido de Seda Branco', 'Branco', 10.50, 30),
-      ('Botão Vermelho', 'Vermelho', 0.50, 57),
-      ('Elástico', NULL, 1.00, 3),
-      ('Velcro Dupla Face', NULL, 2.50, 1);
+      ('Tecido de Seda Branco', 'Branco', 12.50, 30),
+      ('Malha Azul Estampada', 'Azul', 18.90, 20),
+      ('Botão Vermelho', 'Vermelho', 0.75, 57),
+      ('Elástico', NULL, 3.00, 3),
+      ('Velcro Dupla Face', NULL, 4.50, 10),
+      ('Linha de costura - Retrós 10m', 'Preto', 3.75, 8);
 
     INSERT INTO products (product_name, selling_price) VALUES
-      ('Camisa', 25.99),
-      ('Calça', 39.99),
-      ('Vestido', 49.99),
-      ('Saia', 24.99);
+      ('Camisa', 39.90),
+      ('Calça', 109.79),
+      ('Conjunto Pijama', 89.99),
+      ('Saia', 54.50);
 
     INSERT INTO customers (customer_name, cpf, address, email, phone) VALUES
       ('João Silva', '11122233344', 'Rua Principal 123', 'joao@example.com', '31945678931'),
@@ -116,18 +118,28 @@ async function dbSeedAndReset() {
       (1, 1, 2),
       (2, 1, 1),
       (3, 2, 1),
-      (1, 3, 1),
+      (1, 3, 2),
       (3, 3, 2),
       (2, 5, 3),
       (4, 4, 2);
 
     INSERT INTO products_materials (material_id, product_id, quantity) VALUES
-      (1, 1, 2.50),
-      (2, 1, 4.00),
-      (3, 2, 1.75),
-      (4, 3, 0.50),
-      (1, 4, 3.75),
-      (3, 4, 2.00);
+      (1, 1, 1.15),
+      (3, 1, 4),
+      (4, 1, 0.5),
+      (6, 1, 1),
+      (2, 2, 2.50),
+      (3, 2, 1),
+      (4, 2, 0.70),
+      (5, 2, 0.50),
+      (6, 2, 2),
+      (1, 3, 1.80),
+      (2, 3, 1.20),
+      (4, 3, 1.5),
+      (6, 3, 3),
+      (1, 4, 1.50),
+      (4, 4, 1),
+      (6, 4, 1);
   `;
 
 	await dbConnection.query(query);
