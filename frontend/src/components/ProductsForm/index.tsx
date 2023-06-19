@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
+import { IMaterialApi } from '../../types';
 
 interface IMaterials {
   material: string;
@@ -18,7 +19,7 @@ export default function ProductsForm() {
 
   const getAllMaterials = async () => {
     const response = await getAll('materials')
-    setMaterialsData(response.data)
+    setMaterialsData(response as IMaterialApi[])
   }
 
   const handleClick = () => {

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { getAll } from '../../services/api/api';
 import Context from '../../context/Context';
+import { ICustomerApi, IProductApi } from '../../types';
 
 interface IProducts {
   productName: string;
@@ -23,8 +24,8 @@ export default function OrdersForm() {
   const getAllItems = async () => {
     const customersResponse = await getAll('customers')
     const productsResponse = await getAll('products')
-    setCustomersData(customersResponse.data)
-    setProductsData(productsResponse.data)
+    setCustomersData(customersResponse as ICustomerApi[])
+    setProductsData(productsResponse as IProductApi[])
   }
 
   const handleClick = () => {

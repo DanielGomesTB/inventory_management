@@ -7,7 +7,12 @@ interface IProps {
 }
 
 export default function OrdersView(props : IProps) {
-  const {data} = props;
+  let {data} = props;
+
+  if (!data || data.length === 0) {
+    data = []
+    return <p>Nenhum dado disponível.</p>;
+  }
 
   const pending = data.filter((item) => item.order_status === 'pendente');
   const initialized = data.filter((item) => item.order_status === 'iniciado');

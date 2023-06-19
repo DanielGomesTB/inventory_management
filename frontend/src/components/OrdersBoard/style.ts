@@ -11,7 +11,7 @@ export const Board = styled.div`
 
   > header {
     padding: 8px;
-    font-size: 14px;
+    font-size: 14rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -42,7 +42,7 @@ export const OrdersContainer = styled.div`
     }
 
     span {
-      font-size: 14px;
+      font-size: 14rem;
     }
 
     & + button {

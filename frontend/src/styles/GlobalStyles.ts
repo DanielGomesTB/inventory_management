@@ -16,6 +16,10 @@ export const GlobalStyles = createGlobalStyle`
     --small-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
 
+  html {
+    font-size: 6.25%;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -26,6 +30,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     color: var(--main-white);
     background-color: var(--main-dark);
+    font-size: 16rem;
   }
 
   a {

@@ -4,6 +4,7 @@ import ProductsForm from "../../components/ProductsForm";
 import ProductsTable from "../../components/ProductsTable";
 import Context from "../../context/Context";
 import { getAll } from "../../services/api/api"
+import { IProductApi } from "../../types";
 
 // import { productsDataMock } from '../../mocks' // Remove this line
 
@@ -12,7 +13,7 @@ export default function ProductsPage() {
 
   const getAllProducts = async () => {
     const response = await getAll('products')
-    setProductsData(response.data)
+    setProductsData(response as IProductApi[])
   }
 
   useEffect(() => {

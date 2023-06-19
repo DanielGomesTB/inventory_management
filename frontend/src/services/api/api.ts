@@ -6,7 +6,11 @@ type PayloadType = ICustomer | IOrder | IProduct | IMaterial;
 export async function getAll(route: string) {
     try {
         const response = await API.get(route);
-        return response;
+        if (response.status === 200) {
+            return response;
+        }
+        console.error(response);
+        return [];
     } catch (error) {
         console.error(error);
         return [];
