@@ -22,7 +22,7 @@ export default function OrdersPage() {
 
   return (
     <>
-      <h1>Adicionar pedido</h1>
+      <h2>Pedidos</h2>
       <OrdersForm />
       <OrdersView data={ordersData} />
     </>

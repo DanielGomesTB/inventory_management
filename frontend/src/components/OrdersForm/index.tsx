@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { getAll } from '../../services/api/api';
 import Context from '../../context/Context';
 import { ICustomerApi, IProductApi } from '../../types';
+import { Form, SecondaryForm } from './style';
+import { Text } from '../CustomersForm/style';
 
 interface IProducts {
   productName: string;
@@ -48,7 +50,8 @@ export default function OrdersForm() {
 
   return (
     <>
-      <form>
+      <Form>
+      <Text>+ Criar novo pedido</Text>
         <label htmlFor="customerId">
           Cliente
           <select
@@ -56,7 +59,7 @@ export default function OrdersForm() {
             value={customerId}
             onChange={(e) => setCustomerId(e.target.value)}
           >
-            {customersData.map(({customer_id, customer_name}) => (
+            {customersData.map(({ customer_id, customer_name }) => (
               <option key={customer_id} value={customer_id}>{customer_name}</option>
             ))}
           </select>
@@ -96,35 +99,37 @@ export default function OrdersForm() {
 
         <div>
           <h3>Produtos inclusos no pedido</h3>
-          <label htmlFor="productName">
-            Produto pedido
-            <select
-              id="productName"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-            >
-            {productsData.map(({product_id, product_name}) => (
-              <option key={product_id} value={product_id}>{product_name}</option>
-            ))}
-            </select>
-          </label>
+          <SecondaryForm>
+            <label htmlFor="productName">
+              Produto
+              <select
+                id="productName"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              >
+                {productsData.map(({ product_id, product_name }) => (
+                  <option key={product_id} value={product_id}>{product_name}</option>
+                ))}
+              </select>
+            </label>
 
-          <label htmlFor="quantity">
-            Quantidade
-            <input
-              type="number"
-              id="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
-          </label>
+            <label htmlFor="quantity">
+              Quantidade
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+            </label>
 
-          <button type="button" onClick={handleAddProduct}>
-            Adicionar Produto
-          </button>
+            <button type="button" onClick={handleAddProduct}>
+              Adicionar
+            </button>
+          </SecondaryForm>
         </div>
 
-      </form>
+      </Form>
 
       {products.map((product, index) => (
         <div key={index}>

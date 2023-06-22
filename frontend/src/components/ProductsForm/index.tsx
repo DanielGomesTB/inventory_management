@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { IMaterialApi } from '../../types';
+import { Form, SecondaryForm } from '../OrdersForm/style';
+import { Text } from '../CustomersForm/style';
 
 interface IMaterials {
   material: string;
@@ -41,7 +43,8 @@ export default function ProductsForm() {
 
   return (
     <>
-      <form>
+      <Form>
+      <Text>+ Catalogar novo produto</Text>
         <label htmlFor="productName">
           Descrição do Produto
           <input
@@ -72,35 +75,37 @@ export default function ProductsForm() {
 
         <div>
           <h3>Materiais utilizados na fabricação</h3>
-          <label htmlFor="materialName">
-            Material
-            <select
-              id="materialName"
-              value={material}
-              onChange={(e) => setMaterial(e.target.value)}
-            >
-              {materialsData.map(({material_id, material_name}) => (
-                <option key={material_id} value={material_id}>{material_name}</option>
-              ))}
-            </select>
-          </label>
+          <SecondaryForm>
+            <label htmlFor="materialName">
+              Material
+              <select
+                id="materialName"
+                value={material}
+                onChange={(e) => setMaterial(e.target.value)}
+              >
+                {materialsData.map(({ material_id, material_name }) => (
+                  <option key={material_id} value={material_id}>{material_name}</option>
+                ))}
+              </select>
+            </label>
 
-          <label htmlFor="quantity">
-            Quantidade
-            <input
-              type="number"
-              id="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
-          </label>
+            <label htmlFor="quantity">
+              Quantidade
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+            </label>
 
-          <button type="button" onClick={handleAddMaterial}>
-            Adicionar Material
-          </button>
+            <button type="button" onClick={handleAddMaterial}>
+              Adicionar
+            </button>
+          </SecondaryForm>
         </div>
 
-      </form>
+      </Form>
 
       {materials.map((material, index) => (
         <div key={index}>

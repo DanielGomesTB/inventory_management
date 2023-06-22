@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form, Text } from '../CustomersForm/style';
 
 export default function MaterialsForm() {
   const [materialName, setMaterialName] = useState<string>('');
@@ -16,7 +17,8 @@ export default function MaterialsForm() {
   };
 
   return (
-    <form>
+    <Form>
+      <Text>+ Cadastrar novo material</Text>
       <label htmlFor="materialName">
         Descrição do Material
         <input
@@ -63,6 +65,6 @@ export default function MaterialsForm() {
       >
         Cadastrar
       </button>
-    </form>
+    </Form>
   );
 }
