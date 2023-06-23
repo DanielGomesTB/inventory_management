@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Form = styled.form`
   display: flex;
@@ -15,7 +15,7 @@ export const Form = styled.form`
   }
 `;
 
-export const SecondaryForm = styled.form`
+export const InnerContainer = styled.section`
   display: flex;
   align-items: flex-end;
   gap: 8px;
