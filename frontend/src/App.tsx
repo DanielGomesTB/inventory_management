@@ -5,10 +5,11 @@ import { GlobalStyles } from './styles/GlobalStyles';
 
 export default function App() {
 	return (
-		<Provider>
-			<GlobalStyles />
-			{/* <NavBar /> */}
-			<Router />
-		</Provider>
+		<>
+			<Provider>
+				<GlobalStyles />
+				<Router />
+			</Provider>
+		</>
 	);
 }

@@ -3,9 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.header`
   display: flex;
   justify-content: space-between;
-  width: 100vw;
   align-items: center;
-  height: 80px;
+  height: 128px;
   padding: 0 24px;
 `;
 

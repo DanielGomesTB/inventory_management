@@ -7,10 +7,9 @@ interface IProps {
 }
 
 export default function OrdersView(props : IProps) {
-	let {ordersData} = props;
+	const {ordersData} = props;
 
 	if (!ordersData || ordersData.length === 0) {
-		ordersData = [];
 		return <p>Nenhum dado disponível.</p>;
 	}
 

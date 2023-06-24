@@ -7,16 +7,16 @@ import { Container, Box } from './style';
 export default function HomePage() {
 	return (
 		<Container>
-			<Link to='/orders'>
-				<Box>
-					<FaClipboardList />
-					<p>PEDIDOS</p>
-				</Box>
-			</Link>
 			<Link to='/customers'>
 				<Box>
 					<RiGroupFill />
 					<p>CLIENTES</p>
+				</Box>
+			</Link>
+			<Link to='/orders'>
+				<Box>
+					<FaClipboardList />
+					<p>PEDIDOS</p>
 				</Box>
 			</Link>
 			<Link to='/products'>

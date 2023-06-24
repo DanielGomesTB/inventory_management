@@ -16,16 +16,14 @@ export default function Router() {
 			<Header />
 			<Container>
 				<NavBar />
-				<div>
-					<Routes>
-						<Route path="/" element={<HomePage />} />
-						<Route path="/customers" element={<CustomersPage />} />
-						<Route path="/orders" element={<OrdersPage />} />
-						<Route path="/products" element={<ProductsPage />} />
-						<Route path="/materials" element={<MaterialsPage />} />
-						<Route path="/*" element={<NotFoundPage />} />
-					</Routes>
-				</div>
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/customers" element={<CustomersPage />} />
+					<Route path="/orders" element={<OrdersPage />} />
+					<Route path="/products" element={<ProductsPage />} />
+					<Route path="/materials" element={<MaterialsPage />} />
+					<Route path="/*" element={<NotFoundPage />} />
+				</Routes>
 			</Container>
 		</BrowserRouter>
 	);

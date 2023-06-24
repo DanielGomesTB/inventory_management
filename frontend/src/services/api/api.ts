@@ -7,7 +7,7 @@ export async function getAll(route: string) {
 	try {
 		const response = await API.get(route);
 		if (response.status === 200) {
-			return response;
+			return response.data;
 		}
 		console.error(response);
 		return [];
@@ -20,7 +20,11 @@ export async function getAll(route: string) {
 export async function insert(route: string, payload: PayloadType) {
 	try {
 		const response = await API.post(route, payload);
-		return response;
+		if (response.status === 201) {
+			return response.data;
+		}
+		console.error(response);
+		return {};
 	} catch (error) {
 		console.error(error);
 	}

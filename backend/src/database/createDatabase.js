@@ -41,7 +41,7 @@ async function dbCreateDatabase() {
       customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       customer_name VARCHAR(45) NOT NULL,
       cpf VARCHAR(20) NOT NULL,
-      address VARCHAR(45) NOT NULL,
+      address TEXT NOT NULL,
       email VARCHAR(45) NOT NULL,
       phone VARCHAR(20) NOT NULL,
       is_active BOOLEAN NOT NULL DEFAULT true,
