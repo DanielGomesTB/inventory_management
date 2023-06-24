@@ -24,7 +24,7 @@ export default function CustomersPage() {
 	return (
 		<Container>
 			<CustomersForm getAllCustomers={getAllCustomers}/>
-			<CostumersTable customersData={customersData} />
+			<CostumersTable customersData={customersData} getAllCustomers={getAllCustomers}/>
 		</Container>
 	);
 }

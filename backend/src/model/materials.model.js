@@ -1,7 +1,7 @@
 const dbConnection = require('../database/mySqlConnection');
 
 async function getAll() {
-    const query = 'SELECT * FROM materials';
+    const query = 'SELECT * FROM materials WHERE is_active = true';
     const [result] = await dbConnection.execute(query);
 
 	return result;
@@ -33,10 +33,9 @@ async function update(payload, id) {
 	return result;
 }
 
-async function deleteMaterial(payload, id) {
-    const values = Object.values(payload);
-    const query = `UPDATE materials SET is_active = ? WHERE material_id = ${id}`;
-    const [result] = await dbConnection.execute(query, values);
+async function deleteMaterial(id) {
+    const query = `UPDATE materials SET is_active = NOT is_active WHERE material_id = ${id}`;
+    const [result] = await dbConnection.execute(query);
 
 	return result;
 }

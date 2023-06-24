@@ -1,7 +1,7 @@
 const dbConnection = require('../database/mySqlConnection');
 
 async function getAll() {
-    const query = 'SELECT * FROM customers';
+    const query = 'SELECT * FROM customers WHERE is_active = true';
     const [result] = await dbConnection.execute(query);
 
 	return result;
@@ -33,10 +33,9 @@ async function update(payload, id) {
 	return result;
 }
 
-async function deleteCustomers(payload, id) {
-    const values = Object.values(payload);
-    const query = `UPDATE customers SET is_active = ? WHERE customer_id = ${id}`;
-    const [result] = await dbConnection.execute(query, values);
+async function deleteCustomers(id) {
+    const query = `UPDATE customers SET is_active = NOT is_active WHERE customer_id = ${id}`;
+    const [result] = await dbConnection.execute(query);
 
 	return result;
 }

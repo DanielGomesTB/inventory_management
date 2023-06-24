@@ -41,7 +41,7 @@ export async function update(route: string, id: number, payload: PayloadType) {
 
 export async function remove(route: string, id: number) {
 	try {
-		const response = await API.patch(`${route}/:${id}`);
+		const response = await API.patch(`${route}/${id}`);
 		return response;
 	} catch (error) {
 		console.error(error);

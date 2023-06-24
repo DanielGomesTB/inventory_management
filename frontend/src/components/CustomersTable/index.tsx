@@ -2,24 +2,59 @@ import { ICustomerApi } from '../../types';
 import formatPhoneNumber from '../../utils/formatPhoneNumber';
 import formatCPF from '../../utils/formatCPF';
 import formatDate from '../../utils/formatDate';
-import { Container, Text, Table, ActionRow } from './style';
+import { Container, Text, Table, ActionRow, SearchBar } from './style';
 import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
+import { remove } from '../../services/api/api';
+import { useEffect, useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 interface IProps {
   customersData: ICustomerApi[];
+	getAllCustomers: () => Promise<void>;
 }
 
 export default function CostumersTable(props : IProps) {
-	const {customersData} = props;
+	const {customersData, getAllCustomers} = props;
+
+	const [filteredCustomer, setFilteredCustomer] = useState<string>('');
+	// const [customers, setCustomers] = useState<ICustomerApi[]>(customersData);
 
 	if (!customersData || customersData.length === 0) {
 		return <p>Nenhum dado disponível.</p>;
 	}
 
+	const handleDelete = async (id: number, name: string) => {
+		const confirmed = window.confirm(`Tem certeza que quer deletar ${name.toUpperCase()}?`);
+
+		if (confirmed) {
+			await remove('customers', id);
+			await getAllCustomers();
+		}
+	};
+
+	// const filterCustomers = (value: string) => {
+	// 	setFilteredCustomer(value);
+	// 	const filtered = customers.filter((customer) => customer.customer_name.includes(filteredCustomer));
+	// 	setCustomers(filtered);
+	// };
+
 	return (
 		<Container>
-			<Text><RiGroupFill /> Clientes</Text>
+			<SearchBar>
+				<Text><RiGroupFill /> Clientes</Text>
+				<label htmlFor="filteredCustomer">
+					<input
+						type="text"
+						id="filteredCustomer"
+						placeholder='Pesquisar Cliente'
+						value={filteredCustomer}
+						onChange={(e) => setFilteredCustomer(e.target.value)}
+						// onChange={(e) => filterCustomers(e.target.value)}
+					/>
+					<FaSearch />
+				</label>
+			</SearchBar>
 			<Table>
 				<thead>
 					<tr>
@@ -45,7 +80,7 @@ export default function CostumersTable(props : IProps) {
 								<button type="button" onClick={() => alert('Editar!')}>
 									<RiEdit2Fill style={{color: 'var(--main-white)'}} />
 								</button>
-								<button type="button" onClick={() => alert('Deletar!')}>
+								<button type="button" onClick={() => handleDelete(item.customer_id, item.customer_name)}>
 									<MdDeleteForever style={{color: 'var(--main-red)'}}/>
 								</button>
 							</ActionRow>

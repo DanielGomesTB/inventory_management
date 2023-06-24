@@ -37,5 +37,31 @@ export const ActionRow = styled.td`
     font-size: 20rem;
     border: none;
     background-color: inherit;
+
+    &:active {
+      transform: scale(0.9)
+    }
+  }
+`;
+
+export const SearchBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    input {
+    font-weight: 500;
+    padding: 8px;
+    color: var(--main-dark);
+
+    &:focus {
+      outline: var(--sec-green) solid 2px;
+    }
+  }
   }
 `;
