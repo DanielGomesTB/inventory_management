@@ -53,7 +53,7 @@ export default function CustomersForm(props: IProps) {
 		const isAnyFieldEmpty = !(
 			customerName.length >= 3 &&
 			cpf.length === 11 &&
-			(phone.length === 10 || phone.length === 10) &&
+			(phone.length === 11 || phone.length === 10) &&
 			emailRegex.test(email) &&
 			street &&
 			num &&
