@@ -32,7 +32,7 @@ export async function insert(route: string, payload: PayloadType) {
 
 export async function update(route: string, id: number, payload: PayloadType) {
 	try {
-		const response = await API.put(`${route}/:${id}`, payload);
+		const response = await API.put(`${route}/${id}`, payload);
 		return response;
 	} catch (error) {
 		console.error(error);

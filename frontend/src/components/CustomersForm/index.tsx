@@ -3,6 +3,7 @@ import { Form, Label, Button, Text } from './style';
 import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
 import { FaUserPlus } from 'react-icons/fa';
 import { insert } from '../../services/api/api';
+import toast from 'react-hot-toast';
 
 interface IStates {
   nome: string;
@@ -45,6 +46,18 @@ export default function CustomersForm(props: IProps) {
 			phone,
 		};
 		await insert('customers', payload);
+
+		setCustomerName('');
+		setCpf('');
+		setPhone('');
+		setEmail('');
+		setStreet('');
+		setNum('');
+		setNeighborhood('');
+		setCity('');
+		setZipCode('');
+
+		toast.success('Cliente cadastrado com sucesso!');
 		await getAllCustomers();
 	};
 

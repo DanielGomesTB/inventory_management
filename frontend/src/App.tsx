@@ -1,7 +1,7 @@
 import Provider from './context/Provider';
 import Router from './routes/router';
 import { GlobalStyles } from './styles/GlobalStyles';
-// import NavBar from './components/NavBar';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
 	return (
@@ -9,6 +9,7 @@ export default function App() {
 			<Provider>
 				<GlobalStyles />
 				<Router />
+				<Toaster position="top-right"/>
 			</Provider>
 		</>
 	);

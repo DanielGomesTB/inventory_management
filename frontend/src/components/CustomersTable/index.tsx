@@ -6,8 +6,10 @@ import { Container, Text, Table, ActionRow, SearchBar } from './style';
 import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { remove } from '../../services/api/api';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
+import EditRegisterModal from '../EditRegisterModal';
+import { toast } from 'react-hot-toast';
 
 interface IProps {
   customersData: ICustomerApi[];
@@ -18,7 +20,8 @@ export default function CostumersTable(props : IProps) {
 	const {customersData, getAllCustomers} = props;
 
 	const [filteredCustomer, setFilteredCustomer] = useState<string>('');
-	// const [customers, setCustomers] = useState<ICustomerApi[]>(customersData);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [customerInEdit, setCustomerInEdit] = useState<ICustomerApi>(customersData[0]);
 
 	if (!customersData || customersData.length === 0) {
 		return <p>Nenhum dado disponível.</p>;
@@ -29,18 +32,25 @@ export default function CostumersTable(props : IProps) {
 
 		if (confirmed) {
 			await remove('customers', id);
+			toast.success(`${name.split(' ')[0].toUpperCase()} deletado com sucesso!`);
 			await getAllCustomers();
 		}
 	};
 
-	// const filterCustomers = (value: string) => {
-	// 	setFilteredCustomer(value);
-	// 	const filtered = customers.filter((customer) => customer.customer_name.includes(filteredCustomer));
-	// 	setCustomers(filtered);
-	// };
+	const handleEdit = async (customer: ICustomerApi) => {
+		setCustomerInEdit(customer);
+		setIsModalOpen(true);
+	};
 
 	return (
 		<Container>
+			{isModalOpen &&
+				<EditRegisterModal 
+					setIsModalOpen={setIsModalOpen}
+					customerInEdit={customerInEdit}
+					getAllCustomers={getAllCustomers}
+				/>
+			}
 			<SearchBar>
 				<Text><RiGroupFill /> Clientes</Text>
 				<label htmlFor="filteredCustomer">
@@ -50,7 +60,6 @@ export default function CostumersTable(props : IProps) {
 						placeholder='Pesquisar Cliente'
 						value={filteredCustomer}
 						onChange={(e) => setFilteredCustomer(e.target.value)}
-						// onChange={(e) => filterCustomers(e.target.value)}
 					/>
 					<FaSearch />
 				</label>
@@ -77,7 +86,7 @@ export default function CostumersTable(props : IProps) {
 							<td>{formatPhoneNumber(item.phone)}</td>
 							<td>{formatDate(item.created_at)}</td>
 							<ActionRow color='white'>
-								<button type="button" onClick={() => alert('Editar!')}>
+								<button type="button" onClick={() => handleEdit(item)}>
 									<RiEdit2Fill style={{color: 'var(--main-white)'}} />
 								</button>
 								<button type="button" onClick={() => handleDelete(item.customer_id, item.customer_name)}>

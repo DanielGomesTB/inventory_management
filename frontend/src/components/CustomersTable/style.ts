@@ -18,6 +18,7 @@ export const Text = styled.h3`
 
 export const Table = styled.table`
   text-align: left;
+  /* border-collapse: collapse; */
 
   thead {
     background-color: var(--main-green);
@@ -26,12 +27,23 @@ export const Table = styled.table`
       padding: 2px 8px;
     }
   }
+
+  td {
+    padding: 0 4px;
+    max-width: 250px;
+    text-overflow: ellipsis;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: var(--third-dark);
+  }
 `;
 
 export const ActionRow = styled.td`
   display: flex;
   justify-content:space-between;
-  
+  align-items: center;
+
   button {
     border-radius: 100%;
     font-size: 20rem;
