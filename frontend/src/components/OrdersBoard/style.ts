@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const Board = styled.div`
   padding: 16px;
-  border: 1px solid var(--main-white);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+  background-color: var(--third-dark);
 
   > header {
     padding: 8px;

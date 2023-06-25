@@ -28,7 +28,6 @@ export default function OrdersPage() {
 
 	return (
 		<>
-			<h2>Pedidos</h2>
 			<OrdersForm customersData={customersData} productsData={productsData} />
 			<OrdersView ordersData={ordersData} />
 		</>

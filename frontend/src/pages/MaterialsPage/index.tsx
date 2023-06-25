@@ -22,7 +22,6 @@ export default function MaterialsPage() {
 
 	return (
 		<>
-			<h2>Estoque</h2>
 			<MaterialsForm />
 			<MaterialsTable materialsData={materialsData}/>
 		</>

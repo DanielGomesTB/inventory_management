@@ -4,6 +4,13 @@ interface ILabelProps {
   width?: number;
 }
 
+export const Text = styled.h3`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--main-white);
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -12,17 +19,28 @@ export const Form = styled.form`
   border-radius: 8px;
   background: var(--main-green);
 
-  div {
+  .forms{
     display: flex;
-    gap: 16px;
+    justify-content: space-between;
   }
+
+  .main-form {
+    display: flex;
+    width: 100%;
+  }
+ 
 `;
 
-export const Text = styled.h3`
+export const InnerContainer = styled.div`
+  background: var(--third-green);
   display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--main-white);
+  flex-direction: column;
+  border-radius: 8px;
+  width: 100%;
+
+  .inputs {
+    display: flex;
+  }
 `;
 
 export const SelectLabel = styled.label<ILabelProps>`
@@ -48,7 +66,7 @@ export const Button = styled.button`
   color: var(--main-dark);
   text-align: center;
   font-weight: 600;
-  width: 128px;
+  width: 160px;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { IMaterialApi } from '../../types';
-import { Form, InnerContainer } from '../OrdersForm/style';
-import { Text } from '../CustomersForm/style';
+import { Form, Button, Text, InnerContainer, SelectLabel } from './style';
+import { TbNeedleThread } from 'react-icons/tb';
+import Label from '../Label';
 
 interface IProps {
   materialsData: IMaterialApi[];
@@ -9,15 +10,15 @@ interface IProps {
 
 interface IMaterials {
   material: string;
-  quantity: number;
+  quantity: string;
 }
 
 export default function ProductsForm(props: IProps) {
 	const { materialsData } = props;
 	const [productName, setProductName] = useState<string>('');
-	const [sellingPrice, setSellingPrice] = useState<number>(0);
+	const [sellingPrice, setSellingPrice] = useState<string>('');
 	const [material, setMaterial] = useState<string>('');
-	const [quantity, setQuantity] = useState<number>(0);
+	const [quantity, setQuantity] = useState<string>('');
 	const [materials, setMaterials] = useState<IMaterials[]>([]);
 
 	const handleClick = () => {
@@ -36,74 +37,49 @@ export default function ProductsForm(props: IProps) {
 	return (
 		<>
 			<Form>
-				<Text>+ Catalogar novo produto</Text>
-				<label htmlFor="productName">
-          Descrição do Produto
-					<input
-						type="text"
-						id="productName"
-						value={productName}
-						onChange={(e) => setProductName(e.target.value)}
-					/>
-				</label>
+				<Text><TbNeedleThread />Catalogar novo produto</Text>
+				<div className='forms'>
+					<div className='main-form'>
+						<Label label='Descrição do Produto' value={{productName}}	width={40} setState={setProductName} />
+						<Label label='Preço' type="number" value={{sellingPrice}}	width={10} setState={setSellingPrice} />
+					</div>
 
-				<label htmlFor="sellingPrice">
-          Preço
-					<input
-						type="number"
-						id="sellingPrice"
-						value={sellingPrice}
-						onChange={(e) => setSellingPrice(Number(e.target.value))}
-					/>
-				</label>
+					<InnerContainer>
+						<h3>Materiais utilizados na fabricação</h3>
+						<div className='inputs'>
+							<SelectLabel htmlFor="materialName" width={15}>
+              Material
+								<select id="materialName"	value={material} onChange={(e) => setMaterial(e.target.value)}>
+									{materialsData.map(({ material_id, material_name }) => (
+										<option key={material_id} value={material_id}>{`${material_id} - ${material_name}`}</option>
+									))}
+								</select>
+							</SelectLabel>
+						
+							<Label label='Quantidade' type="number" value={{quantity}}	width={10} setState={setQuantity} />
 
-				<button
+							<Button type="button" onClick={handleAddMaterial}>
+              Adicionar
+							</Button>
+					
+							{materials.map((material, index) => (
+								<div key={index}>
+									{`${material.material} - ${material.quantity}`}
+								</div>
+							))}
+						</div>
+					</InnerContainer>
+				</div>
+
+				<Button
 					type="button"
 					onClick={handleClick}
 					disabled={materials.length === 0}
 				>
           Salvar Produto
-				</button>
-
-				<div>
-					<h3>Materiais utilizados na fabricação</h3>
-					<InnerContainer>
-						<label htmlFor="materialName">
-              Material
-							<select
-								id="materialName"
-								value={material}
-								onChange={(e) => setMaterial(e.target.value)}
-							>
-								{materialsData.map(({ material_id, material_name }) => (
-									<option key={material_id} value={material_id}>{material_name}</option>
-								))}
-							</select>
-						</label>
-
-						<label htmlFor="quantity">
-              Quantidade
-							<input
-								type="number"
-								id="quantity"
-								value={quantity}
-								onChange={(e) => setQuantity(Number(e.target.value))}
-							/>
-						</label>
-
-						<button type="button" onClick={handleAddMaterial}>
-              Adicionar
-						</button>
-					</InnerContainer>
-				</div>
+				</Button>
 
 			</Form>
-
-			{materials.map((material, index) => (
-				<div key={index}>
-					{`${material.material} - ${material.quantity}`}
-				</div>
-			))}
 		</>
 	);
 }

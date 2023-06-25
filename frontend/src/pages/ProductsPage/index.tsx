@@ -1,10 +1,11 @@
 import { useContext, useEffect } from 'react';
 
 import ProductsForm from '../../components/ProductsForm';
-import ProductsTable from '../../components/ProductsTable';
+import ProductsView from '../../components/ProductsView';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { IProductApi, IMaterialApi } from '../../types';
+import { Container } from '../CustomersPage/style';
 
 // import { productsDataMock } from '../../mocks' // Remove this line
 
@@ -26,10 +27,9 @@ export default function ProductsPage() {
 	}, []);
 
 	return (
-		<>
-			<h2>Produtos</h2>
+		<Container>
 			<ProductsForm materialsData={materialsData} />
-			<ProductsTable productsData={productsData} />
-		</>
+			<ProductsView productsData={productsData} />
+		</Container>
 	);
 }

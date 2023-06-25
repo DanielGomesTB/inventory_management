@@ -7,7 +7,7 @@ export const Form = styled.form`
   width: 400px;
   padding: 16px;
   border-radius: 8px;
-  background: var(--sec-dark);
+  background: var(--main-green);
 
   label {
     display: flex;
@@ -22,7 +22,7 @@ export const InnerContainer = styled.section`
   width: 100%;
   padding: 16px;
   border-radius: 8px;
-  background: var(--third-dark);
+  background: var(--third-green);
 
   label {
     display: flex;
