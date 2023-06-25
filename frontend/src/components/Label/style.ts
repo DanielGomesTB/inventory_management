@@ -16,9 +16,13 @@ export const StyledLabel = styled.label<ILabelProps>`
     font-weight: 500;
     padding: 8px;
     color: var(--main-dark);
-
+    
     &:focus {
       outline: var(--third-dark) solid 2px;
     }
+  }
+
+  input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
   }
 `;

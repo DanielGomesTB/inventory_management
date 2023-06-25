@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Form, Label, Button, Text } from './style';
-import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
-import { FaUserPlus } from 'react-icons/fa';
-import { insert } from '../../services/api/api';
 import toast from 'react-hot-toast';
-// import MyLabel from '../Label';
+import { FaUserPlus } from 'react-icons/fa';
+
+import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
+import { insert } from '../../services/api/api';
+import Label from '../Label';
+
+import { Form, SelectLabel, Button, Text } from './style';
+
 
 interface IStates {
   nome: string;
@@ -29,7 +32,7 @@ export default function CustomersForm(props: IProps) {
 	const [num, setNum] = useState<string>('');
 	const [neighborhood, setNeighborhood] = useState<string>('');
 	const [city, setCity] = useState<string>('');
-	const [state, setState] = useState<string>('');
+	const [state, setState] = useState<string>(states[0]?.nome);
 	const [zipCode, setZipCode] = useState<string>('');
 
 	const fetchStatesFromIBGE = async () => {
@@ -92,112 +95,28 @@ export default function CustomersForm(props: IProps) {
 		<Form>
 			<Text><FaUserPlus /> Cadastrar novo cliente</Text>
 			<div>
-				{/* <MyLabel label='Nome' value={{customerName}}	width={40} setState={setCustomerName} />
-				<MyLabel label='CPF' value={{cpf}}	width={20} setState={setCpf} />
-				<MyLabel label='Telefone' value={{phone}}	width={20} setState={setPhone} />
-				<MyLabel label='e-mail' value={{email}}	width={20} setState={setEmail} /> */}
-				<Label htmlFor="customerName" width={40}>
-          Nome
-					<input
-						type="text"
-						id="customerName"
-						value={customerName}
-						onChange={(e) => setCustomerName(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="cpf" width={20}>
-          CPF
-					<input
-						type="text"
-						id="cpf"
-						value={cpf}
-						onChange={(e) => setCpf(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="phone" width={20}>
-          Telefone
-					<input
-						type="text"
-						id="phone"
-						value={phone}
-						onChange={(e) => setPhone(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="email" width={20}>
-          Email
-					<input
-						type="email"
-						id="email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-				</Label>
+				<Label label='Nome' value={{customerName}}	width={40} setState={setCustomerName} />
+				<Label label='CPF' value={{cpf}} type='number' maxlength={11} width={20} setState={setCpf} />
+				<Label label='Telefone' value={{phone}}	type='number' maxlength={11} width={20} setState={setPhone} />
+				<Label label='e-mail' value={{email}}	type='email' width={20} setState={setEmail} />
 			</div>
 
 			<div>
-				{/* <MyLabel label='Rua' value={{street}}	width={30} setState={setStreet} />
-				<MyLabel label='Nº' value={{num}}	width={5} setState={setNum} />
-				<MyLabel label='Bairro' value={{neighborhood}} width={20} setState={setNeighborhood} />
-				<MyLabel label='Cidade' value={{city}}	width={20} setState={setCity} />
+				<Label label='Rua' value={{street}}	width={30} setState={setStreet} />
+				<Label label='Nº' value={{num}}	width={5} setState={setNum} />
+				<Label label='Bairro' value={{neighborhood}} width={20} setState={setNeighborhood} />
+				<Label label='Cidade' value={{city}} width={20} setState={setCity} />
 
-				<MyLabel label='CEP' value={{zipCode}}	width={10} setState={setZipCode} /> */}
-				<Label htmlFor="street" width={30}>
-          Rua
-					<input
-						type="text"
-						id="street"
-						value={street}
-						onChange={(e) => setStreet(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="num" width={5}>
-          Nº
-					<input
-						type="text"
-						id="num"
-						value={num}
-						onChange={(e) => setNum(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="neighborhood" width={20}>
-          Bairro
-					<input
-						type="text"
-						id="neighborhood"
-						value={neighborhood}
-						onChange={(e) => setNeighborhood(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="city" width={20}>
-          Cidade
-					<input
-						type="text"
-						id="city"
-						value={city}
-						onChange={(e) => setCity(e.target.value)}
-					/>
-				</Label>
-				<Label htmlFor="state" width={15}>
+				<SelectLabel htmlFor="state" width={15}>
           UF
-					<select
-						id="state"
-						value={state}
-						onChange={(e) => setState(e.target.value)}
-					>
+					<select	id="state" value={state} onChange={(e) => setState(e.target.value)}>
 						{states.map(({ sigla, nome }) => (
 							<option key={sigla} value={sigla}>{nome}</option>
 						))}
 					</select>
-				</Label>
-				<Label htmlFor="zipCode" width={10}>
-          CEP
-					<input
-						type="text"
-						id="zipCode"
-						value={zipCode}
-						onChange={(e) => setZipCode(e.target.value)}
-					/>
-				</Label>
+				</SelectLabel>
+
+				<Label label='CEP' value={{zipCode}} type='number' maxlength={8} width={10} setState={setZipCode} />
 			</div>
 
 			<Button

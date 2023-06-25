@@ -1,9 +1,13 @@
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { FaUserEdit } from 'react-icons/fa';
-import { ModalBody, Overlay, Text, Label, Button} from './style';
-import { useEffect, useState } from 'react';
+
 import { ICustomerApi } from '../../types';
 import { update } from '../../services/api/api';
-import { toast } from 'react-hot-toast';
+import Label from '../Label';
+
+import { ModalBody, Overlay, Text, Button } from './style';
+
 
 interface IProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,11 +28,11 @@ export default function EditRegisterModal(props: IProps) {
 	const handleDisable = () => {
 		const emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
 		const isAnyFieldEmpty = !(
-			customerName.length >= 3 &&
-			cpf.length === 11 &&
-			(phone.length === 11 || phone.length === 10) &&
-			emailRegex.test(email) &&
-			completeAddress.length >= 5
+			customerName.length >= 3
+			&& cpf.length === 11
+			&& (phone.length === 11 || phone.length === 10)
+			&& emailRegex.test(email)
+			&& completeAddress.length >= 5
 		);
 		setIsDisable(isAnyFieldEmpty);
 	};
@@ -57,71 +61,21 @@ export default function EditRegisterModal(props: IProps) {
 			<ModalBody>
 				<form>
 					<Text><FaUserEdit /> Editar informações do cliente</Text>
-
-					<Label htmlFor="customerName">
-              Nome
-						<input
-							type="text"
-							id="customerName"
-							value={customerName}
-							onChange={(e) => setCustomerName(e.target.value)}
-						/>
-					</Label>
-					<Label htmlFor="cpf">
-              CPF
-						<input
-							type="text"
-							id="cpf"
-							value={cpf}
-							onChange={(e) => setCpf(e.target.value)}
-						/>
-					</Label>
-					<Label htmlFor="phone">
-              Telefone
-						<input
-							type="text"
-							id="phone"
-							value={phone}
-							onChange={(e) => setPhone(e.target.value)}
-						/>
-					</Label>
-					<Label htmlFor="email">
-              Email
-						<input
-							type="email"
-							id="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</Label>
-					<Label htmlFor="completeAddress">
-              Endereço Completo
-						<input
-							type="text"
-							id="completeAddress"
-							value={completeAddress}
-							onChange={(e) => setCompleteAddress(e.target.value)}
-						/>
-					</Label>
+					<Label label='Nome' value={{customerName}} setState={setCustomerName} />
+					<Label label='CPF' value={{cpf}} type='number' maxlength={11} setState={setCpf} />
+					<Label label='Telefone' value={{phone}}	type='number' maxlength={11} setState={setPhone} />
+					<Label label='e-mail' value={{email}}	type='email' setState={setEmail} />
+					<Label label='Endereço Completo' value={{completeAddress}} setState={setCompleteAddress} />
 				</form>
 
 				<div>
-					<Button
-						disabled={isDisable}
-						type="button"
-						onClick={handleSaveData}
-					>
-						{isDisable ? 'Preencha tudo' : 'Salvar'}
+					<Button	disabled={isDisable} type="button"	onClick={handleSaveData}>
+						{isDisable ? 'Preencha todos os campos' : 'Salvar'}
 					</Button>
-					<Button
-						type="button"
-						onClick={() => setIsModalOpen(false)}
-						color='danger'
-					>
+					<Button	type="button"	onClick={() => setIsModalOpen(false)}	color='danger'>
             Cancelar
 					</Button>
 				</div>
-
 
 			</ModalBody>
 		</Overlay>

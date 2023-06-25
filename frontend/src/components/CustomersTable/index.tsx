@@ -1,15 +1,18 @@
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
+import { MdDeleteForever } from 'react-icons/md';
+import { FaSearch } from 'react-icons/fa';
+
 import { ICustomerApi } from '../../types';
+import { remove } from '../../services/api/api';
+import EditRegisterModal from '../EditRegisterModal';
 import formatPhoneNumber from '../../utils/formatPhoneNumber';
 import formatCPF from '../../utils/formatCPF';
 import formatDate from '../../utils/formatDate';
+
 import { Container, Text, Table, ActionRow, SearchBar } from './style';
-import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
-import { MdDeleteForever } from 'react-icons/md';
-import { remove } from '../../services/api/api';
-import { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import EditRegisterModal from '../EditRegisterModal';
-import { toast } from 'react-hot-toast';
+
 
 interface IProps {
   customersData: ICustomerApi[];
@@ -55,7 +58,7 @@ export default function CostumersTable(props : IProps) {
 				<Text><RiGroupFill /> Clientes</Text>
 				<label htmlFor="filteredCustomer">
 					<input
-						type="text"
+						type="search"
 						id="filteredCustomer"
 						placeholder='Pesquisar Cliente'
 						value={filteredCustomer}

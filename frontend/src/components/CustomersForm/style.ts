@@ -25,7 +25,7 @@ export const Text = styled.h3`
   color: var(--main-white)
 `;
 
-export const Label = styled.label<ILabelProps>`
+export const SelectLabel = styled.label<ILabelProps>`
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -33,7 +33,6 @@ export const Label = styled.label<ILabelProps>`
   font-size: 14rem;
   font-weight: 500;
 
-  input,
   select {
     font-weight: 500;
     padding: 8px;
