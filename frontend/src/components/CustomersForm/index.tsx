@@ -4,6 +4,7 @@ import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
 import { FaUserPlus } from 'react-icons/fa';
 import { insert } from '../../services/api/api';
 import toast from 'react-hot-toast';
+// import MyLabel from '../Label';
 
 interface IStates {
   nome: string;
@@ -30,7 +31,7 @@ export default function CustomersForm(props: IProps) {
 	const [city, setCity] = useState<string>('');
 	const [state, setState] = useState<string>('');
 	const [zipCode, setZipCode] = useState<string>('');
-	
+
 	const fetchStatesFromIBGE = async () => {
 		const response = await getStatesFromIBGE();
 		setStates(response);
@@ -64,16 +65,16 @@ export default function CustomersForm(props: IProps) {
 	const handleDisable = () => {
 		const emailRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
 		const isAnyFieldEmpty = !(
-			customerName.length >= 3 &&
-			cpf.length === 11 &&
-			(phone.length === 11 || phone.length === 10) &&
-			emailRegex.test(email) &&
-			street &&
-			num &&
-			neighborhood &&
-			city &&
-			state &&
-			zipCode.length === 8
+			customerName.length >= 3
+			&& cpf.length === 11
+			&& (phone.length === 11 || phone.length === 10)
+			&& emailRegex.test(email)
+			&& street
+			&& num
+			&& neighborhood
+			&& city
+			&& state
+			&& zipCode.length === 8
 		);
 		setIsDisable(isAnyFieldEmpty);
 	};
@@ -91,6 +92,10 @@ export default function CustomersForm(props: IProps) {
 		<Form>
 			<Text><FaUserPlus /> Cadastrar novo cliente</Text>
 			<div>
+				{/* <MyLabel label='Nome' value={{customerName}}	width={40} setState={setCustomerName} />
+				<MyLabel label='CPF' value={{cpf}}	width={20} setState={setCpf} />
+				<MyLabel label='Telefone' value={{phone}}	width={20} setState={setPhone} />
+				<MyLabel label='e-mail' value={{email}}	width={20} setState={setEmail} /> */}
 				<Label htmlFor="customerName" width={40}>
           Nome
 					<input
@@ -130,6 +135,12 @@ export default function CustomersForm(props: IProps) {
 			</div>
 
 			<div>
+				{/* <MyLabel label='Rua' value={{street}}	width={30} setState={setStreet} />
+				<MyLabel label='Nº' value={{num}}	width={5} setState={setNum} />
+				<MyLabel label='Bairro' value={{neighborhood}} width={20} setState={setNeighborhood} />
+				<MyLabel label='Cidade' value={{city}}	width={20} setState={setCity} />
+
+				<MyLabel label='CEP' value={{zipCode}}	width={10} setState={setZipCode} /> */}
 				<Label htmlFor="street" width={30}>
           Rua
 					<input

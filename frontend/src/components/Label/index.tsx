@@ -5,16 +5,16 @@ interface IProps {
   type?: string;
   width?: number;
   value: { [key: string]: string };
-  set: React.Dispatch<React.SetStateAction<string>>;
+  setState: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Label(props: IProps) {
+export default function MyLabel(props: IProps) {
 	const {
 		label,
 		type,
 		value,
 		width,
-		set,
+		setState,
 	} = props;
 
 	const objectKey = Object.keys(value)[0];
@@ -27,7 +27,7 @@ export default function Label(props: IProps) {
 				type={type || 'text'}
 				id={objectKey}
 				value={objectValue}
-				onChange={(e) => set(e.target.value)}
+				onChange={(e) => setState(e.target.value)}
 			/>
 		</StyledLabel>
 	);
