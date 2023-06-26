@@ -29,7 +29,7 @@ async function update(req, res) {
 
 async function deleteProduct(req, res) {
     const { id } = req.params;
-    const result = await productsModel.deleteProduct(req.body, id);
+    const result = await productsModel.deleteProduct(id);
 
     return res.status(200).json(result);
 }

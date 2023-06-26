@@ -1,23 +1,30 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import NotFoundPage from '../pages/NotFoundPage/index'
+import NavBar from '../components/NavBar';
 import HomePage from '../pages/HomePage';
-import CustomersForm from '../components/CustomersForm';
-import OrdersForm from '../components/OrdersForm';
-import ProductsForm from '../components/ProductsForm';
-import MaterialsForm from '../components/MaterialsForm';
+import NotFoundPage from '../pages/NotFoundPage/index';
+import CustomersPage from '../pages/CustomersPage';
+import OrdersPage from '../pages/OrdersPage';
+import ProductsPage from '../pages/ProductsPage';
+import MaterialsPage from '../pages/MaterialsPage';
+import Header from '../components/Header';
+import { Container } from './style';
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/customers" element={<CustomersForm />} />
-        <Route path="/orders" element={<OrdersForm />} />
-        <Route path="/products" element={<ProductsForm />} />
-        <Route path="/materials" element={<MaterialsForm />} />
-        <Route path="/*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
-  )
+	return (
+		<BrowserRouter>
+			<Header />
+			<Container>
+				<NavBar />
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/customers" element={<CustomersPage />} />
+					<Route path="/orders" element={<OrdersPage />} />
+					<Route path="/products" element={<ProductsPage />} />
+					<Route path="/materials" element={<MaterialsPage />} />
+					<Route path="/*" element={<NotFoundPage />} />
+				</Routes>
+			</Container>
+		</BrowserRouter>
+	);
 }

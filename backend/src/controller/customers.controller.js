@@ -22,7 +22,7 @@ async function update(req, res) {
 
 async function deleteCustomers(req, res) {
     const { id } = req.params;
-    const result = await customersModel.deleteCustomers(req.body, id);
+    const result = await customersModel.deleteCustomers(id);
 
     return res.status(200).json(result);
 }

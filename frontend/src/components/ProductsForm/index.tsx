@@ -1,102 +1,85 @@
 import { useState } from 'react';
+import { IMaterialApi } from '../../types';
+import { Form, Button, Text, InnerContainer, SelectLabel } from './style';
+import { TbNeedleThread } from 'react-icons/tb';
+import Label from '../Label';
 
-export default function ProductsForm() {
-  const [productName, setProductName] = useState<string>('');
-  const [sellingPrice, setSellingPrice] = useState<number>(0);
-  const [materialName, setMaterialName] = useState<string>('Cetim');
-  const [quantity, setQuantity] = useState<number>(0);
-  const [materials, setMaterials] = useState<IMaterials[]>([]);
+interface IProps {
+  materialsData: IMaterialApi[];
+}
 
-  const handleClick = () => {
-    console.log({
-      productName,
-      sellingPrice,
-      materials,
-    })
-  };
+interface IMaterials {
+  material: string;
+  quantity: string;
+}
 
-  interface IMaterials {
-    materialName: string;
-    quantity: number;
-  }
+export default function ProductsForm(props: IProps) {
+	const { materialsData } = props;
+	const [productName, setProductName] = useState<string>('');
+	const [sellingPrice, setSellingPrice] = useState<string>('');
+	const [material, setMaterial] = useState<string>('');
+	const [quantity, setQuantity] = useState<string>('');
+	const [materials, setMaterials] = useState<IMaterials[]>([]);
 
-  const handleAddMaterial = () => {
-    const updatedMaterials = [...materials, { materialName, quantity }];
-    setMaterials(updatedMaterials);
-  };
+	const handleClick = () => {
+		console.log({
+			productName,
+			sellingPrice,
+			materials,
+		});
+	};
 
-  return (
-    <>
-      <h2>Produtos</h2>
+	const handleAddMaterial = () => {
+		const updatedMaterials = [...materials, { material, quantity }];
+		setMaterials(updatedMaterials);
+	};
 
-      <form>
-        <label htmlFor="productName">
-          Descrição do Produto
-          <input
-            type="text"
-            id="productName"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-          />
-        </label>
+	return (
+		<>
+			<Form>
+				<Text><TbNeedleThread />Catalogar novo produto</Text>
+				<div className='forms'>
+					<div className='main-form'>
+						<Label label='Descrição do Produto' value={{productName}}	width={40} setState={setProductName} />
+						<Label label='Preço' type="number" value={{sellingPrice}}	width={10} setState={setSellingPrice} />
+					</div>
 
-        <label htmlFor="sellingPrice">
-          Preço
-          <input
-            type="number"
-            id="sellingPrice"
-            value={sellingPrice}
-            onChange={(e) => setSellingPrice(Number(e.target.value))}
-          />
-        </label>
+					<InnerContainer>
+						<h3>Materiais utilizados na fabricação</h3>
+						<div className='inputs'>
+							<SelectLabel htmlFor="materialName" width={15}>
+              Material
+								<select id="materialName"	value={material} onChange={(e) => setMaterial(e.target.value)}>
+									{materialsData.map(({ material_id, material_name }) => (
+										<option key={material_id} value={material_id}>{`${material_id} - ${material_name}`}</option>
+									))}
+								</select>
+							</SelectLabel>
+						
+							<Label label='Quantidade' type="number" value={{quantity}}	width={10} setState={setQuantity} />
 
-        <button
-          type="button"
-          onClick={handleClick}
-          disabled={materials.length === 0}
-        >
+							<Button type="button" onClick={handleAddMaterial}>
+              Adicionar
+							</Button>
+					
+							{materials.map((material, index) => (
+								<div key={index}>
+									{`${material.material} - ${material.quantity}`}
+								</div>
+							))}
+						</div>
+					</InnerContainer>
+				</div>
+
+				<Button
+					type="button"
+					onClick={handleClick}
+					disabled={materials.length === 0}
+				>
           Salvar Produto
-        </button>
+				</Button>
 
-        <div>
-          <h3>Materiais utilizados na fabricação</h3>
-          <label htmlFor="materialName">
-            Material
-            <select
-              id="materialName"
-              value={materialName}
-              onChange={(e) => setMaterialName(e.target.value)}
-            >
-              <option value="Cetim">Cetim</option>
-              <option value="Velcro">Velcro</option>
-              <option value="Botão">Botão</option>
-              <option value="Seda">Seda</option>
-            </select>
-          </label>
-
-          <label htmlFor="quantity">
-            Quantidade
-            <input
-              type="number"
-              id="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
-          </label>
-
-          <button type="button" onClick={handleAddMaterial}>
-            Adicionar Material
-          </button>
-        </div>
-
-      </form>
-
-      {materials.map((material, index) => (
-        <div key={index}>
-          {`${material.materialName} - ${material.quantity}`}
-        </div>
-      ))}
-
-    </>
-  );
+			</Form>
+		</>
+	);
 }

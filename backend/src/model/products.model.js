@@ -1,7 +1,7 @@
 const dbConnection = require('../database/mySqlConnection');
 
 async function getAll() {
-    const query = 'SELECT * FROM products';
+    const query = 'SELECT * FROM products WHERE is_active = true';
     const [result] = await dbConnection.execute(query);
 
 	return result;
@@ -61,10 +61,9 @@ async function update(payload, id) {
 // 	return result;
 // }
 
-async function deleteProduct(payload, id) {
-    const values = Object.values(payload);
-    const query = `UPDATE products SET is_active = ? WHERE product_id = ${id}`;
-    const [result] = await dbConnection.execute(query, values);
+async function deleteProduct(id) {
+    const query = `UPDATE products SET is_active = NOT is_active WHERE product_id = ${id}`;
+    const [result] = await dbConnection.execute(query);
 
 	return result;
 }
@@ -76,5 +75,5 @@ module.exports = {
     insertProductMaterial,
     update,
     deleteProduct,
-    updateProductMaterial,
+    // updateProductMaterial,
 }

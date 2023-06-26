@@ -22,7 +22,7 @@ async function update(req, res) {
 
 async function deleteMaterial(req, res) {
     const { id } = req.params;
-    const result = await materialsModel.deleteMaterial(req.body, id);
+    const result = await materialsModel.deleteMaterial(id);
 
     return res.status(200).json(result);
 }

@@ -41,7 +41,7 @@ async function dbSeedAndReset() {
       customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       customer_name VARCHAR(45) NOT NULL,
       cpf VARCHAR(11) NOT NULL,
-      address VARCHAR(45) NOT NULL,
+      address TEXT NOT NULL,
       email VARCHAR(45) NOT NULL,
       phone VARCHAR(20) NOT NULL,
       is_active BOOLEAN NOT NULL DEFAULT true,
@@ -88,46 +88,60 @@ async function dbSeedAndReset() {
     );
 
     INSERT INTO materials (material_name, color, cost_price, stock) VALUES
-      ('Tecido de Seda Branco', 'Branco', 10.50, 30),
-      ('Botão Vermelho', 'Vermelho', 0.50, 57),
-      ('Elástico', NULL, 1.00, 3),
-      ('Velcro Dupla Face', NULL, 2.50, 1);
+      ('Tecido de Seda Branco', 'Branco', 12.50, 30),
+      ('Malha Azul Estampada', 'Azul', 18.90, 20),
+      ('Botão Vermelho', 'Vermelho', 0.75, 57),
+      ('Elástico', NULL, 3.00, 3),
+      ('Velcro Dupla Face', NULL, 4.50, 10),
+      ('Linha de costura - Retrós 10m', 'Preto', 3.75, 8);
 
     INSERT INTO products (product_name, selling_price) VALUES
-      ('Camisa', 25.99),
-      ('Calça', 39.99),
-      ('Vestido', 49.99),
-      ('Saia', 24.99);
+      ('Camisa', 39.90),
+      ('Calça', 109.79),
+      ('Conjunto Pijama', 89.99),
+      ('Saia', 54.50);
 
     INSERT INTO customers (customer_name, cpf, address, email, phone) VALUES
-      ('João Silva', '123456789', 'Rua Principal 123', 'joao@example.com', '123-456-7890'),
-      ('Ana Oliveira', '987654321', 'Rua das Flores 123', 'ana@example.com', '987-654-3210'),
-      ('Pedro Santos', '123456789', 'Avenida Principal 456', 'pedro@example.com', '123-456-7890'),
-      ('Maria Santos', '987654321', 'Rua Secundária 456', 'maria@example.com', '987-654-3210');
+      ('João Silva', '11122233344', 'Rua Principal 123', 'joao@example.com', '31945678931'),
+      ('Ana Oliveira', '44455566677', 'Rua das Flores 123', 'ana@example.com', '41976543211'),
+      ('Pedro Santos', '77788899900', 'Avenida Principal 456', 'pedro@example.com', '55923456789'),
+      ('Maria Santos', '00011122233', 'Rua Secundária 456', 'maria@example.com', '11987654321');
 
     INSERT INTO orders (order_status, order_type, customer_id) VALUES
       ('pendente', 'varejo', 1),
       ('concluído', 'varejo', 2),
       ('iniciado', 'atacado', 3),
       ('iniciado', 'varejo', 4),
-      ('pendente', 'varejo', 2);
+      ('pendente', 'varejo', 2),
+      ('cancelado', 'varejo', 3);
 
     INSERT INTO order_items (product_id, order_id, quantity) VALUES
       (1, 1, 2),
       (2, 1, 1),
       (3, 2, 1),
-      (1, 3, 1),
+      (1, 3, 2),
       (3, 3, 2),
-      (2, 5, 3),
-      (4, 4, 2);
+      (2, 4, 3),
+      (4, 5, 2),
+      (4, 6, 5);
 
     INSERT INTO products_materials (material_id, product_id, quantity) VALUES
-      (1, 1, 2.50),
-      (2, 1, 4.00),
-      (3, 2, 1.75),
-      (4, 3, 0.50),
-      (1, 4, 3.75),
-      (3, 4, 2.00);
+      (1, 1, 1.15),
+      (3, 1, 4),
+      (4, 1, 0.5),
+      (6, 1, 1),
+      (2, 2, 2.50),
+      (3, 2, 1),
+      (4, 2, 0.70),
+      (5, 2, 0.50),
+      (6, 2, 2),
+      (1, 3, 1.80),
+      (2, 3, 1.20),
+      (4, 3, 1.5),
+      (6, 3, 3),
+      (1, 4, 1.50),
+      (4, 4, 1),
+      (6, 4, 1);
   `;
 
 	await dbConnection.query(query);

@@ -25,5 +25,5 @@ async function insert(body) {
 
 module.exports = {
     insert,
-    update,
+    // update,
 }
