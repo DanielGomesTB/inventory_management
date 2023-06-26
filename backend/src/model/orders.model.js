@@ -1,7 +1,21 @@
 const dbConnection = require('../database/mySqlConnection');
 
 async function getAll() {
-    const query = 'SELECT * FROM orders';
+    const query = `
+        SELECT orders.*,
+            customers.customer_name,
+            JSON_ARRAYAGG(JSON_OBJECT(
+                'product_id', products.product_id,
+                'product_name', products.product_name,
+                'quantity', order_items.quantity,
+                'price', products.selling_price
+            )) AS products
+        FROM orders
+        JOIN customers ON orders.customer_id = customers.customer_id
+        JOIN order_items ON orders.order_id = order_items.order_id
+        JOIN products ON order_items.product_id = products.product_id
+        GROUP BY orders.order_id;
+    `;
     const [result] = await dbConnection.execute(query);
 
 	return result;
