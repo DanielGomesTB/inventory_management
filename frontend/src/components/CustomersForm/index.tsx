@@ -103,7 +103,7 @@ export default function CustomersForm(props: IProps) {
 
 			<div>
 				<Label label='Rua' value={{street}}	width={30} setState={setStreet} />
-				<Label label='Nº' value={{num}}	width={5} setState={setNum} />
+				<Label label='Nº' value={{num}}	width={5} setState={setNum} type='number'/>
 				<Label label='Bairro' value={{neighborhood}} width={20} setState={setNeighborhood} />
 				<Label label='Cidade' value={{city}} width={20} setState={setCity} />
 
