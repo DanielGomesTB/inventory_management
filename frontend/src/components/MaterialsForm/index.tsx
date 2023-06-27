@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Form, Text } from '../CustomersForm/style';
+import FormContainer from '../FormContainer';
+import { LuPackagePlus } from 'react-icons/lu';
 
 export default function MaterialsForm() {
 	const [materialName, setMaterialName] = useState<string>('');
@@ -17,8 +18,14 @@ export default function MaterialsForm() {
 	};
 
 	return (
-		<Form>
-			<Text>+ Cadastrar novo material</Text>
+		<FormContainer
+			title="Cadastrar novo material"
+			icon={<LuPackagePlus />}
+			handleClick={handleClick}
+			buttonText="Cadastrar"
+			isDisabled={false}
+		>
+
 			<label htmlFor="materialName">
         Descrição do Material
 				<input
@@ -59,12 +66,6 @@ export default function MaterialsForm() {
 				/>
 			</label>
 
-			<button
-				type="button"
-				onClick={handleClick}
-			>
-        Cadastrar
-			</button>
-		</Form>
+		</FormContainer>
 	);
 }

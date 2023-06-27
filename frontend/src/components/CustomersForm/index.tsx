@@ -5,8 +5,9 @@ import { FaUserPlus } from 'react-icons/fa';
 import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
 import { insert } from '../../services/api/api';
 import Label from '../Label';
+import FormContainer from '../FormContainer';
 
-import { Form, SelectLabel, Button, Text } from './style';
+import { SelectLabel } from './style';
 
 
 interface IStates {
@@ -92,16 +93,21 @@ export default function CustomersForm(props: IProps) {
 	}, [customerName, cpf, phone, email, street, num, neighborhood, city, state, zipCode]);
 
 	return (
-		<Form>
-			<Text><FaUserPlus /> Cadastrar novo cliente</Text>
-			<div>
+		<FormContainer
+			title="Cadastrar novo cliente"
+			icon={<FaUserPlus />}
+			handleClick={handleClick}
+			buttonText="Cadastrar"
+			isDisabled={isDisable}
+		>
+			<div key='1'>
 				<Label label='Nome' value={{customerName}}	width={40} setState={setCustomerName} />
 				<Label label='CPF' value={{cpf}} type='number' maxlength={11} width={20} setState={setCpf} />
 				<Label label='Telefone' value={{phone}}	type='number' maxlength={11} width={20} setState={setPhone} />
 				<Label label='e-mail' value={{email}}	type='email' width={20} setState={setEmail} />
 			</div>
 
-			<div>
+			<div key='2'>
 				<Label label='Rua' value={{street}}	width={30} setState={setStreet} />
 				<Label label='Nº' value={{num}}	width={5} setState={setNum} type='number'/>
 				<Label label='Bairro' value={{neighborhood}} width={20} setState={setNeighborhood} />
@@ -118,14 +124,6 @@ export default function CustomersForm(props: IProps) {
 
 				<Label label='CEP' value={{zipCode}} type='number' maxlength={8} width={10} setState={setZipCode} />
 			</div>
-
-			<Button
-				disabled={isDisable}
-				type="button"
-				onClick={handleClick}
-			>
-          Cadastrar
-			</Button>
-		</Form>
+		</FormContainer>
 	);
 }

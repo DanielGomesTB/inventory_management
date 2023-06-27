@@ -4,6 +4,7 @@ interface ILabelProps {
   width?: number;
 }
 
+// Pode deletar
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -18,6 +19,7 @@ export const Form = styled.form`
   }
 `;
 
+// Pode deletar
 export const Text = styled.h3`
   display: flex;
   align-items: center;
@@ -41,31 +43,5 @@ export const SelectLabel = styled.label<ILabelProps>`
     &:focus {
       outline: var(--third-dark) solid 2px;
     }
-  }
-`;
-
-export const Button = styled.button`
-  color: var(--main-dark);
-  text-align: center;
-  font-weight: 600;
-  width: 128px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  background: var(--sec-green);
-
-  &:hover {
-    color: var(--main-dark);
-    background: var(--third-green);
-  }
-
-  &:active {
-    transform: scale(0.95)
-  }
-
-  &:disabled {
-    color: var(--third-dark);
-    background: var(--third-green);
-    transform: none;
   }
 `;
