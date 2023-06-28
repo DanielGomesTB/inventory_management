@@ -4,46 +4,37 @@ interface ILabelProps {
   width?: number;
 }
 
-export const Text = styled.h3`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--main-white);
-`;
-
-export const Form = styled.form`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 8px;
-  background: var(--main-green);
+  width: 50%;
 
-  .forms{
+  .materials-info {
     display: flex;
-    justify-content: space-between;
+    align-items: flex-end;
   }
 
-  .main-form {
-    display: flex;
-    width: 100%;
-  }
- 
-`;
+  button {
+    height: 40px;
+    width: 20%;
 
-export const InnerContainer = styled.div`
-  background: var(--third-green);
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  width: 100%;
+    &:hover {
+      filter: brightness(1.1);
+    }
 
-  .inputs {
-    display: flex;
+    &:active {
+      transform: scale(0.98)
+    }
+
+    &:disabled {
+      color: var(--third-dark);
+      background: var(--third-green);
+      transform: none;
+    }
   }
 `;
 
-export const SelectLabel = styled.label<ILabelProps>`
+export const CustomLabel = styled.label<ILabelProps>`
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -51,6 +42,7 @@ export const SelectLabel = styled.label<ILabelProps>`
   font-size: 14rem;
   font-weight: 500;
 
+  input,
   select {
     font-weight: 500;
     padding: 8px;
@@ -59,31 +51,5 @@ export const SelectLabel = styled.label<ILabelProps>`
     &:focus {
       outline: var(--third-dark) solid 2px;
     }
-  }
-`;
-
-export const Button = styled.button`
-  color: var(--main-dark);
-  text-align: center;
-  font-weight: 600;
-  width: 160px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  background: var(--sec-green);
-
-  &:hover {
-    color: var(--main-dark);
-    background: var(--third-green);
-  }
-
-  &:active {
-    transform: scale(0.95)
-  }
-
-  &:disabled {
-    color: var(--third-dark);
-    background: var(--third-green);
-    transform: none;
   }
 `;

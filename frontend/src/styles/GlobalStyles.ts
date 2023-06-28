@@ -50,6 +50,14 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }
 
+  button:hover {
+    filter: brightness(1.1);
+  }
+
+  button:active {
+      transform: scale(0.98)
+  }
+
   button:disabled,
   button:disabled:hover,
   button:disabled:focus,
@@ -57,4 +65,7 @@ export const GlobalStyles = createGlobalStyle`
     cursor: not-allowed;
   }
 
+  input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+  }
 `;

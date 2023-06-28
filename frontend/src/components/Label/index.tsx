@@ -1,7 +1,7 @@
 import { StyledLabel } from './style';
 
 interface IProps {
-  label: string;
+  label?: string;
   type?: string;
 	maxlength?: number;
   width?: number;
