@@ -6,7 +6,7 @@ export const Container = styled.form`
   gap: 16px;
   padding: 16px;
   border-radius: 8px;
-  background: var(--main-green);
+  background: var(--emerald-900);
 
   div {
     display: flex;
@@ -17,32 +17,10 @@ export const Container = styled.form`
     display: flex;
     align-items: center;
     gap: 16px;
-    color: var(--main-white);
+    color: var(--zinc-50);
   }
 
   button {
-    color: var(--main-dark);
-    text-align: center;
-    font-weight: 600;
     width: 160px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background: var(--sec-green);
-
-    &:hover {
-      color: var(--main-dark);
-      background: var(--third-green);
-    }
-
-    &:active {
-      transform: scale(0.95)
-    }
-
-    &:disabled {
-      color: var(--third-dark);
-      background: var(--third-green);
-      transform: none;
-    }
   }
 `;

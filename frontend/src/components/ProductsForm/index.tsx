@@ -113,7 +113,7 @@ export default function ProductsForm(props: IProps) {
 							: (<button
 								type="button"
 								onClick={() => handleRemoveMaterial(index)}
-								style={{backgroundColor: 'var(--main-red)', color: 'var(--main-white)'}}
+								style={{backgroundColor: 'var(--red-500)', color: 'var(--zinc-50)'}}
 							>
 								Remover
 							</button>)

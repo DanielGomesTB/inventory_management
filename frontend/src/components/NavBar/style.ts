@@ -7,7 +7,7 @@ export const StyledNavBar = styled.nav`
   width: 200px;
   padding: 16px;
   border-radius: 8px;
-  background: var(--sec-dark);
+  background: var(--zinc-900);
 
   ul {
     display: flex;
@@ -20,17 +20,17 @@ export const StyledNavBar = styled.nav`
     align-items: center;
     gap: 8px;
     list-style: none;
-    color: var(--main-white);
+    color: var(--zinc-50);
     text-align: left;
     font-weight: 500;
     width: 100%;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
-    background: var(--third-dark);
+    background: var(--zinc-800);
 
     &:hover {
-      /* background: var(--main-dark); */
+      /* background: var(--zinc-950); */
       box-shadow: var(--normal-shadow);
       transform: translateX(1px);
     }

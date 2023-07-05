@@ -6,5 +6,5 @@ export const Container = styled.div`
   margin: 40px auto;
   display: flex;
   gap: 32px;
-  background-color: var(--sec-dark);
+  background-color: var(--zinc-900);
 `;

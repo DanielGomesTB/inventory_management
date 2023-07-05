@@ -7,7 +7,7 @@ export const Container = styled.div`
   gap: 16px;
   padding: 16px;
   border-radius: 8px;
-  background: var(--sec-dark);
+  background: var(--zinc-900);
 
   .products {
   display: flex;
@@ -25,17 +25,17 @@ export const HeaderBar = styled.div`
     display: flex;
     gap: 8px;
     align-items: center;
-    color: var(--main-dark);
+    color: var(--zinc-950);
     font-weight: 600;
     width: 160px;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
-    background: var(--sec-green);
+    background: var(--emerald-400);
 
     &:hover {
-      color: var(--main-dark);
-      background: var(--third-green);
+      color: var(--zinc-950);
+      background: var(--emerald-300);
     }
 
     &:active {
@@ -43,8 +43,8 @@ export const HeaderBar = styled.div`
     }
 
     &:disabled {
-      color: var(--third-dark);
-      background: var(--third-green);
+      color: var(--zinc-800);
+      background: var(--emerald-300);
       transform: none;
     }
   }
@@ -54,7 +54,7 @@ export const Text = styled.h3`
   display: flex;
   align-items: center;
   gap: 16px;
-  color: var(--sec-green);
+  color: var(--emerald-400);
 `;
 
 export const Card = styled.div`
@@ -62,7 +62,7 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 8px;
-  background-color: var(--third-dark);
+  background-color: var(--zinc-800);
   border-radius: 8px;
   padding: 8px 16px;
   max-width: 260px;
@@ -77,9 +77,9 @@ export const Card = styled.div`
   }
 
   button {
-    border: none;
+    padding: 0;
     background-color: inherit;
-    color: var(--main-white)
+    color: var(--zinc-50)
   }
 
   .card-header {
@@ -102,7 +102,7 @@ export const Card = styled.div`
       text-align: center;
       font-size: 20rem;
       font-weight: 600;
-      color:var(--sec-green)
+      color:var(--emerald-400)
     }
   }
 

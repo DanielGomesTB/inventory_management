@@ -27,8 +27,8 @@ export const Container = styled.div`
     }
 
     &:disabled {
-      color: var(--third-dark);
-      background: var(--third-green);
+      color: var(--zinc-800);
+      background: var(--emerald-300);
       transform: none;
     }
   }
@@ -46,10 +46,10 @@ export const CustomLabel = styled.label<ILabelProps>`
   select {
     font-weight: 500;
     padding: 8px;
-    color: var(--main-dark);
+    color: var(--zinc-950);
 
     &:focus {
-      outline: var(--third-dark) solid 2px;
+      outline: var(--zinc-800) solid 2px;
     }
   }
 `;

@@ -4,29 +4,6 @@ interface ILabelProps {
   width?: number;
 }
 
-// Pode deletar
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 8px;
-  background: var(--main-green);
-
-  div {
-    display: flex;
-    gap: 16px;
-  }
-`;
-
-// Pode deletar
-export const Text = styled.h3`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--main-white);
-`;
-
 export const SelectLabel = styled.label<ILabelProps>`
   display: flex;
   flex-direction: column;
@@ -38,10 +15,10 @@ export const SelectLabel = styled.label<ILabelProps>`
   select {
     font-weight: 500;
     padding: 8px;
-    color: var(--main-dark);
+    color: var(--zinc-950);
 
     &:focus {
-      outline: var(--third-dark) solid 2px;
+      outline: var(--zinc-800) solid 2px;
     }
   }
 `;

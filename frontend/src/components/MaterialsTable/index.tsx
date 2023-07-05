@@ -14,7 +14,7 @@ export default function MaterialsTable(props : IProps) {
 	}
 
 	return (
-		<div style={{backgroundColor: 'var(--sec-dark)'}}>
+		<div style={{backgroundColor: 'var(--zinc-900)'}}>
 			<h3>Estoque</h3>
 			<table>
 				<thead>

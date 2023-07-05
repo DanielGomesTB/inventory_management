@@ -6,14 +6,14 @@ export const Container = styled.div`
   gap: 16px;
   padding: 16px;
   border-radius: 8px;
-  background: var(--sec-dark);
+  background: var(--zinc-900);
 `;
 
 export const Text = styled.h3`
   display: flex;
   align-items: center;
   gap: 16px;
-  color: var(--sec-green);
+  color: var(--emerald-400);
 `;
 
 export const Table = styled.table`
@@ -21,7 +21,7 @@ export const Table = styled.table`
   /* border-collapse: collapse; */
 
   thead {
-    background-color: var(--main-green);
+    background-color: var(--emerald-900);
 
     th {
       padding: 2px 8px;
@@ -35,7 +35,7 @@ export const Table = styled.table`
   }
 
   tbody tr:nth-child(even) {
-    background-color: var(--third-dark);
+    background-color: var(--zinc-800);
   }
 `;
 
@@ -69,10 +69,10 @@ export const SearchBar = styled.div`
     input {
     font-weight: 500;
     padding: 8px;
-    color: var(--main-dark);
+    color: var(--zinc-950);
 
     &:focus {
-      outline: var(--sec-green) solid 2px;
+      outline: var(--emerald-400) solid 2px;
     }
   }
   }

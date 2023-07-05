@@ -90,10 +90,10 @@ export default function CostumersTable(props : IProps) {
 							<td>{formatDate(item.created_at)}</td>
 							<ActionRow color='white'>
 								<button type="button" onClick={() => handleEdit(item)}>
-									<RiEdit2Fill style={{color: 'var(--main-white)'}} />
+									<RiEdit2Fill style={{color: 'var(--zinc-50)'}} />
 								</button>
 								<button type="button" onClick={() => handleDelete(item.customer_id, item.customer_name)}>
-									<MdDeleteForever style={{color: 'var(--main-red)'}}/>
+									<MdDeleteForever style={{color: 'var(--red-500)'}}/>
 								</button>
 							</ActionRow>
 						</tr>

@@ -7,7 +7,7 @@ export const Board = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  background-color: var(--third-dark);
+  background-color: var(--zinc-800);
 
   > header {
     padding: 8px;
@@ -26,10 +26,10 @@ export const OrdersContainer = styled.div`
 
   button {
     padding: 16px;
-    background: var(--main-white);
+    background: var(--zinc-50);
     border-radius: 8px;
     height: 128px;
-    border: 1px solid var(--sec-dark);
+    border: 1px solid var(--zinc-900);
     width: 100%;
     display: flex;
     flex-direction: column;

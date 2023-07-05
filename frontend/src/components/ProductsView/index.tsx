@@ -53,10 +53,10 @@ export default function ProductsTable(props : IProps) {
 							</div>
 							<div className='card-footer-editors'>
 								<button type="button">
-									<RiEdit2Fill style={{color: 'var(--main-white)'}} />
+									<RiEdit2Fill style={{color: 'var(--zinc-50)'}} />
 								</button>
 								<button type="button">
-									<MdDeleteForever style={{color: 'var(--main-red)'}}/>
+									<MdDeleteForever style={{color: 'var(--red-500)'}}/>
 								</button>
 							</div>
 						</div>

@@ -17,7 +17,7 @@ export const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;;
-  background: var(--third-dark);
+  background: var(--zinc-800);
   width: 480px;
   border-radius: 8px;
   padding: 32px;
@@ -37,7 +37,7 @@ export const ModalBody = styled.div`
 export const Text = styled.h3`
   display: flex;
   justify-content: center;
-  color: var(--sec-green);
+  color: var(--emerald-400);
   align-items: center;
   gap: 16px;
 `;
@@ -52,10 +52,10 @@ export const Label = styled.label`
   input {
     font-weight: 500;
     padding: 8px;
-    color: var(--main-dark);
+    color: var(--zinc-950);
 
     &:focus {
-      outline: var(--sec-green) solid 2px;
+      outline: var(--emerald-400) solid 2px;
     }
   }
 `;
@@ -67,8 +67,8 @@ export const Button = styled.button`
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  background-color: ${({color}) => (color && color == 'danger' ? 'var(--main-red)' : 'var(--sec-green)')};
-  color: ${({color}) => (color && color == 'danger' ? 'var(--main-white)' : 'var(--main-dark)')};
+  background-color: ${({color}) => (color && color == 'danger' ? 'var(--red-500)' : 'var(--emerald-400)')};
+  color: ${({color}) => (color && color == 'danger' ? 'var(--zinc-50)' : 'var(--zinc-950)')};
 
   &:hover {
     transform: scale(1.05)
@@ -79,8 +79,8 @@ export const Button = styled.button`
   }
 
   &:disabled {
-    color: var(--third-dark);
-    background: var(--third-green);
+    color: var(--zinc-800);
+    background: var(--emerald-300);
     transform: none;
   }
 `;

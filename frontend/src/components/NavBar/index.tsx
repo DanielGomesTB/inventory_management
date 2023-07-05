@@ -5,7 +5,7 @@ import { FaClipboardList } from 'react-icons/fa';
 import { StyledNavBar } from './style';
 
 export default function NavBar() {
-	const style = { color: 'var(--sec-green)'};
+	const style = { color: 'var(--emerald-400)'};
   
 	return (
 		<StyledNavBar>

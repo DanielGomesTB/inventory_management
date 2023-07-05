@@ -16,33 +16,17 @@ export const Box = styled.div`
   justify-content: center;
   font-size: 24rem;
   font-weight: 600;
-  background-color: var(--main-green);
+  background: linear-gradient(45deg, var(--emerald-900), var(--emerald-600));
   border-radius: 8px;
   width: 200px;
   height: 200px;
 
-  transition: all 0.25s linear;
+  transition: all 0.2s linear;
 
   &:hover {
-    font-size: 12rem;
+    font-size: 16rem;
     svg {
       font-size: 48rem;
     }
   }
-
-  &:nth-child(1) {
-      background: linear-gradient(135deg, var(--main-green), var(--third-green));
-    }
-
-    &:nth-child(2) {
-      background: linear-gradient(180deg, var(--main-green), var(--third-green));
-    }
-
-    &:nth-child(3) {
-      background: linear-gradient(45deg, var(--main-green), var(--third-green));
-    }
-
-    &:nth-child(4) {
-      background: linear-gradient(90deg, var(--main-green), var(--third-green));
-    }
 `;

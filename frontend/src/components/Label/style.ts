@@ -15,10 +15,10 @@ export const StyledLabel = styled.label<ILabelProps>`
   input {
     font-weight: 500;
     padding: 8px;
-    color: var(--main-dark);
+    color: var(--zinc-950);
     
     &:focus {
-      outline: var(--third-dark) solid 2px;
+      outline: var(--zinc-800) solid 2px;
     }
   }
 
