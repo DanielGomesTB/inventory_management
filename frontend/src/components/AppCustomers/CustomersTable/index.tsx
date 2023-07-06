@@ -3,12 +3,12 @@ import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
 
-import { ICustomerApi } from '../../types';
-import { remove } from '../../services/api/api';
+import { ICustomerApi } from '../../../types';
+import { remove } from '../../../services/api/api';
 import EditCustomerModal from '../EditCustomerModal';
-import formatPhoneNumber from '../../utils/formatPhoneNumber';
-import formatCPF from '../../utils/formatCPF';
-import formatDate from '../../utils/formatDate';
+import formatPhoneNumber from '../../../utils/formatPhoneNumber';
+import formatCPF from '../../../utils/formatCPF';
+import formatDate from '../../../utils/formatDate';
 
 import { Container, Text, Table, ActionRow, SearchBar } from './style';
 

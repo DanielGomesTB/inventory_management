@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FaUserEdit } from 'react-icons/fa';
 
-import { ICustomerApi } from '../../types';
-import { update } from '../../services/api/api';
-import Label from '../Label';
+import { ICustomerApi } from '../../../types';
+import { update } from '../../../services/api/api';
+import Label from '../../Label';
 
 import { ModalBody, Overlay, Text, Button } from './style';
 

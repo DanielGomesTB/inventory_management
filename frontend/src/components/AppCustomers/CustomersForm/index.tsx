@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
 
-import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
-import { insert } from '../../services/api/api';
-import Label from '../Label';
-import FormContainer from '../FormContainer';
+import { getStatesFromIBGE } from '../../../services/externalApis/apiIBGE';
+import { insert } from '../../../services/api/api';
+import Label from '../../Label';
+import FormContainer from '../../FormContainer';
 
 import { SelectLabel } from './style';
 

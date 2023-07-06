@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 
-import { IProductApi } from '../../types';
-import { update } from '../../services/api/api';
-import Label from '../Label';
+import { IProductApi } from '../../../types';
+import { update } from '../../../services/api/api';
+import Label from '../../Label';
 
 import { ModalBody, Overlay, Text, Button } from './style';
 

@@ -1,5 +1,5 @@
 import OrdersBoard from '../OrdersBoard';
-import { IOrderApi } from '../../types';
+import { IOrderApi } from '../../../types';
 import { Container } from './style';
 
 interface IProps {

@@ -1,6 +1,6 @@
-import { IMaterialApi } from '../../types';
-import formatCurrency from '../../utils/formatCurrency';
-import formatDate from '../../utils/formatDate';
+import { IMaterialApi } from '../../../types';
+import formatCurrency from '../../../utils/formatCurrency';
+import formatDate from '../../../utils/formatDate';
 
 interface IProps {
   materialsData: IMaterialApi[];

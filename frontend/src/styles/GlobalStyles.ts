@@ -94,23 +94,10 @@ export const GlobalStyles = createGlobalStyle`
     cursor: pointer;
     font-weight: 600;
     text-align: center;
-    padding: 8px 16px;
     border: none;
-    border-radius: 4px;
-    background-color: var(--emerald-400);
-    color: var(--zinc-950);
-
-
-    &:hover {
-      /* filter: brightness(1.1); */
-      background-color: var(--emerald-300);
-      color: var(--zinc-950);
-    }
 
     &:active {
       transform: scale(0.98);
-      background-color: var(--emerald-500);
-      color: var(--zinc-950);
     }
 
     &:disabled,
@@ -118,8 +105,6 @@ export const GlobalStyles = createGlobalStyle`
     &:disabled:focus,
     &:disabled:active {
       cursor: not-allowed;
-      background-color: var(--emerald-800);
-      color: var(--emerald-100);
     }
   }
 

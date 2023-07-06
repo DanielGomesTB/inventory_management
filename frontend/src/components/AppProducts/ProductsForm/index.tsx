@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { IMaterialApi } from '../../types';
+import { IMaterialApi } from '../../../types';
 import { Container, CustomLabel, Button } from './style';
 import { TbNeedleThread } from 'react-icons/tb';
-import Label from '../Label';
-import FormContainer from '../FormContainer';
-import { insert } from '../../services/api/api';
+import Label from '../../Label';
+import FormContainer from '../../FormContainer';
+import { insert } from '../../../services/api/api';
 
 interface IProps {
   materialsData: IMaterialApi[];

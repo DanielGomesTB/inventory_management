@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { InnerContainer } from './style';
-import { ICustomerApi, IProductApi } from '../../types';
-import FormContainer from '../FormContainer';
+import { ICustomerApi, IProductApi } from '../../../types';
+import FormContainer from '../../FormContainer';
 import { BsFillClipboardPlusFill } from 'react-icons/bs';
 
 interface IProducts {

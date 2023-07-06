@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 
-import CustomersForm from '../../components/CustomersForm';
-import CostumersTable from '../../components/CustomersTable';
+import CustomersForm from '../../components/AppCustomers/CustomersForm';
+import CostumersTable from '../../components/AppCustomers/CustomersTable';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { ICustomerApi } from '../../types';

@@ -6,14 +6,14 @@ import { GiClothes } from 'react-icons/gi';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { BsCartPlusFill } from 'react-icons/bs';
 
-import { IProductApi, ISelectedProducts } from '../../types';
-import formatDate from '../../utils/formatDate';
-import formatCurrency from '../../utils/formatCurrency';
-import formatTitle from '../../utils/formatTitle';
-import Context from '../../context/Context';
+import { IProductApi, ISelectedProducts } from '../../../types';
+import formatDate from '../../../utils/formatDate';
+import formatCurrency from '../../../utils/formatCurrency';
+import formatTitle from '../../../utils/formatTitle';
+import Context from '../../../context/Context';
 
 import { Card, Container, HeaderBar, Text } from './style';
-import { remove } from '../../services/api/api';
+import { remove } from '../../../services/api/api';
 import EditProductsModal from '../EditProductModal';
 
 

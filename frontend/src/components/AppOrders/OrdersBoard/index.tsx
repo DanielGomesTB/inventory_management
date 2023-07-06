@@ -1,6 +1,6 @@
-import formatDate from '../../utils/formatDate';
-import formatTitle from '../../utils/formatTitle';
-import { IOrderApi } from '../../types';
+import formatDate from '../../../utils/formatDate';
+import formatTitle from '../../../utils/formatTitle';
+import { IOrderApi } from '../../../types';
 
 import { Board, OrdersContainer, ColoredText } from './style';
 

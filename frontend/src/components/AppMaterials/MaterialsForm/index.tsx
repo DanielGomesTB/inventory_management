@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FormContainer from '../FormContainer';
+import FormContainer from '../../FormContainer';
 import { LuPackagePlus } from 'react-icons/lu';
 
 export default function MaterialsForm() {

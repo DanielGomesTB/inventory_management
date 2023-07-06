@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 
-import ProductsForm from '../../components/ProductsForm';
-import ProductsView from '../../components/ProductsView';
+import ProductsForm from '../../components/AppProducts/ProductsForm';
+import ProductsView from '../../components/AppProducts/ProductsView';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { IProductApi, IMaterialApi } from '../../types';
