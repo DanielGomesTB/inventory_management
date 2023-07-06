@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { FaUserPlus } from 'react-icons/fa';
 
 import { getStatesFromIBGE } from '../../services/externalApis/apiIBGE';
@@ -62,7 +61,6 @@ export default function CustomersForm(props: IProps) {
 		setCity('');
 		setZipCode('');
 
-		toast.success('Cliente cadastrado com sucesso!');
 		await getAllCustomers();
 	};
 

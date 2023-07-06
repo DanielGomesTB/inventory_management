@@ -64,7 +64,7 @@ export default function ProductsForm(props: IProps) {
 			icon={<TbNeedleThread />}
 			handleClick={handleClick}
 			buttonText="Salvar Produto"
-			isDisabled={materials.length === 0}
+			isDisabled={!materials.every((m) => m.material_id && m.quantity)}
 		>
 			<Container>
 

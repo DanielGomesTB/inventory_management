@@ -54,7 +54,7 @@ export const Card = styled.div`
     width: 225px;
     height: 225px;
     max-width: 225px;
-    max-height: 255px;
+    max-height: 225px;
   }
 
   button {

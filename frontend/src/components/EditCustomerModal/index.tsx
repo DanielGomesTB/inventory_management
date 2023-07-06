@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { FaUserEdit } from 'react-icons/fa';
 
 import { ICustomerApi } from '../../types';
@@ -11,18 +10,18 @@ import { ModalBody, Overlay, Text, Button } from './style';
 
 interface IProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-	customerInEdit: ICustomerApi;
+	inEdit: ICustomerApi;
 	getAllCustomers: () => Promise<void>;
 }
 
-export default function EditRegisterModal(props: IProps) {
-	const {setIsModalOpen, customerInEdit, getAllCustomers} = props;
+export default function EditCustomerModal(props: IProps) {
+	const {setIsModalOpen, inEdit, getAllCustomers} = props;
 
-	const [customerName, setCustomerName] = useState<string>(customerInEdit.customer_name);
-	const [cpf, setCpf] = useState<string>(customerInEdit.cpf);
-	const [phone, setPhone] = useState<string>(customerInEdit.cpf);
-	const [email, setEmail] = useState<string>(customerInEdit.email);
-	const [completeAddress, setCompleteAddress] = useState<string>(customerInEdit.address);
+	const [customerName, setCustomerName] = useState<string>(inEdit.customer_name);
+	const [cpf, setCpf] = useState<string>(inEdit.cpf);
+	const [phone, setPhone] = useState<string>(inEdit.cpf);
+	const [email, setEmail] = useState<string>(inEdit.email);
+	const [completeAddress, setCompleteAddress] = useState<string>(inEdit.address);
 	const [isDisable, setIsDisable] = useState<boolean>(true);
 
 	const handleDisable = () => {
@@ -45,10 +44,9 @@ export default function EditRegisterModal(props: IProps) {
 			email,
 			address: completeAddress,
 		};
-		await update('customers', customerInEdit.customer_id, payload);
+		await update('customers', inEdit.customer_id, payload);
 		await getAllCustomers();
 		setIsModalOpen(false);
-		toast.success('Informações atualizadas com sucesso!');
 	};
 
 	useEffect(() => {

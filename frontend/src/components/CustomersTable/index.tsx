@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
 
 import { ICustomerApi } from '../../types';
 import { remove } from '../../services/api/api';
-import EditRegisterModal from '../EditRegisterModal';
+import EditCustomerModal from '../EditCustomerModal';
 import formatPhoneNumber from '../../utils/formatPhoneNumber';
 import formatCPF from '../../utils/formatCPF';
 import formatDate from '../../utils/formatDate';
@@ -24,7 +23,7 @@ export default function CostumersTable(props : IProps) {
 
 	const [filteredCustomer, setFilteredCustomer] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const [customerInEdit, setCustomerInEdit] = useState<ICustomerApi>(customersData[0]);
+	const [inEdit, setInEdit] = useState<ICustomerApi>(customersData[0]);
 
 	if (!customersData || customersData.length === 0) {
 		return <p>Nenhum dado disponível.</p>;
@@ -35,22 +34,21 @@ export default function CostumersTable(props : IProps) {
 
 		if (confirmed) {
 			await remove('customers', id);
-			toast.success(`${name.split(' ')[0].toUpperCase()} deletado com sucesso!`);
 			await getAllCustomers();
 		}
 	};
 
 	const handleEdit = async (customer: ICustomerApi) => {
-		setCustomerInEdit(customer);
+		setInEdit(customer);
 		setIsModalOpen(true);
 	};
 
 	return (
 		<Container>
 			{isModalOpen &&
-				<EditRegisterModal 
+				<EditCustomerModal 
 					setIsModalOpen={setIsModalOpen}
-					customerInEdit={customerInEdit}
+					inEdit={inEdit}
 					getAllCustomers={getAllCustomers}
 				/>
 			}
