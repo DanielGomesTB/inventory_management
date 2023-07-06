@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IMaterialApi } from '../../types';
-import { Container, CustomLabel } from './style';
+import { Container, CustomLabel, Button } from './style';
 import { TbNeedleThread } from 'react-icons/tb';
 import Label from '../Label';
 import FormContainer from '../FormContainer';
@@ -109,14 +109,8 @@ export default function ProductsForm(props: IProps) {
 						</CustomLabel>
 
 						{index === materials.length -1 && materials.length < 10
-							? (<button type="button" onClick={handleAddMaterial}>Adicionar</button>)
-							: (<button
-								type="button"
-								onClick={() => handleRemoveMaterial(index)}
-								style={{backgroundColor: 'var(--red-500)', color: 'var(--zinc-50)'}}
-							>
-								Remover
-							</button>)
+							? (<Button type="button" disabled={!(materials[index].material_id && materials[index].quantity)} onClick={handleAddMaterial}>Adicionar</Button>)
+							: (<Button type="button" onClick={() => handleRemoveMaterial(index)} danger>Remover</Button>)
 						}
 						
 					</div>

@@ -24,6 +24,7 @@ export interface IProductApi extends BaseColumns {
   product_id: number;
   product_name: string;
   selling_price: string;
+  quantity?: number;
 }
 
 export interface IMaterialApi extends BaseColumns {

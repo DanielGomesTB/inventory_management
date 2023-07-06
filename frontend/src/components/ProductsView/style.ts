@@ -23,30 +23,11 @@ export const HeaderBar = styled.div`
 
   button {
     display: flex;
-    gap: 8px;
+    justify-content: center;
     align-items: center;
-    color: var(--zinc-950);
-    font-weight: 600;
+    gap: 8px;
     width: 160px;
-    padding: 8px 16px;
     border: none;
-    border-radius: 4px;
-    background: var(--emerald-400);
-
-    &:hover {
-      color: var(--zinc-950);
-      background: var(--emerald-300);
-    }
-
-    &:active {
-      transform: scale(0.98)
-    }
-
-    &:disabled {
-      color: var(--zinc-800);
-      background: var(--emerald-300);
-      transform: none;
-    }
   }
 `;
 
@@ -79,7 +60,12 @@ export const Card = styled.div`
   button {
     padding: 0;
     background-color: inherit;
-    color: var(--zinc-50)
+    color: var(--zinc-50);
+
+    &:hover {
+      color: var(--zinc-50);
+      background-color: transparent;
+    }
   }
 
   .card-header {
@@ -95,7 +81,7 @@ export const Card = styled.div`
 
     span {
       font-size: 10rem;
-      color: var(--third-white)
+      color: var(--zinc-50)
     }
 
     p {

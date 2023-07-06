@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IButtonProps {
+  danger?: boolean;
+}
+
 export const Overlay = styled.div`
   left: 0;
   top: 0;
@@ -60,27 +64,27 @@ export const Label = styled.label`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<IButtonProps>`
   text-align: center;
   font-weight: 600;
   width: 48%;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  background-color: ${({color}) => (color && color == 'danger' ? 'var(--red-500)' : 'var(--emerald-400)')};
-  color: ${({color}) => (color && color == 'danger' ? 'var(--zinc-50)' : 'var(--zinc-950)')};
+  color: ${({danger}) => (danger ? 'var(--zinc-950)' : 'auto')};
+  background-color: ${({danger}) => (danger ? 'var(--red-500)' : 'auto')};
 
   &:hover {
-    transform: scale(1.05)
+    background-color: ${({danger}) => (danger ? 'var(--red-400)' : 'auto')};
   }
 
   &:active {
-    transform: scale(0.98)
+    background-color: ${({danger}) => (danger ? 'var(--red-600)' : 'auto')};
   }
 
   &:disabled {
-    color: var(--zinc-800);
-    background: var(--emerald-300);
     transform: none;
+    color: ${({danger}) => (danger ? 'var(--red-100)' : 'auto')};
+    background-color: ${({danger}) => (danger ? 'var(--red-800)' : 'auto')};
   }
 `;

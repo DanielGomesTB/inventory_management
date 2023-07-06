@@ -1,5 +1,7 @@
 import { createContext } from 'react';
-import { ICustomerApi, IOrderApi, IProductApi, IMaterialApi } from '../types';
+import { ICustomerApi, IOrderApi, IProductApi, IMaterialApi, ISelectedProducts, ISelectedMaterials } from '../types';
+
+
 
 interface IContextValue {
   customersData: ICustomerApi[];
@@ -10,6 +12,10 @@ interface IContextValue {
   setProductsData: React.Dispatch<React.SetStateAction<IProductApi[]>>;
   materialsData: IMaterialApi[];
   setMaterialsData: React.Dispatch<React.SetStateAction<IMaterialApi[]>>;
+  selectedProducts: ISelectedProducts[];
+  setSelectedProducts: React.Dispatch<React.SetStateAction<ISelectedProducts[]>>;
+  selectedMaterials: ISelectedMaterials[];
+  setSelectedMaterials: React.Dispatch<React.SetStateAction<ISelectedMaterials[]>>;
 }
 
 const Context = createContext({} as IContextValue);

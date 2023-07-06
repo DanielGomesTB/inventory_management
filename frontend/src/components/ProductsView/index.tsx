@@ -1,26 +1,67 @@
-import { IProductApi } from '../../types';
-import formatDate from '../../utils/formatDate';
-import formatCurrency from '../../utils/formatCurrency';
-import { Card, Container, HeaderBar, Text } from './style';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import { RiEdit2Fill } from 'react-icons/ri';
 import { GiClothes } from 'react-icons/gi';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
-import { useState } from 'react';
 import { BsCartPlusFill } from 'react-icons/bs';
+
+import { IProductApi, ISelectedProducts } from '../../types';
+import formatDate from '../../utils/formatDate';
+import formatCurrency from '../../utils/formatCurrency';
+import formatTitle from '../../utils/formatTitle';
+import Context from '../../context/Context';
+
+import { Card, Container, HeaderBar, Text } from './style';
+
 
 interface IProps {
   productsData: IProductApi[];
+	setProductsData: React.Dispatch<React.SetStateAction<IProductApi[]>>;
 }
 
 export default function ProductsTable(props : IProps) {
-	const {productsData} = props;
+	const {productsData, setProductsData} = props;
 
-	const [qty, setQty] = useState<number>(0);
+	const navigate = useNavigate();
+
+	const { selectedProducts, setSelectedProducts } = useContext(Context);
 
 	if (!productsData || productsData.length === 0) {
 		return <p>Nenhum dado disponível.</p>;
 	}
+
+	const handleOrderQuantity = (productId: number, type: string) => {
+		setProductsData((prevState) => {
+			const index = prevState.findIndex((product) => product.product_id === productId);
+			const newProducts = [...prevState];
+
+			let quantity;
+
+			if (type === 'increase') quantity = !newProducts[index].quantity ? 1 : newProducts[index].quantity + 1;
+			if (type === 'decrease') quantity = !newProducts[index].quantity ? 0 : newProducts[index].quantity - 1;
+
+			newProducts[index] = {
+				...newProducts[index],
+				quantity,
+			};
+
+			return newProducts;
+		});
+
+		const selectedNewProducts: ISelectedProducts[] = [];
+
+		productsData.forEach((item) => {
+			if (item.quantity) {
+				selectedNewProducts.push({
+					product_id: item.product_id,
+					quantity: item.quantity,
+				});
+			}
+		});
+
+		setSelectedProducts(selectedNewProducts);
+	};
 
 	const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlK4iCP11ex4FIfZ7JOcXGHO9NIAcN0UMboImcFdakZKM55Tr8FX0CyULaO9Mrhx-sePM&usqp=CAU';
 
@@ -29,13 +70,13 @@ export default function ProductsTable(props : IProps) {
 
 			<HeaderBar>
 				<Text><GiClothes /> Produtos</Text>
-				<button type="button"><BsCartPlusFill />Criar Pedido</button>
+				<button type="button" onClick={() => navigate('/orders')}><BsCartPlusFill />Criar Pedido</button>
 			</HeaderBar>
 
 			<div className="products">
 				{productsData.map((item) => (
 					<Card key={item.product_id}>
-						<span className='card-header'>{item.product_name}</span>
+						<span className='card-header'>{formatTitle(item.product_name, 'title')}</span>
 
 						<div className='card-main'>
 							<img src={url} alt={item.product_name} />
@@ -47,9 +88,9 @@ export default function ProductsTable(props : IProps) {
 
 						<div className='card-footer'>
 							<div className='card-footer-controllers'>
-								<button type="button"onClick={() => setQty(qty - 1)}><AiFillMinusCircle /></button>
-								<span>{qty}</span>
-								<button type="button" onClick={() => setQty(qty + 1)}><AiFillPlusCircle /></button>
+								<button type="button" onClick={() => handleOrderQuantity(item.product_id, 'decrease')}><AiFillMinusCircle /></button>
+								<span>{item.quantity || 0}</span>
+								<button type="button" onClick={() => handleOrderQuantity(item.product_id, 'increase')}><AiFillPlusCircle /></button>
 							</div>
 							<div className='card-footer-editors'>
 								<button type="button">

@@ -29,7 +29,7 @@ export default function ProductsPage() {
 	return (
 		<Container>
 			<ProductsForm materialsData={materialsData} fetchApi={fetchApi}/>
-			<ProductsView productsData={productsData} />
+			<ProductsView productsData={productsData} setProductsData={setProductsData}/>
 		</Container>
 	);
 }

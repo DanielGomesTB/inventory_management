@@ -72,7 +72,7 @@ export default function EditRegisterModal(props: IProps) {
 					<Button	disabled={isDisable} type="button"	onClick={handleSaveData}>
 						{isDisable ? 'Preencha todos os campos' : 'Salvar'}
 					</Button>
-					<Button	type="button"	onClick={() => setIsModalOpen(false)}	color='danger'>
+					<Button	type="button"	onClick={() => setIsModalOpen(false)}	danger>
             Cancelar
 					</Button>
 				</div>

@@ -4,6 +4,10 @@ interface ILabelProps {
   width?: number;
 }
 
+interface IButtonProps {
+  danger?: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,24 +17,22 @@ export const Container = styled.div`
     display: flex;
     align-items: flex-end;
   }
+`;
 
-  button {
-    height: 40px;
-    width: 20%;
+export const Button = styled.button<IButtonProps>`
+  height: 40px;
+  width: 20%;
+  color: ${({danger}) => (danger ? 'var(--zinc-50)' : 'auto')};
+  background-color: ${({danger}) => (danger ? 'var(--red-500)' : 'auto')};
 
-    &:hover {
-      filter: brightness(1.1);
-    }
+  &:hover {
+    color: ${({danger}) => (danger ? 'var(--zinc-50)' : 'auto')};
+    background-color: ${({danger}) => (danger ? 'var(--red-400)' : 'auto')};
+  }
 
-    &:active {
-      transform: scale(0.98)
-    }
-
-    &:disabled {
-      color: var(--zinc-800);
-      background: var(--emerald-300);
-      transform: none;
-    }
+  &:active {
+    color: ${({danger}) => (danger ? 'var(--zinc-50)' : 'auto')};
+    background-color: ${({danger}) => (danger ? 'var(--red-600)' : 'auto')};
   }
 `;
 

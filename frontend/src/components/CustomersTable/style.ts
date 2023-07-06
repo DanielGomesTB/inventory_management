@@ -45,6 +45,7 @@ export const ActionRow = styled.td`
   align-items: center;
 
   button {
+    padding: 0;
     border-radius: 100%;
     font-size: 20rem;
     border: none;
@@ -52,6 +53,10 @@ export const ActionRow = styled.td`
 
     &:active {
       transform: scale(0.9)
+    }
+
+    &:hover {
+      background-color: inherit;
     }
   }
 `;

@@ -16,7 +16,7 @@ export const StyledLabel = styled.label<ILabelProps>`
     font-weight: 500;
     padding: 8px;
     color: var(--zinc-950);
-    
+
     &:focus {
       outline: var(--zinc-800) solid 2px;
     }
