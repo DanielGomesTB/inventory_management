@@ -5,7 +5,8 @@ import { ICustomerApi } from '../../../types';
 import { update } from '../../../services/api/api';
 import Label from '../../Label';
 
-import { ModalBody, Overlay, Text, Button } from './style';
+import { ModalBody, Overlay, Text } from './style';
+import { Button } from '../../../styles/Button';
 
 
 interface IProps {
@@ -67,10 +68,10 @@ export default function EditCustomerModal(props: IProps) {
 				</form>
 
 				<div>
-					<Button	disabled={isDisable} type="button"	onClick={handleSaveData}>
+					<Button	disabled={isDisable} type="button" width={'48%'} onClick={handleSaveData}>
 						{isDisable ? 'Preencha todos os campos' : 'Salvar'}
 					</Button>
-					<Button	type="button"	onClick={() => setIsModalOpen(false)}	danger>
+					<Button	type="button" width={'48%'} onClick={() => setIsModalOpen(false)}	danger>
             Cancelar
 					</Button>
 				</div>

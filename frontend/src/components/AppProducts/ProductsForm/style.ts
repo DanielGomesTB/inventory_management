@@ -22,18 +22,6 @@ export const Container = styled.div`
 export const Button = styled.button<IButtonProps>`
   height: 40px;
   width: 20%;
-  color: ${({danger}) => (danger ? 'var(--zinc-50)' : 'auto')};
-  background-color: ${({danger}) => (danger ? 'var(--red-500)' : 'auto')};
-
-  &:hover {
-    color: ${({danger}) => (danger ? 'var(--zinc-50)' : 'auto')};
-    background-color: ${({danger}) => (danger ? 'var(--red-400)' : 'auto')};
-  }
-
-  &:active {
-    color: ${({danger}) => (danger ? 'var(--zinc-50)' : 'auto')};
-    background-color: ${({danger}) => (danger ? 'var(--red-600)' : 'auto')};
-  }
 `;
 
 export const CustomLabel = styled.label<ILabelProps>`

@@ -67,28 +67,3 @@ export const Label = styled.label`
     }
   }
 `;
-
-export const Button = styled.button<IButtonProps>`
-  text-align: center;
-  font-weight: 600;
-  width: 48%;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  color: ${({danger}) => (danger ? 'var(--zinc-950)' : 'auto')};
-  background-color: ${({danger}) => (danger ? 'var(--red-500)' : 'auto')};
-
-  &:hover {
-    background-color: ${({danger}) => (danger ? 'var(--red-400)' : 'auto')};
-  }
-
-  &:active {
-    background-color: ${({danger}) => (danger ? 'var(--red-600)' : 'auto')};
-  }
-
-  &:disabled {
-    transform: none;
-    color: ${({danger}) => (danger ? 'var(--red-100)' : 'auto')};
-    background-color: ${({danger}) => (danger ? 'var(--red-800)' : 'auto')};
-  }
-`;

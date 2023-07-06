@@ -2,22 +2,25 @@ import styled from 'styled-components';
 
 interface IButtonProps {
   danger?: boolean;
-  padding?: boolean;
+  width?: string;
+  height?: string;
 }
 
 export const Button = styled.button<IButtonProps>`
   border-radius: 4px;
+  padding: 8px 16px;
   color: var(--zinc-950);
-  padding: '8px 16px';
-  background-color: ${({danger}) => (danger ? 'var(--red-500)' :'var(--emerald-400)')};
+  width: ${({width}) => (width ? width :'auto')};
+  height: ${({height}) => (height ? height :'auto')};
+  background-color: ${({danger}) => (danger ? 'var(--red-400)' :'var(--emerald-400)')};
 
   &:hover {
-    background-color: ${({danger}) => (danger ? 'var(--red-400)' : 'var(--emerald-300)')};
+    background-color: ${({danger}) => (danger ? 'var(--red-300)' : 'var(--emerald-300)')};
   }
 
   &:active {
     transform: scale(0.98);
-    background-color: ${({danger}) => (danger ? 'var(--red-600)' : 'var(--emerald-500)')};
+    background-color: ${({danger}) => (danger ? 'var(--red-500)' : 'var(--emerald-500)')};
   }
 
   &:disabled,

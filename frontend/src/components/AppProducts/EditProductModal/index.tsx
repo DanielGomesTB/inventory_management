@@ -5,7 +5,8 @@ import { IProductApi } from '../../../types';
 import { update } from '../../../services/api/api';
 import Label from '../../Label';
 
-import { ModalBody, Overlay, Text, Button } from './style';
+import { ModalBody, Overlay, Text } from './style';
+import { Button } from '../../../styles/Button';
 
 interface IProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -65,10 +66,10 @@ export default function EditProductsModal(props: IProps) {
 				</form>
 
 				<div>
-					<Button	disabled={isDisable} type="button"	onClick={() => setIsModalOpen(false)}>
+					<Button	disabled={isDisable} type="button" width="48%" onClick={() => setIsModalOpen(false)}>
 						{isDisable ? 'Preencha todos os campos' : 'Salvar'}
 					</Button>
-					<Button	type="button"	onClick={() => setIsModalOpen(false)}	danger>
+					<Button	type="button" width="48%" onClick={() => setIsModalOpen(false)}	danger>
             Cancelar
 					</Button>
 				</div>

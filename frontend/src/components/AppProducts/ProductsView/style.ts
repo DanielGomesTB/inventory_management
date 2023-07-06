@@ -26,8 +26,6 @@ export const HeaderBar = styled.div`
     justify-content: center;
     align-items: center;
     gap: 8px;
-    width: 160px;
-    border: none;
   }
 `;
 

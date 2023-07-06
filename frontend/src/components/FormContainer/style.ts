@@ -19,8 +19,4 @@ export const Container = styled.form`
     gap: 16px;
     color: var(--zinc-50);
   }
-
-  button {
-    width: 160px;
-  }
 `;

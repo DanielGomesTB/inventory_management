@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { IMaterialApi } from '../../../types';
-import { Container, CustomLabel, Button } from './style';
+import { Container, CustomLabel } from './style';
 import { TbNeedleThread } from 'react-icons/tb';
 import Label from '../../Label';
 import FormContainer from '../../FormContainer';
 import { insert } from '../../../services/api/api';
+import { Button } from '../../../styles/Button';
 
 interface IProps {
   materialsData: IMaterialApi[];
@@ -109,8 +110,8 @@ export default function ProductsForm(props: IProps) {
 						</CustomLabel>
 
 						{index === materials.length -1 && materials.length < 10
-							? (<Button type="button" disabled={!(materials[index].material_id && materials[index].quantity)} onClick={handleAddMaterial}>Adicionar</Button>)
-							: (<Button type="button" onClick={() => handleRemoveMaterial(index)} danger>Remover</Button>)
+							? (<Button type="button" width={'20%'} height={'40px'} disabled={!(materials[index].material_id && materials[index].quantity)} onClick={handleAddMaterial}>Adicionar</Button>)
+							: (<Button type="button" width={'20%'} height={'40px'} onClick={() => handleRemoveMaterial(index)} danger>Remover</Button>)
 						}
 						
 					</div>

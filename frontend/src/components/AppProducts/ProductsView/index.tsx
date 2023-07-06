@@ -15,6 +15,7 @@ import Context from '../../../context/Context';
 import { Card, Container, HeaderBar, Text } from './style';
 import { remove } from '../../../services/api/api';
 import EditProductsModal from '../EditProductModal';
+import { Button } from '../../../styles/Button';
 
 
 interface IProps {
@@ -94,7 +95,7 @@ export default function ProductsTable(props : IProps) {
 
 			<HeaderBar>
 				<Text><GiClothes /> Produtos</Text>
-				<button type="button" onClick={() => navigate('/orders')}><BsCartPlusFill />Criar Pedido</button>
+				<Button type="button" width={'160px'} onClick={() => navigate('/orders')}><BsCartPlusFill />Criar Pedido</Button>
 			</HeaderBar>
 
 			<div className="products">
