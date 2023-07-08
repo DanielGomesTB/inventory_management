@@ -25,46 +25,48 @@ export default function MaterialsForm() {
 			buttonText="Cadastrar"
 			isDisabled={false}
 		>
-
-			<label htmlFor="materialName">
+			<div key='1'>
+				<label htmlFor="materialName">
         Descrição do Material
-				<input
-					type="text"
-					id="materialName"
-					value={materialName}
-					onChange={(e) => setMaterialName(e.target.value)}
-				/>
-			</label>
-
-			<label htmlFor="color">
+					<input
+						type="text"
+						id="materialName"
+						value={materialName}
+						onChange={(e) => setMaterialName(e.target.value)}
+					/>
+				</label>
+			</div>
+			<div key='2'>
+				<label htmlFor="color">
         Cor
-				<input
-					type="text"
-					id="color"
-					value={color}
-					onChange={(e) => setColor(e.target.value)}
-				/>
-			</label>
+					<input
+						type="text"
+						id="color"
+						value={color}
+						onChange={(e) => setColor(e.target.value)}
+					/>
+				</label>
 
-			<label htmlFor="costPrice">
+				<label htmlFor="costPrice">
         Preço de Custo
-				<input
-					type="number"
-					id="costPrice"
-					value={costPrice}
-					onChange={(e) => setCostPrice(Number(e.target.value))}
-				/>
-			</label>
+					<input
+						type="number"
+						id="costPrice"
+						value={costPrice}
+						onChange={(e) => setCostPrice(Number(e.target.value))}
+					/>
+				</label>
 
-			<label htmlFor="stock">
+				<label htmlFor="stock">
         Quantidade em estoque
-				<input
-					type="number"
-					id="stock"
-					value={stock}
-					onChange={(e) => setStock(Number(e.target.value))}
-				/>
-			</label>
+					<input
+						type="number"
+						id="stock"
+						value={stock}
+						onChange={(e) => setStock(Number(e.target.value))}
+					/>
+				</label>
+			</div>
 
 		</FormContainer>
 	);

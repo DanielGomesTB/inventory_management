@@ -44,15 +44,15 @@ export const Card = styled.div`
   background-color: var(--zinc-800);
   border-radius: 8px;
   padding: 8px 16px;
-  max-width: 260px;
+  max-width: 255px;
   text-overflow: ellipsis;
 
   img{
     border-radius: 16px;
-    width: 225px;
-    height: 225px;
-    max-width: 225px;
-    max-height: 225px;
+    width: 220px;
+    height: 220px;
+    max-width: 220px;
+    max-height: 220px;
   }
 
   button {

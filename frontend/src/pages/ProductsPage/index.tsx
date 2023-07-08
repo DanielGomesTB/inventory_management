@@ -5,9 +5,8 @@ import ProductsView from '../../components/AppProducts/ProductsView';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { IProductApi, IMaterialApi } from '../../types';
-import { Container } from '../CustomersPage/style';
+import { Container } from '../../styles/PageContainer';
 
-// import { productsDataMock } from '../../mocks' // Remove this line
 
 export default function ProductsPage() {
 	const { 

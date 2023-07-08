@@ -4,7 +4,7 @@ import { getAll } from '../../services/api/api';
 import OrdersForm from '../../components/AppOrders/OrdersForm';
 import OrdersView from '../../components/AppOrders/OrdersView';
 import { IOrderApi, ICustomerApi, IProductApi } from '../../types';
-// import { ordersDataMock } from '../../mocks' // Remove this line
+import { Container } from '../../styles/PageContainer';
 
 export default function OrdersPage() {
 	const {
@@ -27,9 +27,9 @@ export default function OrdersPage() {
 	}, []);
 
 	return (
-		<>
+		<Container>
 			<OrdersForm customersData={customersData} productsData={productsData} />
 			<OrdersView ordersData={ordersData} />
-		</>
+		</Container>
 	);
 }

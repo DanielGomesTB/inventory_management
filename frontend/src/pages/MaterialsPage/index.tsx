@@ -5,8 +5,8 @@ import MaterialsTable from '../../components/AppMaterials/MaterialsTable';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { IMaterialApi } from '../../types';
+import { Container } from '../../styles/PageContainer';
 
-// import { materialsDataMock } from '../../mocks' // Remove this line
 
 export default function MaterialsPage() {
 	const { materialsData, setMaterialsData } = useContext(Context);
@@ -21,9 +21,9 @@ export default function MaterialsPage() {
 	}, []);
 
 	return (
-		<>
+		<Container>
 			<MaterialsForm />
 			<MaterialsTable materialsData={materialsData}/>
-		</>
+		</Container>
 	);
 }
