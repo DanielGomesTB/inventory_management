@@ -8,9 +8,9 @@ import { Container } from '../../styles/PageContainer';
 
 export default function OrdersPage() {
 	const {
-		ordersData, setOrdersData,
-		customersData, setCustomersData,
-		productsData, setProductsData,
+		setOrdersData,
+		setCustomersData,
+		setProductsData,
 	} = useContext(Context);
 
 	const fetchApi = async () => {
@@ -28,8 +28,8 @@ export default function OrdersPage() {
 
 	return (
 		<Container>
-			<OrdersForm customersData={customersData} productsData={productsData} />
-			<OrdersView ordersData={ordersData} />
+			<OrdersForm fetchApi={fetchApi} />
+			<OrdersView fetchApi={fetchApi} />
 		</Container>
 	);
 }

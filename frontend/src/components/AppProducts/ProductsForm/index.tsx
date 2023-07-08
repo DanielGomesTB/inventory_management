@@ -1,29 +1,26 @@
-import { useState } from 'react';
-import { IMaterialApi } from '../../../types';
-import { Container, CustomLabel } from './style';
+import { useContext, useState } from 'react';
 import { TbNeedleThread } from 'react-icons/tb';
-import Label from '../../Label';
-import FormContainer from '../../FormContainer';
+
+import { DynamicInputs } from '../../DynamicInputs/DynamicInputs';
+import { ISelectedMaterials } from '../../../types';
 import { insert } from '../../../services/api/api';
-import { Button } from '../../../styles/Button';
+import { Container } from './style';
+import FormContainer from '../../FormContainer';
+import Context from '../../../context/Context';
+import Label from '../../Label';
 
 interface IProps {
-  materialsData: IMaterialApi[];
 	fetchApi: () => Promise<void>;
 }
 
-interface IMaterials {
-  material_id: string;
-  quantity: string;
-	[key: string]: number | string;
-}
-
 export default function ProductsForm(props: IProps) {
-	const { materialsData, fetchApi} = props;
+	const { fetchApi} = props;
+
+	const { materialsData } = useContext(Context);
 
 	const [productName, setProductName] = useState<string>('');
 	const [sellingPrice, setSellingPrice] = useState<string>('');
-	const [materials, setMaterials] = useState<IMaterials[]>([{material_id: '', quantity: ''}]);
+	const [materials, setMaterials] = useState<ISelectedMaterials[]>([{material_id: '', quantity: ''}]);
 
 	const handleClick = async () => {
 
@@ -41,82 +38,29 @@ export default function ProductsForm(props: IProps) {
 		await fetchApi();
 	};
 
-	const handleAddMaterial = () => {
-		const updatedMaterials = [...materials, { material_id: '', quantity: '' }];
-		setMaterials(updatedMaterials);
-	};
-
-	const handleRemoveMaterial = (index: number) => {
-		const updatedMaterials = [...materials];
-		updatedMaterials.splice(index, 1);
-		setMaterials(updatedMaterials);
-	};
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, index: number) => {
-		const {name, value} = e.target;
-		const list = [...materials];
-		list[index][name] = value;
-		setMaterials(list);
-	};
-
 	return (
 		<FormContainer
 			title="Catalogar novo produto"
 			icon={<TbNeedleThread />}
 			handleClick={handleClick}
 			buttonText="Salvar Produto"
-			isDisabled={!materials.every((m) => m.material_id && m.quantity)}
+			isDisabled={!materials.every((e) => e.material_id && e.quantity)}
 		>
 			<Container>
-
-				<div className='products-info'>
+				<div>
 					<Label label='Descrição do Produto' value={{productName}}	width={80} setState={setProductName} />
 					<Label label='Preço' type="number" value={{sellingPrice}}	width={20} setState={setSellingPrice} />
 				</div>
 
-				<h4>Materiais utilizados na fabricação</h4>
-
-				{materials.map((singleMaterial, index) => (
-					<div key={index} className='materials-info'>
-
-						<CustomLabel htmlFor="materialName" width={60}>
-							{index ===  0 && 'Material'}
-							<select
-								id="materialName"
-								name="material_id"
-								value={singleMaterial.material_id}
-								onChange={(e) => handleChange(e, index)}
-							>
-								{materialsData.map(({ material_id, material_name }) => (
-									<option
-										key={material_id}
-										value={material_id}
-									>
-										{`${material_id} - ${material_name}`}
-									</option>
-								))}
-							</select>
-						</CustomLabel>
-
-						<CustomLabel htmlFor="quantity" width={20}>
-							{index ===  0 && 'Quantidade'}
-							<input
-								id="quantity"
-								name="quantity"
-								type="number"
-								value={singleMaterial.quantity}
-								onChange={(e) => handleChange(e, index)} 
-							/>
-						</CustomLabel>
-
-						{index === materials.length -1 && materials.length < 10
-							? (<Button type="button" width={'20%'} height={'40px'} disabled={!(materials[index].material_id && materials[index].quantity)} onClick={handleAddMaterial}>Adicionar</Button>)
-							: (<Button type="button" width={'20%'} height={'40px'} onClick={() => handleRemoveMaterial(index)} danger>Remover</Button>)
-						}
-						
-					</div>
-				))}
-
+				<DynamicInputs
+					title="Materiais utilizados na fabricação"
+					label="Materiais"
+					field="material"
+					apiData={materialsData}
+					selectedData={materials}
+					initialData={{ material_id: '', quantity: '' }}
+					setState={setMaterials}
+				/>
 			</Container>
 
 		</FormContainer>

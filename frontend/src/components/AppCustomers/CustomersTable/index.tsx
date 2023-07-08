@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { RiEdit2Fill, RiGroupFill } from 'react-icons/ri';
 import { MdDeleteForever } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
@@ -11,15 +11,17 @@ import formatCPF from '../../../utils/formatCPF';
 import formatDate from '../../../utils/formatDate';
 
 import { Container, Text, Table, ActionRow, SearchBar } from './style';
+import Context from '../../../context/Context';
 
 
 interface IProps {
-  customersData: ICustomerApi[];
-	getAllCustomers: () => Promise<void>;
+	fetchApi: () => Promise<void>;
 }
 
 export default function CostumersTable(props : IProps) {
-	const {customersData, getAllCustomers} = props;
+	const { fetchApi} = props;
+
+	const { customersData } = useContext(Context);
 
 	const [filteredCustomer, setFilteredCustomer] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -34,7 +36,7 @@ export default function CostumersTable(props : IProps) {
 
 		if (confirmed) {
 			await remove('customers', id);
-			await getAllCustomers();
+			await fetchApi();
 		}
 	};
 
@@ -49,7 +51,7 @@ export default function CostumersTable(props : IProps) {
 				<EditCustomerModal 
 					setIsModalOpen={setIsModalOpen}
 					inEdit={inEdit}
-					getAllCustomers={getAllCustomers}
+					fetchApi={fetchApi}
 				/>
 			}
 			<SearchBar>

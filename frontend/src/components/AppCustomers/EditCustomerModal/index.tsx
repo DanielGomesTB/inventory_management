@@ -12,15 +12,15 @@ import { Button } from '../../../styles/Button';
 interface IProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 	inEdit: ICustomerApi;
-	getAllCustomers: () => Promise<void>;
+	fetchApi: () => Promise<void>;
 }
 
 export default function EditCustomerModal(props: IProps) {
-	const {setIsModalOpen, inEdit, getAllCustomers} = props;
+	const {setIsModalOpen, inEdit, fetchApi} = props;
 
 	const [customerName, setCustomerName] = useState<string>(inEdit.customer_name);
 	const [cpf, setCpf] = useState<string>(inEdit.cpf);
-	const [phone, setPhone] = useState<string>(inEdit.cpf);
+	const [phone, setPhone] = useState<string>(inEdit.phone);
 	const [email, setEmail] = useState<string>(inEdit.email);
 	const [completeAddress, setCompleteAddress] = useState<string>(inEdit.address);
 	const [isDisable, setIsDisable] = useState<boolean>(true);
@@ -46,13 +46,12 @@ export default function EditCustomerModal(props: IProps) {
 			address: completeAddress,
 		};
 		await update('customers', inEdit.customer_id, payload);
-		await getAllCustomers();
+		await fetchApi();
 		setIsModalOpen(false);
 	};
 
 	useEffect(() => {
 		handleDisable();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [customerName, cpf, phone, email, completeAddress]);
 
 	return (

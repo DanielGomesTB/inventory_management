@@ -1,12 +1,12 @@
 interface ISelectedItems{
   quantity: string | number;
-	[key: string]: number | string;
+	[key: string]: number | string | undefined;
 }
 
 export interface ISelectedProducts extends ISelectedItems {
-  product_id: string | number;
+  product_id?: string | number;
 }
 
 export interface ISelectedMaterials extends ISelectedItems {
-	material_id: string | number;
+	material_id?: string | number;
 }

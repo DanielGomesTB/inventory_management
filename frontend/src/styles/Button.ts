@@ -9,9 +9,9 @@ interface IButtonProps {
 export const Button = styled.button<IButtonProps>`
   border-radius: 4px;
   padding: 8px 16px;
+  height: 40px;
   color: var(--zinc-950);
   width: ${({width}) => (width ? width :'auto')};
-  height: ${({height}) => (height ? height :'auto')};
   background-color: ${({danger}) => (danger ? 'var(--red-400)' :'var(--emerald-400)')};
 
   &:hover {

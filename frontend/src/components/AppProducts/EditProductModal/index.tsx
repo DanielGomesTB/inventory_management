@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 
 import { IProductApi } from '../../../types';
-import { update } from '../../../services/api/api';
+// import { update } from '../../../services/api/api';
 import Label from '../../Label';
 
 import { ModalBody, Overlay, Text } from './style';
@@ -15,7 +15,11 @@ interface IProps {
 }
 
 export default function EditProductsModal(props: IProps) {
-	const {setIsModalOpen, inEdit, fetchApi} = props;
+	const {
+		setIsModalOpen,
+		inEdit,
+		// fetchApi
+	} = props;
 
 	const [productName, setProductName] = useState<string>(inEdit.product_name);
 	const [sellingPrice, setSellingPrice] = useState<string>(inEdit.selling_price);
@@ -31,22 +35,21 @@ export default function EditProductsModal(props: IProps) {
 		setIsDisable(isAnyFieldEmpty);
 	};
 
-	const handleSaveData = async () => {
-		const payload = {
-			customer_name: productName,
-			sellingPrice,
-			// materials,
-		};
-		await update('products', inEdit.product_id, payload);
-		await fetchApi();
-		setIsModalOpen(false);
-	};
+	// const handleSaveData = async () => {
+	// 	const payload = {
+	// 		customer_name: productName,
+	// 		sellingPrice,
+	// 		// materials,
+	// 	};
+	// 	await update('products', inEdit.product_id, payload);
+	// 	await fetchApi();
+	// 	setIsModalOpen(false);
+	// };
 
 	const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlK4iCP11ex4FIfZ7JOcXGHO9NIAcN0UMboImcFdakZKM55Tr8FX0CyULaO9Mrhx-sePM&usqp=CAU';
 
 	useEffect(() => {
 		handleDisable();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [productName, sellingPrice]);
 
 	return (

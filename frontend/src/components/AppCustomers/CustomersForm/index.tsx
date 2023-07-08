@@ -15,11 +15,11 @@ interface IStates {
 }
 
 interface IProps {
-  getAllCustomers: () => Promise<void>;
+  fetchApi: () => Promise<void>;
 }
 
 export default function CustomersForm(props: IProps) {
-	const {getAllCustomers} = props;
+	const {fetchApi} = props;
 
 	const [customerName, setCustomerName] = useState<string>('');
 	const [cpf, setCpf] = useState<string>('');
@@ -61,7 +61,7 @@ export default function CustomersForm(props: IProps) {
 		setCity('');
 		setZipCode('');
 
-		await getAllCustomers();
+		await fetchApi();
 	};
 
 	const handleDisable = () => {
@@ -87,7 +87,6 @@ export default function CustomersForm(props: IProps) {
 
 	useEffect(() => {
 		handleDisable();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [customerName, cpf, phone, email, street, num, neighborhood, city, state, zipCode]);
 
 	return (

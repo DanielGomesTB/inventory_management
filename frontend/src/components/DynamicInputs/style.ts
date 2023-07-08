@@ -4,15 +4,13 @@ interface ILabelProps {
   width?: number;
 }
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+interface IButtonProps {
+  danger?: boolean;
+}
 
-  .custom-info {
-    display: flex;
-    align-items: flex-end;
-  }
+export const Button = styled.button<IButtonProps>`
+  height: 40px;
+  width: 20%;
 `;
 
 export const CustomLabel = styled.label<ILabelProps>`

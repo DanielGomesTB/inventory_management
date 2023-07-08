@@ -9,10 +9,7 @@ import { Container } from '../../styles/PageContainer';
 
 
 export default function ProductsPage() {
-	const { 
-		productsData, setProductsData,
-		materialsData, setMaterialsData 
-	} = useContext(Context);
+	const { setProductsData, setMaterialsData	} = useContext(Context);
 
 	const fetchApi = async () => {
 		const productsResponse = await getAll('products');
@@ -27,8 +24,8 @@ export default function ProductsPage() {
 
 	return (
 		<Container>
-			<ProductsForm materialsData={materialsData} fetchApi={fetchApi}/>
-			<ProductsView productsData={productsData} setProductsData={setProductsData} fetchApi={fetchApi}/>
+			<ProductsForm fetchApi={fetchApi} />
+			<ProductsView fetchApi={fetchApi} />
 		</Container>
 	);
 }

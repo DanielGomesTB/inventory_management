@@ -1,10 +1,7 @@
-interface IProductMaterials {
-  material_id: string | number;
-  quantity: string | number;
-}
+import { ISelectedMaterials } from '.';
 
 export interface IProduct {
   product_name: string;
   selling_price: string | number;
-  materials: IProductMaterials[];
+  materials: ISelectedMaterials[];
 }

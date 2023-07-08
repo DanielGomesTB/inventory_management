@@ -1,13 +1,18 @@
+import { useContext } from 'react';
+
 import OrdersBoard from '../OrdersBoard';
-import { IOrderApi } from '../../../types';
+import Context from '../../../context/Context';
+
 import { Container } from './style';
 
 interface IProps {
-  ordersData: IOrderApi[];
+	fetchApi: () => Promise<void>;
 }
 
 export default function OrdersView(props : IProps) {
-	const {ordersData} = props;
+	const { fetchApi} = props;
+
+	const { ordersData } = useContext(Context);
 
 	if (!ordersData || ordersData.length === 0) {
 		return <p>Nenhum dado disponível.</p>;

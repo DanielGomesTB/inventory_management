@@ -19,20 +19,18 @@ import { Button } from '../../../styles/Button';
 
 
 interface IProps {
-  productsData: IProductApi[];
-	setProductsData: React.Dispatch<React.SetStateAction<IProductApi[]>>;
 	fetchApi: () => Promise<void>;
 }
 
 export default function ProductsTable(props : IProps) {
-	const {productsData, setProductsData, fetchApi} = props;
+	const { fetchApi } = props;
+
+	const { productsData, setProductsData, setSelectedProducts } = useContext(Context);
 
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [inEdit, setInEdit] = useState<IProductApi>(productsData[0]);
 
 	const navigate = useNavigate();
-
-	const { setSelectedProducts } = useContext(Context);
 
 	if (!productsData || productsData.length === 0) {
 		return <p>Nenhum dado disponível.</p>;

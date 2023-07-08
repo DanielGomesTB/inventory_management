@@ -1,42 +1,45 @@
-import { useState } from 'react';
-
-import { InnerContainer } from './style';
-import { ICustomerApi, IProductApi } from '../../../types';
-import FormContainer from '../../FormContainer';
+import { useState, useContext } from 'react';
 import { BsFillClipboardPlusFill } from 'react-icons/bs';
 
-interface IProducts {
-  productName: string;
-  quantity: number;
-}
+import { insert } from '../../../services/api/api';
+import { ISelectedProducts } from '../../../types';
+import FormContainer from '../../FormContainer';
+import Context from '../../../context/Context';
+
+import { Container, CustomLabel } from './style';
+import { DynamicInputs } from '../../DynamicInputs/DynamicInputs';
 
 interface IProps {
-  customersData: ICustomerApi[];
-  productsData: IProductApi[];
+	fetchApi: () => Promise<void>;
 }
 
 export default function OrdersForm(props: IProps) {
-	const {customersData, productsData} = props;
+	const { fetchApi } = props;
+
+	const { customersData, productsData } = useContext(Context);
   
-	const [orderStatus, setOrderStatus] = useState<string>('pending');
-	const [orderType, setOrderType] = useState<string>('Varejo');
 	const [customerId, setCustomerId] = useState<string>('');
-	const [productName, setProductName] = useState<string>('');
-	const [quantity, setQuantity] = useState<number>(0);
-	const [products, setProducts] = useState<IProducts[]>([]);
+	const [orderType, setOrderType] = useState<string>('varejo');
+	const [orderStatus, setOrderStatus] = useState<string>('pendente');
 
-	const handleClick = () => {
-		console.log({
-			orderStatus,
-			orderType,
-			customerId,
+	const [products, setProducts] = useState<ISelectedProducts[]>([{product_id: '', quantity: ''}]);
+
+	const handleClick = async () => {
+		const payload = {
+			customer_id: Number(customerId),
+			order_type: orderType,
+			order_status: orderStatus,
 			products,
-		});
-	};
+		};
 
-	const handleAddProduct = () => {
-		const updatedProducts = [...products, { productName, quantity }];
-		setProducts(updatedProducts);
+		await insert('orders', payload);
+
+		setCustomerId('');
+		setOrderType('varejo');
+		setOrderStatus('pendente');
+		setProducts([{product_id: '', quantity: ''}]);
+
+		await fetchApi();
 	};
 
 	return (
@@ -45,81 +48,70 @@ export default function OrdersForm(props: IProps) {
 			icon={<BsFillClipboardPlusFill />}
 			handleClick={handleClick}
 			buttonText="Criar Pedido"
-			isDisabled={products.length === 0}
+			isDisabled={!products.every((e) => e.product_id && e.quantity)}
 		>
-			<label htmlFor="customerId">
-          Cliente
-				<select
-					id="customerId"
-					value={customerId}
-					onChange={(e) => setCustomerId(e.target.value)}
-				>
-					{customersData.map(({ customer_id, customer_name }) => (
-						<option key={customer_id} value={customer_id}>{customer_name}</option>
-					))}
-				</select>
-			</label>
 
-			<label htmlFor="orderType">Tipo de pedido</label>
-			<select
-				id="orderType"
-				value={orderType}
-				onChange={(e) => setOrderType(e.target.value)}
-			>
-				<option value="Varejo">Varejo</option>
-				<option value="Atacado">Atacado</option>
-			</select>
-
-			<label htmlFor="orderStatus">
-          Status
-				<select
-					id="orderStatus"
-					value={orderStatus}
-					onChange={(e) => setOrderStatus(e.target.value)}
-				>
-					<option value="pending">Pendente</option>
-					<option value="started">Iniciado</option>
-					<option value="completed">Concluído</option>
-					<option value="cancelled">Cancelado</option>
-				</select>
-			</label>
-
-			<div>
-				<InnerContainer>
-					<h3>Produtos inclusos no pedido</h3>
-					<label htmlFor="productName">
-              Produto
+			<Container>
+				<div>
+					<CustomLabel htmlFor="customerId" width={60}>
+						Cliente
 						<select
-							id="productName"
-							value={productName}
-							onChange={(e) => setProductName(e.target.value)}
+							id="customerId"
+							name="customer_id"
+							value={customerId}
+							onChange={(e) => setCustomerId(e.target.value)}
 						>
-							{productsData.map(({ product_id, product_name }) => (
-								<option key={product_id} value={product_id}>{product_name}</option>
+							{customersData.map(({ customer_id, customer_name }) => (
+								<option
+									key={customer_id}
+									value={customer_id}
+								>
+									{customer_name}
+								</option>
 							))}
 						</select>
-					</label>
+					</CustomLabel>
 
-					<label htmlFor="quantity">
-              Quantidade
-						<input
-							type="number"
-							id="quantity"
-							value={quantity}
-							onChange={(e) => setQuantity(Number(e.target.value))}
-						/>
-					</label>
+					<CustomLabel htmlFor="orderType" width={20}>
+						Tipo de pedido
+						<select
+							id="orderType"
+							name="order_type"
+							value={orderType}
+							onChange={(e) => setOrderType(e.target.value)}
+						>
+							<option value="varejo">Varejo</option>
+							<option value="atacado">Atacado</option>
+						</select>
+					</CustomLabel>
 
-					<button type="button" onClick={handleAddProduct}>
-              Adicionar
-					</button>
-				</InnerContainer>
-				{products.map((product, index) => (
-					<div key={index}>
-						{`${product.productName} - ${product.quantity}`}
-					</div>
-				))}
-			</div>
+					<CustomLabel htmlFor="orderStatus" width={20}>
+						Status
+						<select
+							id="orderStatus"
+							name="order_status"
+							value={orderStatus}
+							onChange={(e) => setOrderStatus(e.target.value)}
+						>
+							<option value="pendente">Pendente</option>
+							<option value="iniciado">Iniciado</option>
+							<option value="concluído">Concluído</option>
+							<option value="cancelado">Cancelado</option>
+						</select>
+					</CustomLabel>
+				</div>
+				
+				<DynamicInputs
+					title="Produtos inclusos no pedido"
+					label="Produtos"
+					field="product"
+					apiData={productsData}
+					selectedData={products}
+					initialData={{ product_id: '', quantity: '' }}
+					setState={setProducts}
+				/>
+			</Container>
+
 		</FormContainer>
 	);
 }

@@ -1,7 +1,8 @@
 interface BaseColumns {
-  is_active?: boolean;
+  is_active?: string;
   created_at: string;
   updated_at: string;
+  [key: string]: number | string | undefined
 }
 
 export interface ICustomerApi extends BaseColumns {

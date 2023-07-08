@@ -12,6 +12,7 @@ module.exports = {
 		'react-refresh/only-export-components': 'warn',
 		'arrow-body-style': ['error', 'as-needed'],
 		'no-console': 'off',
+		'react-hooks/exhaustive-deps': 'off',
 		'indent': [
 			'error',
 			'tab'

@@ -9,21 +9,21 @@ import { Container } from '../../styles/PageContainer';
 
 
 export default function MaterialsPage() {
-	const { materialsData, setMaterialsData } = useContext(Context);
+	const { setMaterialsData } = useContext(Context);
 
-	const getAllMaterials = async () => {
+	const fetchApi = async () => {
 		const response = await getAll('materials');
 		setMaterialsData(response as IMaterialApi[]);
 	};
 
 	useEffect(() => {
-		getAllMaterials();
+		fetchApi();
 	}, []);
 
 	return (
 		<Container>
-			<MaterialsForm />
-			<MaterialsTable materialsData={materialsData}/>
+			<MaterialsForm fetchApi={fetchApi} />
+			<MaterialsTable fetchApi={fetchApi} />
 		</Container>
 	);
 }
