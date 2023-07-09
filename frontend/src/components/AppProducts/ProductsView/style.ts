@@ -21,6 +21,28 @@ export const HeaderBar = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  div {
+    display: flex;
+    gap: 16px;
+
+    label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+      input {
+      font-weight: 500;
+      padding: 8px;
+      color: var(--zinc-950);
+
+        &:focus {
+          outline: var(--emerald-400) solid 2px;
+        }
+      }
+    }
+  }
+
   button {
     display: flex;
     justify-content: center;

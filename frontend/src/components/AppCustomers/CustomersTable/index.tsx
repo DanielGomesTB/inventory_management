@@ -23,7 +23,7 @@ export default function CostumersTable(props : IProps) {
 
 	const { customersData } = useContext(Context);
 
-	const [filteredCustomer, setFilteredCustomer] = useState<string>('');
+	const [filter, setFilter] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [inEdit, setInEdit] = useState<ICustomerApi>(customersData[0]);
 
@@ -45,6 +45,17 @@ export default function CostumersTable(props : IProps) {
 		setIsModalOpen(true);
 	};
 
+	const filteredData = customersData.filter((item) => {
+		const columns = [
+			item.customer_name.toLowerCase(),
+			item.address.toLowerCase(),
+			item.email.toLowerCase(),
+			item.phone,
+			item.cpf
+		];
+		return columns.some((column) => column.includes(filter.toLowerCase()));
+	});
+
 	return (
 		<Container>
 			{isModalOpen &&
@@ -61,8 +72,8 @@ export default function CostumersTable(props : IProps) {
 						type="search"
 						id="filteredCustomer"
 						placeholder='Pesquisar Cliente'
-						value={filteredCustomer}
-						onChange={(e) => setFilteredCustomer(e.target.value)}
+						value={filter}
+						onChange={(e) => setFilter(e.target.value)}
 					/>
 					<FaSearch />
 				</label>
@@ -80,7 +91,7 @@ export default function CostumersTable(props : IProps) {
 					</tr>
 				</thead>
 				<tbody>
-					{customersData.map((item, rowIndex) => (
+					{filteredData.map((item, rowIndex) => (
 						<tr key={rowIndex}>
 							<td>{item.customer_name}</td>
 							<td>{formatCPF(item.cpf)}</td>

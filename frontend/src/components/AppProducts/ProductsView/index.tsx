@@ -5,6 +5,7 @@ import { RiEdit2Fill } from 'react-icons/ri';
 import { GiClothes } from 'react-icons/gi';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { BsCartPlusFill } from 'react-icons/bs';
+import { FaSearch } from 'react-icons/fa';
 
 import { IProductApi, ISelectedProducts } from '../../../types';
 import formatDate from '../../../utils/formatDate';
@@ -26,7 +27,8 @@ export default function ProductsTable(props : IProps) {
 	const { fetchApi } = props;
 
 	const { productsData, setProductsData, setSelectedProducts } = useContext(Context);
-
+	console.log(productsData);
+	const [filter, setFilter] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [inEdit, setInEdit] = useState<IProductApi>(productsData[0]);
 
@@ -43,8 +45,8 @@ export default function ProductsTable(props : IProps) {
 
 			let quantity;
 
-			if (type === 'increase') quantity = !newProducts[index].quantity ? 1 : newProducts[index].quantity + 1;
-			if (type === 'decrease') quantity = !newProducts[index].quantity ? 0 : newProducts[index].quantity - 1;
+			if (type === 'increase') quantity = Number(newProducts[index].quantity) + 1;
+			if (type === 'decrease') quantity = !newProducts[index].quantity ? 0 : Number(newProducts[index].quantity) - 1;
 
 			newProducts[index] = { ...newProducts[index], quantity	};
 
@@ -79,6 +81,11 @@ export default function ProductsTable(props : IProps) {
 		}
 	};
 
+	const filteredData = productsData.filter((item) => {
+		const columns = [ item.product_name.toLowerCase(), item.selling_price ];
+		return columns.some((column) => column.includes(filter.toLowerCase()));
+	});
+
 	const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlK4iCP11ex4FIfZ7JOcXGHO9NIAcN0UMboImcFdakZKM55Tr8FX0CyULaO9Mrhx-sePM&usqp=CAU';
 
 	return (
@@ -93,11 +100,23 @@ export default function ProductsTable(props : IProps) {
 
 			<HeaderBar>
 				<Text><GiClothes /> Produtos</Text>
-				<Button type="button" width={'160px'} onClick={() => navigate('/orders')}><BsCartPlusFill />Criar Pedido</Button>
+				<div>
+					<Button type="button" width={'160px'} onClick={() => navigate('/orders')}><BsCartPlusFill />Criar Pedido</Button>
+					<label htmlFor="filteredProduct">
+						<input
+							type="search"
+							id="filteredProduct"
+							placeholder='Pesquisar Produto'
+							value={filter}
+							onChange={(e) => setFilter(e.target.value)}
+						/>
+						<FaSearch />
+					</label>
+				</div>
 			</HeaderBar>
 
 			<div className="products">
-				{productsData.map((item) => (
+				{filteredData.map((item) => (
 					<Card key={item.product_id}>
 						<span className='card-header'>{formatTitle(item.product_name, 'title')}</span>
 

@@ -76,9 +76,9 @@ export const SearchBar = styled.div`
     padding: 8px;
     color: var(--zinc-950);
 
-    &:focus {
-      outline: var(--emerald-400) solid 2px;
+      &:focus {
+        outline: var(--emerald-400) solid 2px;
+      }
     }
-  }
   }
 `;

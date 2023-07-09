@@ -21,7 +21,7 @@ export default function MaterialsTable(props : IProps) {
 
 	const { materialsData } = useContext(Context);
 
-	const [filteredMaterial, setFilteredMaterial] = useState<string>('');
+	const [filter, setFilter] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [inEdit, setInEdit] = useState<IMaterialApi>(materialsData[0]);
 
@@ -43,6 +43,15 @@ export default function MaterialsTable(props : IProps) {
 		setIsModalOpen(true);
 	};
 
+	const filteredData = materialsData.filter((item) => {
+		const columns = [
+			item.material_name.toLowerCase(),
+			(item.color ? item.color : '').toLowerCase(),
+			item.cost_price
+		];
+		return columns.some((column) => column.includes(filter.toLowerCase()));
+	});
+
 	return (
 		<Container>
 			{isModalOpen &&
@@ -59,8 +68,8 @@ export default function MaterialsTable(props : IProps) {
 						type="search"
 						id="filteredMaterial"
 						placeholder='Pesquisar no Estoque'
-						value={filteredMaterial}
-						onChange={(e) => setFilteredMaterial(e.target.value)}
+						value={filter}
+						onChange={(e) => setFilter(e.target.value)}
 					/>
 					<FaSearch />
 				</label>
@@ -79,7 +88,7 @@ export default function MaterialsTable(props : IProps) {
 					</tr>
 				</thead>
 				<tbody>
-					{materialsData.map((item, rowIndex) => (
+					{filteredData.map((item, rowIndex) => (
 						<tr key={rowIndex}>
 							<td>{item.material_id}</td>
 							<td>{item.material_name}</td>
