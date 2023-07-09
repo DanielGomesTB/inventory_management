@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const Board = styled.div`
-  padding: 16px;
-  border-radius: 16px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 320px;
   background-color: var(--zinc-800);
 
   > header {

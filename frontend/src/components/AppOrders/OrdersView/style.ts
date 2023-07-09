@@ -1,10 +1,24 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  max-width: 1216px;
-  margin: 40px auto;
   display: flex;
-  gap: 32px;
-  background-color: var(--zinc-900);
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--zinc-900);
+
+  .boards {
+    display: flex;
+    justify-content: space-around;
+    gap: 32px;
+  }
+`;
+
+export const Text = styled.h3`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--emerald-400);
 `;
