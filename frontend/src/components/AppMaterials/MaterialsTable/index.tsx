@@ -12,8 +12,15 @@ import { remove } from '../../../services/api/api';
 import { Container, Text, Table, ActionRow, SearchBar } from './style';
 import EditMaterialModal from '../EditMaterialModal';
 
+
 interface IProps {
 	fetchApi: () => Promise<void>;
+}
+
+interface ISortConfig {
+	key: keyof IMaterialApi,
+	direction: 'ascending' | 'descending' | null;
+	arrow: ' ↑' | ' ↓' | null;
 }
 
 export default function MaterialsTable(props : IProps) {
@@ -21,6 +28,7 @@ export default function MaterialsTable(props : IProps) {
 
 	const { materialsData } = useContext(Context);
 
+	const [sortConfig, setSortConfig] = useState<ISortConfig>({ key: 'material_id', direction: 'ascending', arrow: ' ↓' });
 	const [filter, setFilter] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [inEdit, setInEdit] = useState<IMaterialApi>(materialsData[0]);
@@ -43,7 +51,32 @@ export default function MaterialsTable(props : IProps) {
 		setIsModalOpen(true);
 	};
 
-	const filteredData = materialsData.filter((item) => {
+	const handleColumnHeaderClick = (key: keyof IMaterialApi) => {
+		const IsThisKeyAlreadyAscending = sortConfig.key === key && sortConfig.direction === 'ascending';
+		setSortConfig({
+			key,
+			direction: IsThisKeyAlreadyAscending ? 'descending' : 'ascending',
+			arrow: IsThisKeyAlreadyAscending ? ' ↑' : ' ↓',
+		});
+	};
+
+	const sortedData = [...materialsData].sort((a: IMaterialApi, b: IMaterialApi) => {
+		const { key } = sortConfig;
+
+		if (sortConfig.direction === 'ascending') {
+			if (a[key] < b[key]) return -1;
+			if (a[key] > b[key]) return 1;
+			return 0;
+		}
+		if (sortConfig.direction === 'descending') {
+			if (a[key] > b[key]) return -1;
+			if (a[key] < b[key]) return 1;
+			return 0;
+		}
+		return 0;
+	});
+
+	const filteredData = sortedData.filter((item) => {
 		const columns = [
 			item.material_name.toLowerCase(),
 			(item.color ? item.color : '').toLowerCase(),
@@ -77,13 +110,27 @@ export default function MaterialsTable(props : IProps) {
 			<Table>
 				<thead>
 					<tr>
-						<th>Material</th>
-						<th>Descrição</th>
-						<th>Cor</th>
-						<th>Preço de custo</th>
-						<th>Quantidade em estoque</th>
-						<th>Cadastrado em:</th>
-						<th>Atualizado em:</th>
+						<th onClick={() => handleColumnHeaderClick('material_id')}>
+							Material {sortConfig.key === 'material_id' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('material_name')}>
+							Descrição {sortConfig.key === 'material_name' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('color')}>
+							Cor {sortConfig.key === 'color' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('cost_price')}>
+							Preço de custo {sortConfig.key === 'cost_price' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('stock')}>
+							Quantidade em estoque {sortConfig.key === 'stock' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('created_at')}>
+							Cadastrado em: {sortConfig.key === 'created_at' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('updated_at')}>
+							Atualizado em: {sortConfig.key === 'updated_at' && sortConfig.arrow}
+						</th>
 						<th>Ação</th>
 					</tr>
 				</thead>

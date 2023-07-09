@@ -25,6 +25,7 @@ export const Table = styled.table`
 
     th {
       padding: 2px 8px;
+      cursor: cell;
     }
   }
 

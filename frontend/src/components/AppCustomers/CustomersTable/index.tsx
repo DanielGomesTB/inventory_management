@@ -18,11 +18,18 @@ interface IProps {
 	fetchApi: () => Promise<void>;
 }
 
+interface ISortConfig {
+	key: keyof ICustomerApi,
+	direction: 'ascending' | 'descending' | null;
+	arrow: ' ↑' | ' ↓' | null;
+}
+
 export default function CostumersTable(props : IProps) {
 	const { fetchApi} = props;
 
 	const { customersData } = useContext(Context);
 
+	const [sortConfig, setSortConfig] = useState<ISortConfig>({ key: 'customer_id', direction: 'ascending', arrow: ' ↓' });
 	const [filter, setFilter] = useState<string>('');
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const [inEdit, setInEdit] = useState<ICustomerApi>(customersData[0]);
@@ -45,7 +52,32 @@ export default function CostumersTable(props : IProps) {
 		setIsModalOpen(true);
 	};
 
-	const filteredData = customersData.filter((item) => {
+	const handleColumnHeaderClick = (key: keyof ICustomerApi) => {
+		const IsThisKeyAlreadyAscending = sortConfig.key === key && sortConfig.direction === 'ascending';
+		setSortConfig({
+			key,
+			direction: IsThisKeyAlreadyAscending ? 'descending' : 'ascending',
+			arrow: IsThisKeyAlreadyAscending ? ' ↑' : ' ↓',
+		});
+	};
+
+	const sortedData = [...customersData].sort((a: ICustomerApi, b: ICustomerApi) => {
+		const { key } = sortConfig;
+
+		if (sortConfig.direction === 'ascending') {
+			if (a[key] < b[key]) return -1;
+			if (a[key] > b[key]) return 1;
+			return 0;
+		}
+		if (sortConfig.direction === 'descending') {
+			if (a[key] > b[key]) return -1;
+			if (a[key] < b[key]) return 1;
+			return 0;
+		}
+		return 0;
+	});
+
+	const filteredData = sortedData.filter((item) => {
 		const columns = [
 			item.customer_name.toLowerCase(),
 			item.address.toLowerCase(),
@@ -81,12 +113,24 @@ export default function CostumersTable(props : IProps) {
 			<Table>
 				<thead>
 					<tr>
-						<th>Nome</th>
-						<th>CPF</th>
-						<th>Endereço</th>
-						<th>e-mail</th>
-						<th>Telefone</th>
-						<th>Cadastrado em:</th>
+						<th onClick={() => handleColumnHeaderClick('customer_name')}>
+							Nome {sortConfig.key === 'customer_name' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('cpf')}>
+							CPF {sortConfig.key === 'cpf' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('address')}>
+							Endereço {sortConfig.key === 'address' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('email')}>
+							e-mail {sortConfig.key === 'email' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('phone')}>
+							Telefone {sortConfig.key === 'phone' && sortConfig.arrow}
+						</th>
+						<th onClick={() => handleColumnHeaderClick('created_at')}>
+							Cadastrado em: {sortConfig.key === 'created_at' && sortConfig.arrow}
+						</th>
 						<th>Ação</th>
 					</tr>
 				</thead>
