@@ -13,17 +13,10 @@ async function insert(req, res) {
 	return res.status(201).json(result);
 }
 
-// async function update(req, res) {
-//     const { id } = req.params;
-//     const result = await productsModel.update(req.body, id);
-
-//     return res.status(200).json(result);
-// }
-
 async function update(req, res) {
     const { id } = req.params;
     const result = await productsService.update(req.body, id);
-
+    
     return res.status(200).json(result);
 }
 

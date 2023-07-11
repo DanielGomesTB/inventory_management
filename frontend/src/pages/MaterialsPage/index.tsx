@@ -1,29 +1,29 @@
 import { useContext, useEffect } from 'react';
 
-import MaterialsForm from '../../components/MaterialsForm';
-import MaterialsTable from '../../components/MaterialsTable';
+import MaterialsForm from '../../components/AppMaterials/MaterialsForm';
+import MaterialsTable from '../../components/AppMaterials/MaterialsTable';
 import Context from '../../context/Context';
 import { getAll } from '../../services/api/api';
 import { IMaterialApi } from '../../types';
+import { Container } from '../../styles/PageContainer';
 
-// import { materialsDataMock } from '../../mocks' // Remove this line
 
 export default function MaterialsPage() {
-	const { materialsData, setMaterialsData } = useContext(Context);
+	const { setMaterialsData } = useContext(Context);
 
-	const getAllMaterials = async () => {
+	const fetchApi = async () => {
 		const response = await getAll('materials');
 		setMaterialsData(response as IMaterialApi[]);
 	};
 
 	useEffect(() => {
-		getAllMaterials();
+		fetchApi();
 	}, []);
 
 	return (
-		<>
-			<MaterialsForm />
-			<MaterialsTable materialsData={materialsData}/>
-		</>
+		<Container>
+			<MaterialsForm fetchApi={fetchApi} />
+			<MaterialsTable fetchApi={fetchApi} />
+		</Container>
 	);
 }

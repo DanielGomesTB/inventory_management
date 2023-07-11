@@ -15,7 +15,7 @@ async function insert(req, res) {
 
 async function update(req, res) {
     const { id } = req.params;
-    const result = await ordersModel.update(req.body, id);
+    const result = await ordersService.update(req.body, id);
 
     return res.status(200).json(result);
 }

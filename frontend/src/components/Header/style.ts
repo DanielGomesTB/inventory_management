@@ -21,7 +21,7 @@ export const Title = styled.h1`
     position: absolute;
     transform: scaleX(0);
     transform-origin: bottom right;
-    background: var(--main-green);
+    background: var(--emerald-900);
     transition: transform 0.5s ease;
   }
 

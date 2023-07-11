@@ -1,7 +1,8 @@
 interface BaseColumns {
-  is_active?: boolean;
+  is_active?: string;
   created_at: string;
   updated_at: string;
+  [key: string]: number | string | undefined
 }
 
 export interface ICustomerApi extends BaseColumns {
@@ -29,7 +30,7 @@ export interface IProductApi extends BaseColumns {
 export interface IMaterialApi extends BaseColumns {
   material_id: number;
   material_name: string;
-  color: string;
+  color: string | undefined;
   cost_price: string;
   stock: string;
 }
