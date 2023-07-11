@@ -1,7 +1,19 @@
 const dbConnection = require('../database/mySqlConnection');
 
 async function getAll() {
-    const query = 'SELECT * FROM products WHERE is_active = true';
+    const query = `
+        SELECT products.*,
+            JSON_ARRAYAGG(JSON_OBJECT(
+                'material_id', materials.material_id,
+                'material_name', materials.material_name,
+                'stock', materials.stock,
+                'cost_price', materials.cost_price
+            )) AS materials
+        FROM products
+        JOIN products_materials ON products.product_id = products_materials.product_id
+        JOIN materials ON materials.material_id = products_materials.material_id
+        GROUP BY products.product_id;
+    `;
     const [result] = await dbConnection.execute(query);
 
 	return result;
