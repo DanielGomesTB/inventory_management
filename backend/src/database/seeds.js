@@ -62,8 +62,8 @@ async function dbSeedAndReset() {
     );
 
     CREATE TABLE IF NOT EXISTS order_items (
-      product_id INT NOT NULL,
       order_id INT NOT NULL,
+      product_id INT NOT NULL,
       quantity INT NOT NULL,
       PRIMARY KEY (product_id, order_id),
       FOREIGN KEY (product_id) REFERENCES inventory.products (product_id)
@@ -75,8 +75,8 @@ async function dbSeedAndReset() {
     );
 
     CREATE TABLE IF NOT EXISTS products_materials (
-      material_id INT NOT NULL,
       product_id INT NOT NULL,
+      material_id INT NOT NULL,
       quantity DECIMAL(10,2) NOT NULL,
       PRIMARY KEY (material_id, product_id),
       FOREIGN KEY (material_id) REFERENCES inventory.materials (material_id)
