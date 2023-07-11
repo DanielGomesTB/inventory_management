@@ -38,16 +38,6 @@ async function insert(payload) {
 	return result;
 }
 
-async function insertOrderItem(payload) {
-    const values = Object.values(payload);
-    const columns = Object.keys(payload).join(', ');
-    const placeholders = values.map((_value) => '?').join(', ');
-    const query = `INSERT INTO order_items (${columns}) VALUES(${placeholders})`;
-    const [result] = await dbConnection.execute(query, values);
-
-	return result;
-}
-
 async function update(payload, id) {
     const values = Object.values(payload);
     const columns = Object.keys(payload).map((column) => `${column} = ?`).join(', ');
@@ -57,10 +47,28 @@ async function update(payload, id) {
 	return result;
 }
 
+async function insertOrderItems(payload) {
+    const values = Object.values(payload);
+    const columns = Object.keys(payload).join(', ');
+    const placeholders = values.map((_value) => '?').join(', ');
+    const query = `INSERT INTO order_items (${columns}) VALUES(${placeholders})`;
+    const [result] = await dbConnection.execute(query, values);
+
+	return result;
+}
+
+async function deleteOrderItems(id) {
+    const query = `DELETE FROM order_items WHERE order_id = ${id}`;
+    const [result] = await dbConnection.execute(query);
+    
+	return result;
+}
+
 module.exports = {
     getAll,
     getById,
     insert,
-    insertOrderItem,
     update,
+    insertOrderItems,
+    deleteOrderItems,
 }
